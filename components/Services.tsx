@@ -4,6 +4,14 @@ import { ArrowRight } from 'lucide-react';
 import { SERVICES, SERVICE_ICONS } from '../constants';
 
 const Services: React.FC = () => {
+  const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="services" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +55,7 @@ const Services: React.FC = () => {
                   <span className="text-green-600">Benefit:</span> {service.benefit}
                 </p>
                 <a 
-                  href={`https://wa.me/6281234567890?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20layanan%20${encodeURIComponent(service.title)}`}
+                  href={`https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20layanan%20${encodeURIComponent(service.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-bold text-mitrafix-orange hover:gap-3 transition-all"
@@ -68,8 +76,9 @@ const Services: React.FC = () => {
               <p className="text-slate-400">Kami siap menangani kontrak maintenance dan pengadaan infrastruktur B2B dengan harga kompetitif.</p>
             </div>
             <a 
-              href="#contact" 
-              className="bg-white text-slate-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-slate-100 transition-all whitespace-nowrap"
+              href="#contact"
+              onClick={scrollToContact}
+              className="bg-white text-slate-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-slate-100 transition-all whitespace-nowrap cursor-pointer"
             >
               Hubungi Tim Enterprise
             </a>

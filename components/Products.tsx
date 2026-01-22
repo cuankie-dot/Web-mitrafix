@@ -19,6 +19,14 @@ const Products: React.FC = () => {
     ? PRODUCTS 
     : PRODUCTS.filter(p => p.category === activeCategory);
 
+  const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="products" className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -160,9 +168,11 @@ const Products: React.FC = () => {
             </div>
           </div>
           <a 
-            href="https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20sedang%20mencari%20perangkat%20IT%20khusus..."
-            className="bg-slate-900 text-white px-8 py-3.5 rounded-2xl font-bold hover:bg-slate-800 transition-all shadow-xl shadow-slate-200"
-            aria-label="Tanya Stok Produk IT"
+            href="https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20ingin%20tanya%20ketersediaan%20produk%20IT%20spesifik."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-slate-900 text-white px-8 py-3.5 rounded-2xl font-bold hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 cursor-pointer"
+            aria-label="Tanya Stok Produk IT via WhatsApp"
           >
             Tanya Ketersediaan Produk
           </a>

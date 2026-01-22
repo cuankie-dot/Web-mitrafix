@@ -1,0 +1,7 @@
+{
+  "name": "Mitrafix - Professional IT Solutions",
+  "description": "A conversion-oriented company profile for Mitrafix IT Solutions, featuring services for B2B and B2C markets in Indonesia.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -9,8 +9,10 @@ import WhyUs from './components/WhyUs';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import ChatBot from './components/ChatBot';
+import LeadDashboard from './components/LeadDashboard';
+import { LayoutDashboard } from 'lucide-react';
 
-const Footer: React.FC = () => (
+const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => (
   <footer className="bg-slate-900 pt-20 pb-10 text-slate-400">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -52,8 +54,9 @@ const Footer: React.FC = () => (
           <ul className="space-y-4 text-sm">
             <li><a href="#about" className="hover:text-mitrafix-orange transition-colors">Tentang Kami</a></li>
             <li><a href="#why-us" className="hover:text-mitrafix-orange transition-colors">Keunggulan Kami</a></li>
-            <li><a href="#" className="hover:text-mitrafix-orange transition-colors">Kebijakan Privasi</a></li>
-            <li><a href="#" className="hover:text-mitrafix-orange transition-colors">Syarat & Ketentuan</a></li>
+            <li><button onClick={onShowLeads} className="hover:text-mitrafix-orange transition-colors flex items-center gap-2">
+              <LayoutDashboard className="w-4 h-4" /> Admin Report
+            </button></li>
           </ul>
         </div>
 
@@ -62,7 +65,7 @@ const Footer: React.FC = () => (
           <ul className="space-y-4 text-sm">
             <li className="flex justify-between"><span>Senin - Jumat:</span> <span className="text-white">08:00 - 17:00</span></li>
             <li className="flex justify-between"><span>Sabtu:</span> <span className="text-white">08:00 - 15:00</span></li>
-            <li className="flex justify-between"><span>Minggu:</span> <span className="text-white">Tutup (Layanan Emergency Ready)</span></li>
+            <li className="flex justify-between"><span>Minggu:</span> <span className="text-white">Tutup</span></li>
           </ul>
         </div>
       </div>
@@ -76,6 +79,8 @@ const Footer: React.FC = () => (
 );
 
 const App: React.FC = () => {
+  const [showLeads, setShowLeads] = useState(false);
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -86,8 +91,10 @@ const App: React.FC = () => {
       <WhyUs />
       <Testimonials />
       <Contact />
-      <Footer />
+      <Footer onShowLeads={() => setShowLeads(true)} />
       <ChatBot />
+      
+      {showLeads && <LeadDashboard onClose={() => setShowLeads(false)} />}
     </div>
   );
 };

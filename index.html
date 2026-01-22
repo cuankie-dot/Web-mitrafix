@@ -20,17 +20,10 @@
     <meta property="og:description" content="Solusi IT profesional untuk efisiensi bisnis Anda. Service printer, CCTV, Jaringan, dan IT Support terbaik di Jakarta.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://mitrafix.id/">
-    <meta property="twitter:title" content="Mitrafix | One Place for All IT Solutions">
-    <meta property="twitter:description" content="Solusi IT profesional untuk efisiensi bisnis Anda. Service printer, CCTV, Jaringan, dan IT Support terbaik di Jakarta.">
-    <meta property="twitter:image" content="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop">
-
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
 
-    <!-- Fonts -->
+    <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
@@ -67,36 +60,17 @@
         "@type": "GeoCoordinates",
         "latitude": -6.350183,
         "longitude": 106.802054
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "08:00",
-          "closes": "17:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
-          "opens": "08:00",
-          "closes": "15:00"
-        }
-      ],
-      "sameAs": [
-        "https://www.facebook.com/mitrafix",
-        "https://www.instagram.com/mitrafix"
-      ]
+      }
     }
     </script>
-
-    <script type="importmap">
+<script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
     "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
     "vite": "https://esm.sh/vite@^7.3.1"
   }
 }
@@ -104,5 +78,7 @@
 </head>
 <body class="bg-gray-50 text-slate-900 overflow-x-hidden">
     <div id="root"></div>
+    <!-- Point to the entry file -->
+    <script type="module" src="/index.tsx"></script>
 </body>
 </html>

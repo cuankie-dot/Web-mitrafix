@@ -10,7 +10,7 @@ const About: React.FC = () => {
           <div className="order-2 lg:order-1 relative">
              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl">
                <img 
-                src="https://picsum.photos/800/800?team-work" 
+                src="public/images/mitrafix.jpg" 
                 alt="Tim Teknisi Mitrafix Melayani Solusi IT di Jakarta Selatan" 
                 className="w-full h-auto"
                 loading="lazy" 

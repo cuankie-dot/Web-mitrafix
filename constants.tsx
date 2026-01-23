@@ -62,7 +62,8 @@ export const PRODUCTS: Product[] = [
     category: 'printer',
     description: 'Printer multifungsi (Print, Scan, Copy) dengan sistem tangki tinta hemat biaya.',
     price: 'Rp 2.xxx.xxx',
-    image: 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?q=80&w=800&auto=format&fit=crop',
+    // Ganti file di folder: public/images/products/epson-l3210.jpg
+    image: '/images/products/epson-l3210.jpg', 
     isPopular: true,
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
@@ -73,7 +74,8 @@ export const PRODUCTS: Product[] = [
     category: 'printer',
     description: 'Printer laser monochrome cepat dengan konektivitas WiFi untuk kantor.',
     price: 'Rp 1.xxx.xxx',
-    image: 'https://images.unsplash.com/photo-1589330273594-fade1ee91647?q=80&w=800&auto=format&fit=crop',
+    // Ganti file di folder: public/images/products/hp-laserjet.jpg
+    image: '/images/products/hp-laserjet.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
   },
@@ -83,7 +85,8 @@ export const PRODUCTS: Product[] = [
     category: 'hardware',
     description: 'Laptop bisnis tangguh dengan performa tinggi untuk produktivitas tim.',
     price: 'Rp 7.xxx.xxx',
-    image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=800&auto=format&fit=crop',
+    // Ganti file di folder: public/images/products/asus-expertbook.jpg
+    image: '/images/products/asus-expertbook.jpg',
     isPopular: true,
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
@@ -94,7 +97,8 @@ export const PRODUCTS: Product[] = [
     category: 'hardware',
     description: 'Set komputer desktop optimal untuk admin dan manajemen kantor.',
     price: 'Rp 5.xxx.xxx',
-    image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=800&auto=format&fit=crop',
+    // Ganti file di folder: public/images/products/pc-desktop.jpg
+    image: '/images/products/pc-desktop.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
   },
@@ -104,7 +108,8 @@ export const PRODUCTS: Product[] = [
     category: 'cctv',
     description: 'Kamera pengawas Full HD dengan infrared untuk pantauan malam hari.',
     price: 'Rp 4xx.xxx',
-    image: 'https://images.unsplash.com/photo-1557597774-9d2739f85a94?q=80&w=800&auto=format&fit=crop',
+    // Ganti file di folder: public/images/products/cctv-hikvision.jpg
+    image: '/images/products/cctv-hikvision.jpg',
     isPopular: true,
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
@@ -115,7 +120,8 @@ export const PRODUCTS: Product[] = [
     category: 'cctv',
     description: 'Paket lengkap 4 kamera analog HD untuk keamanan rumah & toko.',
     price: 'Rp 2.xxx.xxx',
-    image: 'https://images.unsplash.com/photo-1524338198850-8a2ff63aaceb?q=80&w=800&auto=format&fit=crop',
+    // Ganti file di folder: public/images/products/dahua-dvr.jpg
+    image: '/images/products/dahua-dvr.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
   },
@@ -125,7 +131,8 @@ export const PRODUCTS: Product[] = [
     category: 'accessories',
     description: 'Set keyboard dan mouse wireless hemat ruang dengan baterai tahan lama.',
     price: 'Rp 2xx.xxx',
-    image: 'https://images.unsplash.com/photo-1587829741301-dc798b83aca2?q=80&w=800&auto=format&fit=crop',
+    // Ganti file di folder: public/images/products/keyboard-logitech.jpg
+    image: '/images/products/keyboard-logitech.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
   },
@@ -135,7 +142,8 @@ export const PRODUCTS: Product[] = [
     category: 'accessories',
     description: 'Router WiFi 6 terbaru untuk koneksi internet ultra cepat dan stabil.',
     price: 'Rp 6xx.xxx',
-    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop',
+    // Ganti file di folder: public/images/products/router-tplink.jpg
+    image: '/images/products/router-tplink.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
   }

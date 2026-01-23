@@ -8,11 +8,22 @@ const About: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="order-2 lg:order-1 relative">
-             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl">
+             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl group">
+               {/* 
+                  LOGIKA GAMBAR:
+                  1. Browser mencoba memuat: /images/mitrafix.jpg (dari folder public/images)
+                  2. Jika gagal (file tidak ada), onError akan jalan dan mengganti ke gambar online.
+               */}
                <img 
-                src="public/images/mitrafix.jpg" 
+                src="/images/mitrafix.jpg" 
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  // Fallback image jika foto lokal tidak ketemu
+                  target.src = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop"; 
+                  target.onerror = null; // Mencegah loop error
+                }}
                 alt="Tim Teknisi Mitrafix Melayani Solusi IT di Jakarta Selatan" 
-                className="w-full h-auto"
+                className="w-full h-auto transform transition-transform duration-700 group-hover:scale-105"
                 loading="lazy" 
                />
                <div className="absolute inset-0 bg-mitrafix-orange/20 mix-blend-multiply" />

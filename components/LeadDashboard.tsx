@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Trash2, Download, ExternalLink, Calendar, Briefcase, User, Phone, Settings, Save, CheckCircle2, AlertCircle } from 'lucide-react';
+import { X, Trash2, Download, ExternalLink, Calendar, Briefcase, User, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface Lead {
@@ -22,9 +22,6 @@ interface LeadDashboardProps {
 const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [gsheetUrl, setGsheetUrl] = useState('');
-  const [showSettings, setShowSettings] = useState(false);
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saved'>('idle');
 
   const fetchLeads = async () => {
     setIsLoading(true);
@@ -71,19 +68,10 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
       )
       .subscribe();
 
-    const savedUrl = localStorage.getItem('mitrafix_gsheet_url') || '';
-    setGsheetUrl(savedUrl);
-
     return () => {
       supabase.removeChannel(channel);
     };
   }, []);
-
-  const saveSettings = () => {
-    localStorage.setItem('mitrafix_gsheet_url', gsheetUrl);
-    setSaveStatus('saved');
-    setTimeout(() => setSaveStatus('idle'), 3000);
-  };
 
   const deleteLead = async (id: number) => {
     if (confirm('Hapus laporan ini permanen dari Database?')) {
@@ -121,13 +109,6 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <button 
-              onClick={() => setShowSettings(!showSettings)}
-              className={`p-3 rounded-2xl transition-all ${showSettings ? 'bg-mitrafix-orange text-white' : 'bg-white/10 text-slate-400 hover:bg-white/20'}`}
-              title="Pengaturan Backup Google Sheet"
-            >
-              <Settings className="w-6 h-6" />
-            </button>
             <button onClick={onClose} className="bg-white/10 p-3 rounded-2xl text-white hover:bg-white/20 transition-all">
               <X className="w-6 h-6" />
             </button>
@@ -136,37 +117,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-8 bg-slate-50/50">
-          {showSettings && (
-            <div className="mb-10 p-8 bg-white border border-slate-200 rounded-[2.5rem] shadow-sm animate-in slide-in-from-top-4 duration-300">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="bg-blue-100 p-2 rounded-xl text-blue-600">
-                  <ExternalLink className="w-5 h-5" />
-                </div>
-                <h3 className="font-bold text-slate-900 text-lg">Integrasi Google Sheets (Backup)</h3>
-              </div>
-              <p className="text-sm text-slate-500 mb-6 leading-relaxed">
-                Hubungkan formulir website ke Google Sheets sebagai backup data. Masukkan <strong>Web App URL</strong> dari Google Apps Script:
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input 
-                  type="text" 
-                  value={gsheetUrl}
-                  onChange={(e) => setGsheetUrl(e.target.value)}
-                  placeholder="https://script.google.com/macros/s/.../exec"
-                  className="flex-1 px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50 text-slate-900 text-sm focus:ring-2 focus:ring-mitrafix-orange focus:outline-none transition-all"
-                />
-                <button 
-                  onClick={saveSettings}
-                  className={`px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all ${
-                    saveStatus === 'saved' ? 'bg-green-500 text-white' : 'bg-slate-900 text-white hover:bg-slate-800'
-                  }`}
-                >
-                  {saveStatus === 'saved' ? <><CheckCircle2 className="w-5 h-5" /> Tersimpan</> : <><Save className="w-5 h-5" /> Simpan URL</>}
-                </button>
-              </div>
-            </div>
-          )}
-
+          
           {isLoading ? (
             <div className="flex items-center justify-center h-64 text-slate-400">
               Memuat data dari database...

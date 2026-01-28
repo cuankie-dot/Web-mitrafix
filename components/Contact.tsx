@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Phone, MessageSquare, Send, Map as MapIcon, CheckCircle, Cloud } from 'lucide-react';
+import { Mail, MapPin, Phone, MessageSquare, Send, CheckCircle, Cloud, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 const Contact: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -17,8 +18,9 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSyncing(true);
+    setErrorMessage(null);
     
-    // 1. Simpan ke Supabase (Database Utama)
+    // Simpan ke Supabase (Database Utama)
     try {
       const { error } = await supabase.from('leads').insert([
         {
@@ -34,36 +36,24 @@ const Contact: React.FC = () => {
 
       if (error) {
         console.error("Supabase Error:", error);
-        throw error;
+        throw new Error(error.message || "Gagal menyimpan ke database.");
       }
 
+      // Sukses
       console.log("Data saved to Supabase");
-
-      // 2. Integrasi Tambahan (Google Sheets via Apps Script jika ada)
-      // Ini opsional, tapi kita biarkan sebagai backup jika user sudah setting
-      const gSheetUrl = localStorage.getItem('mitrafix_gsheet_url');
-      if (gSheetUrl) {
-        await fetch(gSheetUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            ...formData,
-            date: new Date().toLocaleString('id-ID'),
-            status: 'New'
-          })
-        }).catch(err => console.error("GSheet Sync Error:", err));
-      }
-
       setIsSubmitted(true);
       setFormData({ name: '', company: '', email: '', phone: '', needs: '', details: '' });
 
-    } catch (err) {
+    } catch (err: any) {
       console.error("Submission Failed:", err);
-      alert("Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi atau hubungi WhatsApp kami.");
+      // Tampilkan pesan error yang lebih jelas ke user
+      setErrorMessage(err.message || "Terjadi kesalahan koneksi. Pastikan internet lancar.");
     } finally {
       setIsSyncing(false);
-      setTimeout(() => setIsSubmitted(false), 5000);
+      // Reset status sukses setelah 5 detik
+      if (!errorMessage) {
+        setTimeout(() => setIsSubmitted(false), 5000);
+      }
     }
   };
 
@@ -130,15 +120,28 @@ const Contact: React.FC = () => {
                 </div>
                 <h4 className="text-2xl font-bold text-white mb-2">Permintaan Terkirim!</h4>
                 <p className="text-slate-400 text-sm">Terima kasih {formData.name}, data Anda telah tersimpan aman di database kami.</p>
+                <button 
+                  onClick={() => setIsSubmitted(false)}
+                  className="mt-6 px-6 py-2 bg-slate-800 rounded-xl text-sm font-bold text-white hover:bg-slate-700 transition-all"
+                >
+                  Kirim Lagi
+                </button>
               </div>
             ) : null}
 
             <div className="flex justify-between items-center mb-8">
                <h4 className="text-2xl font-bold text-white">Minta Penawaran</h4>
                <div className="flex items-center gap-2 text-[10px] text-green-400 font-bold uppercase tracking-widest bg-green-400/10 px-3 py-1 rounded-full">
-                 <Cloud className="w-3 h-3" /> DB Connected
+                 <Cloud className="w-3 h-3" /> System Ready
                </div>
             </div>
+
+            {errorMessage && (
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                <p className="text-sm text-red-400">{errorMessage}</p>
+              </div>
+            )}
             
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -160,7 +163,7 @@ const Contact: React.FC = () => {
               <textarea value={formData.details} onChange={(e) => setFormData({...formData, details: e.target.value})} placeholder="Detail kebutuhan Anda..." rows={3} className={inputClasses} />
               
               <button disabled={isSyncing} type="submit" className="w-full bg-mitrafix-orange text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all disabled:opacity-50">
-                {isSyncing ? 'Menyimpan ke Database...' : 'Kirim Permintaan'} <Send className="w-4 h-4" />
+                {isSyncing ? 'Mengirim Data...' : 'Kirim Permintaan'} <Send className="w-4 h-4" />
               </button>
             </form>
           </div>

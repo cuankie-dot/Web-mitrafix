@@ -6,6 +6,7 @@ export interface ServiceItem {
   solution: string;
   benefit: string;
   icon: string;
+  image: string;
 }
 
 export interface NavLink {

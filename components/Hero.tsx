@@ -4,6 +4,14 @@ import { ChevronRight, ShieldCheck, Zap, Globe } from 'lucide-react';
 import { SERVICES, SERVICE_ICONS } from '../constants';
 
 const Hero: React.FC = () => {
+  const scrollToServices = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById('services');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="home" className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden">
       {/* Background Decor */}
@@ -40,6 +48,7 @@ const Hero: React.FC = () => {
               </a>
               <a 
                 href="#services" 
+                onClick={scrollToServices}
                 className="w-full rounded-xl border border-slate-200 bg-white px-8 py-4 text-lg font-bold text-slate-900 transition-all hover:bg-slate-50 sm:w-auto"
               >
                 Lihat Layanan
@@ -91,7 +100,8 @@ const Hero: React.FC = () => {
             <a 
               key={service.id}
               href="#services"
-              className="group rounded-2xl border border-white bg-white/80 p-5 backdrop-blur-md transition-all hover:border-mitrafix-orange hover:shadow-lg hover:shadow-orange-500/10"
+              onClick={scrollToServices}
+              className="group rounded-2xl border border-white bg-white/80 p-5 backdrop-blur-md transition-all hover:border-mitrafix-orange hover:shadow-lg hover:shadow-orange-500/10 cursor-pointer"
             >
               <div className="mb-3 text-mitrafix-orange transition-transform duration-300 group-hover:scale-110">
                 {React.cloneElement(SERVICE_ICONS[service.icon] as React.ReactElement<any>, { className: 'w-6 h-6' })}

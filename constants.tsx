@@ -12,6 +12,21 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Kontak', href: 'contact' },
 ];
 
+/* 
+  PANDUAN MENGGANTI GAMBAR:
+  
+  OPSI 1 (TERBAIK - LOKAL):
+  1. Masukkan file gambar ke folder proyek: public/images/services/nama-file.jpg
+  2. Ubah 'image' menjadi: '/images/services/nama-file.jpg'
+  
+  OPSI 2 (GOOGLE DRIVE):
+  1. Pastikan akses file di GDrive "Anyone with the link".
+  2. Ambil ID file dari link share. 
+     Contoh Link: https://drive.google.com/file/d/123456AbCdEfG/view
+     ID nya adalah: 123456AbCdEfG
+  3. Gunakan format ini: 'https://drive.google.com/uc?export=view&id=ID_FILE_ANDA'
+*/
+
 export const SERVICES: ServiceItem[] = [
   {
     id: 'printer',
@@ -19,7 +34,9 @@ export const SERVICES: ServiceItem[] = [
     problem: 'Biaya cetak membengkak dan operasional terhambat karena printer rusak atau tinta habis mendadak.',
     solution: 'Kami menyediakan penyewaan printer korporat, penjualan unit baru, dan isi ulang tinta berkualitas tinggi.',
     benefit: 'Efisiensi biaya operasional hingga 40% dan jaminan kelancaran dokumen bisnis Anda.',
-    icon: 'printer'
+    icon: 'printer',
+    // Ganti URL di bawah dengan Link GDrive Anda atau '/images/services/printer.jpg'
+    image: 'https://images.unsplash.com/photo-1612815154858-60aa4c4603e1?q=80&w=800&auto=format&fit=crop'
   },
   {
     id: 'hardware',
@@ -27,7 +44,8 @@ export const SERVICES: ServiceItem[] = [
     problem: 'Perangkat lemot dan spesifikasi yang tidak sesuai menghambat produktivitas karyawan.',
     solution: 'Pengadaan PC, Laptop, dan aksesoris IT orisinal dengan spesifikasi tepat guna untuk kebutuhan bisnis.',
     benefit: 'Peningkatan produktivitas tim dengan perangkat yang andal dan bergaransi resmi.',
-    icon: 'monitor'
+    icon: 'monitor',
+    image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=800&auto=format&fit=crop'
   },
   {
     id: 'cctv',
@@ -35,7 +53,8 @@ export const SERVICES: ServiceItem[] = [
     problem: 'Rasa tidak aman terhadap aset fisik kantor atau rumah saat tidak dipantau secara langsung.',
     solution: 'Instalasi sistem keamanan CCTV berbasis IP atau Analog dengan fitur pemantauan remote via smartphone.',
     benefit: 'Keamanan 24/7 dan ketenangan pikiran dengan sistem monitoring aset yang cerdas.',
-    icon: 'video'
+    icon: 'video',
+    image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=800&auto=format&fit=crop'
   },
   {
     id: 'network',
@@ -43,7 +62,8 @@ export const SERVICES: ServiceItem[] = [
     problem: 'Koneksi internet tidak stabil, WiFi "dead zone", dan keamanan jaringan yang rentan serangan.',
     solution: 'Instalasi jaringan LAN, sistem WiFi Mesh, dan konfigurasi sistem keamanan jaringan (firewall/mikrotik).',
     benefit: 'Konektivitas tanpa hambatan yang mendukung kolaborasi digital dan keamanan data perusahaan.',
-    icon: 'network'
+    icon: 'network',
+    image: 'https://images.unsplash.com/photo-1544197150-b99a580bbcbf?q=80&w=800&auto=format&fit=crop'
   },
   {
     id: 'maintenance',
@@ -51,7 +71,8 @@ export const SERVICES: ServiceItem[] = [
     problem: 'Tidak memiliki tim IT internal namun sering mengalami kendala teknis yang mengganggu operasional.',
     solution: 'Layanan IT support panggilan (on-call) dan kontrak maintenance rutin untuk menjaga stabilitas sistem.',
     benefit: 'Solusi IT instan tanpa biaya gaji tim internal, memastikan operasional tetap berjalan 24/7.',
-    icon: 'shield-check'
+    icon: 'shield-check',
+    image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a783?q=80&w=800&auto=format&fit=crop'
   }
 ];
 
@@ -62,7 +83,7 @@ export const PRODUCTS: Product[] = [
     category: 'printer',
     description: 'Printer multifungsi (Print, Scan, Copy) dengan sistem tangki tinta hemat biaya.',
     price: 'Rp 2.xxx.xxx',
-    // Ganti file di folder: public/images/products/epson-l3210.jpg
+    // Contoh jika pakai GDrive: 'https://drive.google.com/uc?export=view&id=1A2B3C...'
     image: '/images/products/epson-l3210.jpg', 
     isPopular: true,
     tokopediaUrl: 'https://www.tokopedia.com',
@@ -74,7 +95,6 @@ export const PRODUCTS: Product[] = [
     category: 'printer',
     description: 'Printer laser monochrome cepat dengan konektivitas WiFi untuk kantor.',
     price: 'Rp 1.xxx.xxx',
-    // Ganti file di folder: public/images/products/hp-laserjet.jpg
     image: '/images/products/hp-laserjet.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
@@ -85,7 +105,6 @@ export const PRODUCTS: Product[] = [
     category: 'hardware',
     description: 'Laptop bisnis tangguh dengan performa tinggi untuk produktivitas tim.',
     price: 'Rp 7.xxx.xxx',
-    // Ganti file di folder: public/images/products/asus-expertbook.jpg
     image: '/images/products/asus-expertbook.jpg',
     isPopular: true,
     tokopediaUrl: 'https://www.tokopedia.com',
@@ -97,7 +116,6 @@ export const PRODUCTS: Product[] = [
     category: 'hardware',
     description: 'Set komputer desktop optimal untuk admin dan manajemen kantor.',
     price: 'Rp 5.xxx.xxx',
-    // Ganti file di folder: public/images/products/pc-desktop.jpg
     image: '/images/products/pc-desktop.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
@@ -108,7 +126,6 @@ export const PRODUCTS: Product[] = [
     category: 'cctv',
     description: 'Kamera pengawas Full HD dengan infrared untuk pantauan malam hari.',
     price: 'Rp 4xx.xxx',
-    // Ganti file di folder: public/images/products/cctv-hikvision.jpg
     image: '/images/products/cctv-hikvision.jpg',
     isPopular: true,
     tokopediaUrl: 'https://www.tokopedia.com',
@@ -120,7 +137,6 @@ export const PRODUCTS: Product[] = [
     category: 'cctv',
     description: 'Paket lengkap 4 kamera analog HD untuk keamanan rumah & toko.',
     price: 'Rp 2.xxx.xxx',
-    // Ganti file di folder: public/images/products/dahua-dvr.jpg
     image: '/images/products/dahua-dvr.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
@@ -131,7 +147,6 @@ export const PRODUCTS: Product[] = [
     category: 'accessories',
     description: 'Set keyboard dan mouse wireless hemat ruang dengan baterai tahan lama.',
     price: 'Rp 2xx.xxx',
-    // Ganti file di folder: public/images/products/keyboard-logitech.jpg
     image: '/images/products/keyboard-logitech.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
@@ -142,7 +157,6 @@ export const PRODUCTS: Product[] = [
     category: 'accessories',
     description: 'Router WiFi 6 terbaru untuk koneksi internet ultra cepat dan stabil.',
     price: 'Rp 6xx.xxx',
-    // Ganti file di folder: public/images/products/router-tplink.jpg
     image: '/images/products/router-tplink.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'

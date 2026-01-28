@@ -1,11 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Rocket } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '../constants';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,14 +29,23 @@ const Navbar: React.FC = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-3' : 'bg-white/80 backdrop-blur-md py-5'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <div className="bg-mitrafix-orange p-1.5 rounded-lg shadow-lg">
-              <Rocket className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-2xl font-extrabold tracking-tight text-slate-900">
-              Mitrafix
-            </span>
-          </div>
+          {/* Logo Section */}
+          <a 
+            href="#home" 
+            onClick={(e) => scrollToSection(e, 'home')}
+            className="flex items-center"
+          >
+            {!logoError ? (
+              <img 
+                src="/images/logo.png?v=2" 
+                alt="Mitrafix Logo" 
+                className="h-10 w-auto object-contain"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <span className="text-2xl font-extrabold tracking-tight text-slate-900 ml-2">Mitrafix</span>
+            )}
+          </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">

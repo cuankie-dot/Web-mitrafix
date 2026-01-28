@@ -14,6 +14,7 @@ import { LayoutDashboard } from 'lucide-react';
 
 const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
   const [clickCount, setClickCount] = useState(0);
+  const [logoError, setLogoError] = useState(false);
 
   // Fitur Rahasia: Klik 5 kali pada teks copyright untuk membuka Admin Dashboard
   const handleSecretClick = () => {
@@ -32,13 +33,18 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 lg:col-span-1">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="bg-mitrafix-orange p-1 rounded-lg">
-                 <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <span className="text-2xl font-extrabold text-white">Mitrafix</span>
+            <div className="mb-6">
+              {/* Logo Footer dengan penanganan Error yang Robust */}
+              {!logoError ? (
+                <img 
+                  src="/images/logo.png?v=2" 
+                  alt="Mitrafix Logo" 
+                  className="h-12 w-auto bg-white rounded-lg p-2 object-contain"
+                  onError={() => setLogoError(true)}
+                />
+              ) : (
+                <span className="text-2xl font-extrabold text-white">Mitrafix</span>
+              )}
             </div>
             <p className="text-sm leading-relaxed mb-6">
               "One place for all IT solutions to support your business growth". Partner terpercaya untuk efisiensi dan keamanan teknologi Anda.

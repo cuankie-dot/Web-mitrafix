@@ -14,7 +14,7 @@ const envKey = getEnv('VITE_SUPABASE_ANON_KEY');
 const isCustomConfig = envUrl && envUrl.length > 0 && !envUrl.includes('your-project-url');
 
 // Fallback configuration (Demo Project)
-const FALLBACK_URL = 'https://qjiiprxmfyhproewwyvm.supabase.co';
+const FALLBACK_URL = 'https://xxx.supabase.co';
 const FALLBACK_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqaWlwcnhtZnlocHJvZXd3eXZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1NzQyMDEsImV4cCI6MjA4NTE1MDIwMX0.NXePku-CHtv_tmR_s2eHRd61LeNnA6ZDQNqdE7fyjxg';
 
 const supabaseUrl = isCustomConfig ? envUrl : FALLBACK_URL;

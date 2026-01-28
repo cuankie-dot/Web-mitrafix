@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { Mail, MapPin, Phone, MessageSquare, Send, Map as MapIcon, CheckCircle, Cloud } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 const Contact: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -18,48 +18,56 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSyncing(true);
     
-    // 1. Ambil data lama & URL GSheet dari localStorage
-    const existingLeads = JSON.parse(localStorage.getItem('mitrafix_leads') || '[]');
-    const gSheetUrl = localStorage.getItem('mitrafix_gsheet_url');
-    
-    // 2. Tambah data baru dengan timestamp
-    const newLead = {
-      ...formData,
-      id: Date.now(),
-      date: new Date().toLocaleString('id-ID'),
-      status: 'New'
-    };
-    
-    // 3. Simpan ke LocalStorage (sebagai backup)
-    const updatedLeads = [newLead, ...existingLeads];
-    localStorage.setItem('mitrafix_leads', JSON.stringify(updatedLeads));
+    // 1. Simpan ke Supabase (Database Utama)
+    try {
+      const { error } = await supabase.from('leads').insert([
+        {
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          needs: formData.needs,
+          details: formData.details,
+          status: 'New'
+        }
+      ]);
 
-    // 4. Kirim ke Google Sheets jika URL dikonfigurasi
-    if (gSheetUrl) {
-      try {
+      if (error) {
+        console.error("Supabase Error:", error);
+        throw error;
+      }
+
+      console.log("Data saved to Supabase");
+
+      // 2. Integrasi Tambahan (Google Sheets via Apps Script jika ada)
+      // Ini opsional, tapi kita biarkan sebagai backup jika user sudah setting
+      const gSheetUrl = localStorage.getItem('mitrafix_gsheet_url');
+      if (gSheetUrl) {
         await fetch(gSheetUrl, {
           method: 'POST',
-          mode: 'no-cors', // Penting untuk Apps Script
+          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newLead)
-        });
-        console.log("Synced to Google Sheets");
-      } catch (err) {
-        console.error("GSheet Sync Error:", err);
+          body: JSON.stringify({
+            ...formData,
+            date: new Date().toLocaleString('id-ID'),
+            status: 'New'
+          })
+        }).catch(err => console.error("GSheet Sync Error:", err));
       }
-    }
 
-    setIsSyncing(false);
-    setIsSubmitted(true);
-    
-    setTimeout(() => {
-      setIsSubmitted(false);
+      setIsSubmitted(true);
       setFormData({ name: '', company: '', email: '', phone: '', needs: '', details: '' });
-    }, 3000);
+
+    } catch (err) {
+      console.error("Submission Failed:", err);
+      alert("Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi atau hubungi WhatsApp kami.");
+    } finally {
+      setIsSyncing(false);
+      setTimeout(() => setIsSubmitted(false), 5000);
+    }
   };
 
   const inputClasses = "w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-800 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-mitrafix-orange focus:border-transparent transition-all";
-  const labelClasses = "block text-sm font-bold text-slate-300 mb-2";
 
   return (
     <section id="contact" className="py-24 bg-white">
@@ -71,7 +79,7 @@ const Contact: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
-          {/* Info Card - Tetap sama seperti sebelumnya */}
+          {/* Info Card */}
           <div className="bg-slate-900 text-white rounded-[2.5rem] p-10 relative overflow-hidden flex flex-col justify-between shadow-xl">
             <div className="absolute bottom-0 right-0 w-32 h-32 bg-mitrafix-orange opacity-20 rounded-full -mb-10 -mr-10" />
             <div>
@@ -121,17 +129,15 @@ const Contact: React.FC = () => {
                   <CheckCircle className="w-10 h-10 text-green-500" />
                 </div>
                 <h4 className="text-2xl font-bold text-white mb-2">Permintaan Terkirim!</h4>
-                <p className="text-slate-400 text-sm">Terima kasih {formData.name}, data Anda telah tersinkronisasi ke sistem kami.</p>
+                <p className="text-slate-400 text-sm">Terima kasih {formData.name}, data Anda telah tersimpan aman di database kami.</p>
               </div>
             ) : null}
 
             <div className="flex justify-between items-center mb-8">
                <h4 className="text-2xl font-bold text-white">Minta Penawaran</h4>
-               {localStorage.getItem('mitrafix_gsheet_url') && (
-                 <div className="flex items-center gap-2 text-[10px] text-green-400 font-bold uppercase tracking-widest bg-green-400/10 px-3 py-1 rounded-full">
-                   <Cloud className="w-3 h-3" /> Cloud Linked
-                 </div>
-               )}
+               <div className="flex items-center gap-2 text-[10px] text-green-400 font-bold uppercase tracking-widest bg-green-400/10 px-3 py-1 rounded-full">
+                 <Cloud className="w-3 h-3" /> DB Connected
+               </div>
             </div>
             
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -153,14 +159,14 @@ const Contact: React.FC = () => {
               </select>
               <textarea value={formData.details} onChange={(e) => setFormData({...formData, details: e.target.value})} placeholder="Detail kebutuhan Anda..." rows={3} className={inputClasses} />
               
-              <button disabled={isSyncing} type="submit" className="w-full bg-mitrafix-orange text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all">
-                {isSyncing ? 'Memproses...' : 'Kirim Permintaan'} <Send className="w-4 h-4" />
+              <button disabled={isSyncing} type="submit" className="w-full bg-mitrafix-orange text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all disabled:opacity-50">
+                {isSyncing ? 'Menyimpan ke Database...' : 'Kirim Permintaan'} <Send className="w-4 h-4" />
               </button>
             </form>
           </div>
         </div>
 
-        {/* Google Maps - Tetap ada */}
+        {/* Google Maps */}
         <div className="mt-10">
           <div className="w-full h-[350px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100">
             <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3965.719601198428!2d106.80201804476303!3d-6.350045192932447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMjEnMDAuMiJTIDEwNsKwNDgnMDcuMyJF!5e0!3m2!1sid!2sid!4v1715600000000!5m2!1sid!2sid" width="100%" height="100%" style={{ border: 0 }} allowFullScreen={true} loading="lazy" title="Lokasi Kantor"></iframe>

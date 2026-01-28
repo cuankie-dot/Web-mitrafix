@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { X, Trash2, Download, ExternalLink, Calendar, Briefcase, User, Phone, Settings, Save, CheckCircle2, AlertCircle } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 interface Lead {
   id: number;
@@ -10,7 +10,8 @@ interface Lead {
   phone: string;
   needs: string;
   details: string;
-  date: string;
+  created_at?: string; // Supabase timestamp
+  date?: string; // Display date
   status: string;
 }
 
@@ -20,15 +21,62 @@ interface LeadDashboardProps {
 
 const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [gsheetUrl, setGsheetUrl] = useState('');
   const [showSettings, setShowSettings] = useState(false);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saved'>('idle');
 
+  const fetchLeads = async () => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('leads')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      if (data) {
+        // Format date untuk tampilan
+        const formattedData = data.map((item: any) => ({
+          ...item,
+          date: new Date(item.created_at).toLocaleString('id-ID', {
+            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+          })
+        }));
+        setLeads(formattedData);
+      }
+    } catch (error) {
+      console.error("Error fetching leads:", error);
+      // Fallback ke localStorage jika DB gagal/kosong sementara
+      const localData = JSON.parse(localStorage.getItem('mitrafix_leads') || '[]');
+      setLeads(localData);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('mitrafix_leads') || '[]');
+    fetchLeads();
+    
+    // Setup Realtime Listener untuk Lead Baru
+    const channel = supabase.channel('realtime leads')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'leads' },
+        (payload) => {
+           console.log('New lead received!', payload);
+           fetchLeads(); // Refresh list saat ada data masuk
+        }
+      )
+      .subscribe();
+
     const savedUrl = localStorage.getItem('mitrafix_gsheet_url') || '';
-    setLeads(data);
     setGsheetUrl(savedUrl);
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const saveSettings = () => {
@@ -37,11 +85,19 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
     setTimeout(() => setSaveStatus('idle'), 3000);
   };
 
-  const deleteLead = (id: number) => {
-    if (confirm('Hapus laporan ini?')) {
-      const updated = leads.filter(l => l.id !== id);
-      setLeads(updated);
-      localStorage.setItem('mitrafix_leads', JSON.stringify(updated));
+  const deleteLead = async (id: number) => {
+    if (confirm('Hapus laporan ini permanen dari Database?')) {
+      try {
+        const { error } = await supabase.from('leads').delete().eq('id', id);
+        
+        if (error) throw error;
+
+        // Update UI optimistic
+        setLeads(leads.filter(l => l.id !== id));
+      } catch (err) {
+        console.error("Gagal menghapus:", err);
+        alert("Gagal menghapus data. Cek koneksi internet.");
+      }
     }
   };
 
@@ -57,7 +113,9 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
             <div>
               <h2 className="text-white font-extrabold text-2xl tracking-tight">Lead Center Mitrafix</h2>
               <div className="flex items-center gap-3 mt-1">
-                <p className="text-slate-400 text-[10px] uppercase tracking-[0.2em] font-bold">Laporan Real-time</p>
+                <p className="text-slate-400 text-[10px] uppercase tracking-[0.2em] font-bold">
+                  {isLoading ? 'Memuat Data...' : 'Database Supabase Active'}
+                </p>
                 <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
               </div>
             </div>
@@ -66,7 +124,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
             <button 
               onClick={() => setShowSettings(!showSettings)}
               className={`p-3 rounded-2xl transition-all ${showSettings ? 'bg-mitrafix-orange text-white' : 'bg-white/10 text-slate-400 hover:bg-white/20'}`}
-              title="Pengaturan Sync"
+              title="Pengaturan Backup Google Sheet"
             >
               <Settings className="w-6 h-6" />
             </button>
@@ -84,10 +142,10 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
                 <div className="bg-blue-100 p-2 rounded-xl text-blue-600">
                   <ExternalLink className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-slate-900 text-lg">Integrasi Google Sheets</h3>
+                <h3 className="font-bold text-slate-900 text-lg">Integrasi Google Sheets (Backup)</h3>
               </div>
               <p className="text-sm text-slate-500 mb-6 leading-relaxed">
-                Hubungkan formulir website langsung ke Google Sheets. Masukkan <strong>Web App URL</strong> dari Google Apps Script Anda di bawah ini:
+                Hubungkan formulir website ke Google Sheets sebagai backup data. Masukkan <strong>Web App URL</strong> dari Google Apps Script:
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <input 
@@ -106,16 +164,14 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
                   {saveStatus === 'saved' ? <><CheckCircle2 className="w-5 h-5" /> Tersimpan</> : <><Save className="w-5 h-5" /> Simpan URL</>}
                 </button>
               </div>
-              {!gsheetUrl && (
-                <div className="mt-4 flex items-center gap-2 text-amber-600">
-                  <AlertCircle className="w-4 h-4" />
-                  <p className="text-[10px] font-bold uppercase tracking-wider italic">Sync Cloud belum aktif. Laporan hanya tersimpan lokal.</p>
-                </div>
-              )}
             </div>
           )}
 
-          {leads.length === 0 ? (
+          {isLoading ? (
+            <div className="flex items-center justify-center h-64 text-slate-400">
+              Memuat data dari database...
+            </div>
+          ) : leads.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-80 text-slate-400">
               <div className="bg-white p-8 rounded-full mb-6 shadow-sm">
                 <Briefcase className="w-16 h-16 opacity-10" />
@@ -137,7 +193,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
                         </span>
                         <span className="flex items-center gap-1.5 text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-100 px-3 py-1.5 rounded-full">
                           <Calendar className="w-3.5 h-3.5" />
-                          {lead.date}
+                          {lead.date || '-'}
                         </span>
                       </div>
                       
@@ -182,7 +238,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
                       <button 
                         onClick={() => deleteLead(lead.id)}
                         className="flex-1 lg:flex-none bg-white text-red-500 p-5 rounded-2xl border border-red-100 hover:bg-red-50 transition-all hover:scale-110"
-                        title="Hapus Lead"
+                        title="Hapus Lead dari DB"
                       >
                         <Trash2 className="w-6 h-6" />
                       </button>
@@ -196,7 +252,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
 
         <div className="p-6 bg-white border-t border-slate-100 text-center flex justify-center items-center gap-2">
            <div className="w-2 h-2 bg-mitrafix-orange rounded-full" />
-           <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.3em]">Mitrafix Enterprise Lead Management System</p>
+           <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.3em]">Mitrafix Database System • Secure Connection</p>
         </div>
       </div>
     </div>

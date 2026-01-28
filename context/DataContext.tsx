@@ -80,7 +80,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       .on(
         'postgres_changes',
         { event: '*', schema: 'public' },
-        (payload) => {
+        (payload: any) => {
           console.log('Ada perubahan data di database:', payload);
           loadData(); // Refresh data otomatis
         }

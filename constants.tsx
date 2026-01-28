@@ -12,20 +12,6 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Kontak', href: 'contact' },
 ];
 
-/* 
-  PANDUAN MENGGANTI GAMBAR:
-  
-  OPSI 1 (TERBAIK - LOKAL):
-  1. Masukkan file gambar ke folder proyek: public/images/services/nama-file.jpg
-  2. Ubah 'image' menjadi: '/images/services/nama-file.jpg'
-  
-  OPSI 2 (GOOGLE DRIVE):
-  1. Pastikan akses file di GDrive "Anyone with the link".
-  2. Ambil ID file dari link share. 
-     Contoh Link: https://drive.google.com/file/d/123456AbCdEfG/view
-     ID nya adalah: 123456AbCdEfG
-  3. Gunakan format ini: 'https://drive.google.com/uc?export=view&id=ID_FILE_ANDA'
-*/
 
 export const SERVICES: ServiceItem[] = [
   {
@@ -35,7 +21,6 @@ export const SERVICES: ServiceItem[] = [
     solution: 'Kami menyediakan penyewaan printer korporat, penjualan unit baru, dan isi ulang tinta berkualitas tinggi.',
     benefit: 'Efisiensi biaya operasional hingga 40% dan jaminan kelancaran dokumen bisnis Anda.',
     icon: 'printer',
-    // Ganti URL di bawah dengan Link GDrive Anda atau '/images/services/printer.jpg'
     image: 'https://images.unsplash.com/photo-1612815154858-60aa4c4603e1?q=80&w=800&auto=format&fit=crop'
   },
   {

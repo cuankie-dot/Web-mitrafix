@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ServiceItem, Product, Testimonial } from '../types';
 import { SERVICES as INITIAL_SERVICES, PRODUCTS as INITIAL_PRODUCTS, TESTIMONIALS as INITIAL_TESTIMONIALS } from '../constants';
-import { supabase } from '../lib/supabase';
+import { supabase, isConfigured } from '../lib/supabase';
 
 interface DataContextType {
   services: ServiceItem[];
@@ -30,37 +30,45 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const loadData = async () => {
     try {
-      // Access import.meta.env safely by casting to any to avoid TS errors
-      const env = (import.meta as any).env;
-
-      // Cek apakah env variable sudah diset
-      if (!env?.VITE_SUPABASE_URL || env?.VITE_SUPABASE_URL.includes('your-project-url')) {
-        throw new Error("Supabase not configured");
-      }
-
-      // Fetch semua data secara paralel
+      // Kita langsung mencoba fetch ke Supabase tanpa pengecekan manual env variable.
+      // Supabase client di lib/supabase.ts sudah pintar menangani fallback.
+      
       const [servicesRes, productsRes, testimonialsRes] = await Promise.all([
         supabase.from('services').select('*').order('id'),
         supabase.from('products').select('*').order('id'),
         supabase.from('testimonials').select('*').order('id')
       ]);
 
-      // Cek error satu per satu
+      // Cek error dari response Supabase
       if (servicesRes.error) throw servicesRes.error;
       if (productsRes.error) throw productsRes.error;
       if (testimonialsRes.error) throw testimonialsRes.error;
 
-      // Jika sukses, set data dari database
-      // PENTING: Jika tabel kosong (0 rows), ini akan mereturn array kosong [], bukan error.
-      // Website akan terlihat kosong di bagian produk/service jika data DB belum diisi.
-      setServices(servicesRes.data as ServiceItem[]);
-      setProducts(productsRes.data as Product[]);
-      setTestimonials(testimonialsRes.data as Testimonial[]);
-      setIsUsingFallback(false);
+      // SMART DATA HANDLING:
+      // Jika koneksi sukses TAPI datanya kosong (karena database baru dibuat),
+      // kita tampilkan data template (INITIAL_...) agar website tetap terlihat bagus.
+      // Jika ada data, kita pakai data dari database.
+
+      const dbServices = servicesRes.data as ServiceItem[];
+      const dbProducts = productsRes.data as Product[];
+      const dbTestimonials = testimonialsRes.data as Testimonial[];
+
+      setServices(dbServices.length > 0 ? dbServices : INITIAL_SERVICES);
+      setProducts(dbProducts.length > 0 ? dbProducts : INITIAL_PRODUCTS);
+      setTestimonials(dbTestimonials.length > 0 ? dbTestimonials : INITIAL_TESTIMONIALS);
+      
+      // Jika database kosong, kita anggap masih menggunakan fallback data secara visual
+      // meskipun koneksi database sukses (agar user tidak bingung kenapa kosong)
+      const isEmptyDB = dbServices.length === 0 && dbProducts.length === 0;
+      setIsUsingFallback(!isConfigured || isEmptyDB);
+
+      if (isConfigured && isEmptyDB) {
+        console.log("[DataContext] Koneksi DB Sukses tapi data kosong. Menampilkan Template Data.");
+      }
 
     } catch (error) {
-      console.warn("Gagal connect ke Supabase. Mengaktifkan Fallback Mode (Data Lokal).", error);
-      // Fallback ke data statis
+      console.warn("[DataContext] Gagal mengambil data. Mengaktifkan Mode Offline/Statis.", error);
+      // Fallback total jika terjadi error jaringan atau konfigurasi salah
       setServices(INITIAL_SERVICES);
       setProducts(INITIAL_PRODUCTS);
       setTestimonials(INITIAL_TESTIMONIALS);
@@ -71,18 +79,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   useEffect(() => {
-    // 1. Load data pertama kali
     loadData();
 
-    // 2. Subscribe ke perubahan Realtime (Live Update)
-    // Fitur ini membuat website otomatis update saat Anda edit data di Supabase Dashboard
+    // Subscribe ke perubahan Realtime
     const channel = supabase.channel('public:db_changes')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public' },
         (payload: any) => {
-          console.log('Ada perubahan data di database:', payload);
-          loadData(); // Refresh data otomatis
+          console.log('Update Realtime diterima:', payload);
+          loadData();
         }
       )
       .subscribe();

@@ -1,29 +1,29 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Access import.meta.env safely by casting to any to avoid TS errors
-const env = (import.meta as any).env;
+// Helper untuk membaca Env Variable dengan aman di Vite
+const getEnv = (key: string) => {
+  // @ts-ignore
+  return import.meta.env[key];
+};
 
-let supabaseUrl = env?.VITE_SUPABASE_URL;
-let supabaseAnonKey = env?.VITE_SUPABASE_ANON_KEY;
+const envUrl = getEnv('VITE_SUPABASE_URL');
+const envKey = getEnv('VITE_SUPABASE_ANON_KEY');
 
-// Validasi: Jika URL masih default/placeholder, anggap tidak ada
-if (supabaseUrl && supabaseUrl.includes('your-project-url')) {
-  console.warn('Supabase URL di .env masih default. Menggunakan konfigurasi fallback/demo.');
-  supabaseUrl = null;
-  supabaseAnonKey = null;
+// Cek apakah user sudah memasukkan URL project sendiri (bukan placeholder)
+const isCustomConfig = envUrl && envUrl.length > 0 && !envUrl.includes('your-project-url');
+
+// Pilih konfigurasi: Custom (Vercel) atau Fallback (Demo)
+const supabaseUrl = isCustomConfig ? envUrl : FALLBACK_URL;
+const supabaseAnonKey = isCustomConfig ? envKey : FALLBACK_KEY;
+
+// Logging status koneksi untuk mempermudah debugging di Console Browser
+if (isCustomConfig) {
+  console.log("%c[Supabase] Menggunakan Database Pribadi (Custom Config)", "color: #10B981; font-weight: bold;");
+} else {
+  console.log("%c[Supabase] Environment Variable belum terdeteksi. Menggunakan Mode DEMO.", "color: #F59E0B; font-weight: bold;");
 }
 
-// Fallback configuration (Demo Project)
-// Jika Anda ingin menggunakan project sendiri, pastikan .env diisi dengan benar
-const FALLBACK_URL = 'https://qjiiprxmfyhproewwyvm.supabase.co';
-const FALLBACK_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqaWlwcnhtZnlocHJvZXd3eXZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk1NzQyMDEsImV4cCI6MjA4NTE1MDIwMX0.NXePku-CHtv_tmR_s2eHRd61LeNnA6ZDQNqdE7fyjxg';
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-export const supabase = createClient(
-  supabaseUrl || FALLBACK_URL,
-  supabaseAnonKey || FALLBACK_KEY
-);
-
-// Helper untuk mengecek apakah Supabase sudah dikonfigurasi dengan benar
-export const isSupabaseConfigured = () => {
-  return supabaseUrl && !supabaseUrl.includes('your-project-url');
-};
+// Export status konfigurasi untuk dipakai di komponen lain
+export const isConfigured = isCustomConfig;

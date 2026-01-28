@@ -1,9 +1,15 @@
 
 import React from 'react';
 import { Quote, Star } from 'lucide-react';
-import { TESTIMONIALS } from '../constants';
+import { useData } from '../context/DataContext';
 
 const Testimonials: React.FC = () => {
+  const { testimonials, isLoading } = useData();
+
+  if (isLoading) {
+     return <section className="py-24 bg-white text-center">Loading testimonials...</section>;
+  }
+
   return (
     <section id="testimonials" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +24,7 @@ const Testimonials: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {TESTIMONIALS.map((testimonial) => (
+          {testimonials.map((testimonial) => (
             <div 
               key={testimonial.id}
               className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 relative group"

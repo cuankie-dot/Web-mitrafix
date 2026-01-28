@@ -1,9 +1,12 @@
 
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { SERVICES, SERVICE_ICONS } from '../constants';
+import { SERVICE_ICONS } from '../constants';
+import { useData } from '../context/DataContext';
 
 const Services: React.FC = () => {
+  const { services, isLoading } = useData();
+
   const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const element = document.getElementById('contact');
@@ -11,6 +14,10 @@ const Services: React.FC = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  if (isLoading) {
+    return <section className="py-24 bg-white text-center">Loading services...</section>;
+  }
 
   return (
     <section id="services" className="py-24 bg-white">
@@ -26,7 +33,7 @@ const Services: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SERVICES.map((service) => (
+          {services.map((service) => (
             <div 
               key={service.id} 
               className="group rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 flex flex-col h-full overflow-hidden"
@@ -45,8 +52,10 @@ const Services: React.FC = () => {
               <div className="p-8 flex flex-col flex-grow relative">
                 {/* Floating Icon */}
                 <div className="absolute -top-10 left-8 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-mitrafix-orange shadow-lg group-hover:bg-mitrafix-orange group-hover:text-white transition-colors duration-300">
-                   {/* Clone element to slightly increase icon size inside this larger container if needed, or keep standard */}
-                   {React.cloneElement(SERVICE_ICONS[service.icon] as React.ReactElement<any>, { className: 'w-10 h-10' })}
+                   {/* Ikon tetap diambil dari mapping di constants karena React Node tidak bisa disimpan di DB */}
+                   {SERVICE_ICONS[service.icon] ? (
+                      React.cloneElement(SERVICE_ICONS[service.icon] as React.ReactElement<any>, { className: 'w-10 h-10' })
+                   ) : null}
                 </div>
                 
                 <div className="mt-8 mb-4">

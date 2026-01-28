@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
 import { ShoppingCart, ExternalLink, Zap, MessageCircle } from 'lucide-react';
-import { PRODUCTS } from '../constants';
-import { Product } from '../types';
+import { useData } from '../context/DataContext';
 
 const categories = [
   { id: 'all', label: 'Semua Produk' },
@@ -13,19 +12,16 @@ const categories = [
 ];
 
 const Products: React.FC = () => {
+  const { products, isLoading } = useData();
   const [activeCategory, setActiveCategory] = useState('all');
 
   const filteredProducts = activeCategory === 'all' 
-    ? PRODUCTS 
-    : PRODUCTS.filter(p => p.category === activeCategory);
+    ? products 
+    : products.filter(p => p.category === activeCategory);
 
-  const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  if (isLoading) {
+    return <section className="py-24 bg-slate-50 text-center">Loading products...</section>;
+  }
 
   return (
     <section id="products" className="py-24 bg-slate-50">

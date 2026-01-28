@@ -10,7 +10,7 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import ChatBot from './components/ChatBot';
 import LeadDashboard from './components/LeadDashboard';
-import { LayoutDashboard } from 'lucide-react';
+import { DataProvider } from './context/DataContext';
 
 const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
   const [clickCount, setClickCount] = useState(0);
@@ -104,7 +104,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
   );
 };
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [showLeads, setShowLeads] = useState(false);
 
   // Check URL param ?admin=true saat website dimuat
@@ -130,6 +130,14 @@ const App: React.FC = () => {
       
       {showLeads && <LeadDashboard onClose={() => setShowLeads(false)} />}
     </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <DataProvider>
+      <AppContent />
+    </DataProvider>
   );
 };
 

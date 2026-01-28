@@ -1,9 +1,12 @@
 
 import React from 'react';
 import { ChevronRight, ShieldCheck, Zap, Globe } from 'lucide-react';
-import { SERVICES, SERVICE_ICONS } from '../constants';
+import { SERVICE_ICONS } from '../constants';
+import { useData } from '../context/DataContext';
 
 const Hero: React.FC = () => {
+  const { services } = useData();
+
   const scrollToServices = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const element = document.getElementById('services');
@@ -96,7 +99,7 @@ const Hero: React.FC = () => {
 
         {/* Services Highlight Grid */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-          {SERVICES.map((service) => (
+          {services.map((service) => (
             <a 
               key={service.id}
               href="#services"
@@ -104,7 +107,9 @@ const Hero: React.FC = () => {
               className="group rounded-2xl border border-white bg-white/80 p-5 backdrop-blur-md transition-all hover:border-mitrafix-orange hover:shadow-lg hover:shadow-orange-500/10 cursor-pointer"
             >
               <div className="mb-3 text-mitrafix-orange transition-transform duration-300 group-hover:scale-110">
-                {React.cloneElement(SERVICE_ICONS[service.icon] as React.ReactElement<any>, { className: 'w-6 h-6' })}
+                 {SERVICE_ICONS[service.icon] ? (
+                      React.cloneElement(SERVICE_ICONS[service.icon] as React.ReactElement<any>, { className: 'w-6 h-6' })
+                   ) : null}
               </div>
               <h4 className="text-sm font-bold leading-tight text-slate-800">
                 {service.title}

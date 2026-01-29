@@ -47,7 +47,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
               )}
             </div>
             <p className="text-sm leading-relaxed mb-6">
-              "One place for all IT solutions to support your business growth". Partner terpercaya untuk efisiensi dan keamanan teknologi Anda.
+              "One place for all IT solutions to support your business growth"
             </p>
             <div className="flex gap-4">
               {['facebook', 'instagram', 'linkedin', 'twitter'].map(social => (

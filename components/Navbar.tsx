@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
           >
             {!logoError ? (
               <img 
-                src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/fav_ico/web-app-manifest-512x512.png" 
+                src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/fav_ico/android-chrome-512x512.png" 
                 alt="Mitrafix Logo" 
                 className="h-16 md:h-20 w-auto object-contain"
                 onError={() => setLogoError(true)}

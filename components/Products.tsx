@@ -60,22 +60,22 @@ const Products: React.FC = () => {
               key={product.id} 
               className="bg-white rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl hover:shadow-slate-200 transition-all duration-300 group flex flex-col"
             >
-              {/* Image Container */}
-              <div className="relative h-56 overflow-hidden bg-slate-100">
+              {/* Image Container - Updated for better product visibility */}
+              <div className="relative h-64 overflow-hidden bg-white border-b border-slate-50 p-6 flex items-center justify-center">
                 <img 
                   src={product.image} 
                   alt={`${product.name} - Jual & Service di Mitrafix Jakarta`} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                 />
                 {product.isPopular && (
-                  <div className="absolute top-4 left-4 bg-mitrafix-orange text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 uppercase tracking-wider">
+                  <div className="absolute top-4 left-4 bg-mitrafix-orange text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 uppercase tracking-wider shadow-md">
                     <Zap className="w-3 h-3 fill-current" />
                     Terlaris
                   </div>
                 )}
                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-white/90 backdrop-blur-sm p-2 rounded-xl text-slate-900">
+                  <div className="bg-white/90 backdrop-blur-sm p-2 rounded-xl text-slate-900 shadow-sm border border-slate-100">
                     <ExternalLink className="w-4 h-4" />
                   </div>
                 </div>
@@ -85,7 +85,7 @@ const Products: React.FC = () => {
               <div className="p-6 flex flex-col flex-grow">
                 <div className="mb-2">
                   <span className="text-[10px] font-bold text-mitrafix-orange uppercase tracking-widest">{product.category}</span>
-                  <h4 className="text-lg font-bold text-slate-900 leading-tight group-hover:text-mitrafix-orange transition-colors">
+                  <h4 className="text-lg font-bold text-slate-900 leading-tight group-hover:text-mitrafix-orange transition-colors mt-1">
                     {product.name}
                   </h4>
                 </div>

@@ -37,7 +37,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
               {/* Logo Footer dengan penanganan Error yang Robust */}
               {!logoError ? (
                 <img 
-                  src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/fav_ico/web-app-manifest-512x512.png" 
+                  src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/fav_ico/android-chrome-512x512.png" 
                   alt="Mitrafix Logo" 
                   className="h-12 w-auto bg-white rounded-lg p-2 object-contain"
                   onError={() => setLogoError(true)}

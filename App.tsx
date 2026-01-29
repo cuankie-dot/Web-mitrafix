@@ -16,7 +16,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
   const [clickCount, setClickCount] = useState(0);
   const [logoError, setLogoError] = useState(false);
 
-  // Fitur Rahasia: Klik 5 kali pada teks copyright untuk membuka Admin Dashboard
+
   const handleSecretClick = () => {
     const newCount = clickCount + 1;
     setClickCount(newCount);
@@ -24,7 +24,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
       onShowLeads();
       setClickCount(0);
     }
-    // Reset counter jika tidak diklik lagi dalam 2 detik
+ 
     setTimeout(() => setClickCount(0), 2000);
   };
 
@@ -107,7 +107,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
 const AppContent: React.FC = () => {
   const [showLeads, setShowLeads] = useState(false);
 
-  // Check URL param ?admin=true saat website dimuat
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('admin') === 'true') {

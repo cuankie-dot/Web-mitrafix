@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
           <div className="flex-1 text-center lg:text-left">
             <div className="mb-6 inline-flex items-center space-x-2 rounded-full bg-sky-100 px-4 py-1.5 text-sm font-bold text-sky-600">
               <Zap className="h-4 w-4" />
-              <span>Partner IT Terpercaya Jakarta Selatan</span>
+              <span>Partner IT Terpercaya</span>
             </div>
             
             <h1 className="mb-6 text-4xl font-extrabold leading-tight text-slate-900 md:text-6xl">
@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
               </div>
               <div className="flex items-center gap-2 text-sm font-medium">
                 <Globe className="h-5 w-5 text-blue-500" />
-                <span>Support Area Jabodetabek</span>
+                <span>Support Area seluruh Indonesia</span>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@ const Hero: React.FC = () => {
           <div className="relative flex-1">
             <div className="relative z-10 transform overflow-hidden rounded-2xl shadow-2xl shadow-slate-200 transition-transform duration-500 hover:rotate-0 lg:rotate-2">
               <img 
-                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop" 
+                src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/IT%20solution.JPG" 
                 alt="Mitrafix IT Solutions Team Working on Infrastructure" 
                 className="h-[400px] w-full object-cover"
                 loading="eager"

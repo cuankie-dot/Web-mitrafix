@@ -66,7 +66,7 @@ const WhyUs: React.FC = () => {
                 <p className="text-sm font-medium opacity-80 uppercase tracking-widest">Tahun Pengalaman</p>
               </div>
               <div className="rounded-2xl overflow-hidden shadow-lg h-64">
-                <img src="https://picsum.photos/id/0/400/600?server-room" className="w-full h-full object-cover" alt="Server Room" />
+                <img src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/customer-rate.jpg" className="w-full h-full object-cover" alt="Server Room" />
               </div>
             </div>
           </div>

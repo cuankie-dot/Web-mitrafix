@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -28,6 +29,13 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
     setTimeout(() => setClickCount(0), 2000);
   };
 
+  const socialLinks = [
+    { name: 'facebook', url: '#', icon: <Facebook className="w-5 h-5" /> },
+    { name: 'instagram', url: 'https://www.instagram.com/mitra.fix', icon: <Instagram className="w-5 h-5" /> },
+    { name: 'linkedin', url: '#', icon: <Linkedin className="w-5 h-5" /> },
+    { name: 'twitter', url: '#', icon: <Twitter className="w-5 h-5" /> }
+  ];
+
   return (
     <footer className="bg-slate-900 pt-20 pb-10 text-slate-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,10 +58,16 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
               "One place for all IT solutions to support your business growth".
             </p>
             <div className="flex gap-4">
-              {['facebook', 'instagram', 'linkedin', 'twitter'].map(social => (
-                <a key={social} href="#" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-mitrafix-orange hover:text-white transition-all">
-                  <span className="sr-only">{social}</span>
-                  <div className="w-5 h-5 bg-slate-400 rounded-sm"></div>
+              {socialLinks.map((social) => (
+                <a 
+                  key={social.name} 
+                  href={social.url} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-mitrafix-orange hover:text-white transition-all text-slate-400"
+                  aria-label={social.name}
+                >
+                  {social.icon}
                 </a>
               ))}
             </div>

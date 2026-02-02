@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
               <img 
                 src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/fav_ico/android-chrome-512x512.png" 
                 alt="Mitrafix Logo" 
-                className="h-10 w-auto object-contain"
+                className="h-20 w-auto object-contain"
                 onError={() => setLogoError(true)}
               />
             ) : (

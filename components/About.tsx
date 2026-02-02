@@ -44,7 +44,7 @@ const About: React.FC = () => {
 
             <div className="space-y-6">
               <div className="flex gap-4">
-                <div className="bg-orange-100 p-3 rounded-2xl text-mitrafix-orange h-fit">
+                <div className="bg-sky-100 p-3 rounded-2xl text-mitrafix-orange h-fit">
                   <Target className="w-6 h-6" />
                 </div>
                 <div>

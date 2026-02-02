@@ -44,7 +44,7 @@ const Products: React.FC = () => {
               onClick={() => setActiveCategory(cat.id)}
               className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all border-2 ${
                 activeCategory === cat.id 
-                  ? 'bg-mitrafix-orange border-mitrafix-orange text-white shadow-lg shadow-orange-500/20' 
+                  ? 'bg-mitrafix-orange border-mitrafix-orange text-white shadow-lg shadow-sky-400/20' 
                   : 'bg-white border-slate-200 text-slate-600 hover:border-mitrafix-orange hover:text-mitrafix-orange'
               }`}
             >
@@ -155,7 +155,7 @@ const Products: React.FC = () => {
         {/* Custom Order Callout */}
         <div className="mt-16 bg-white p-8 rounded-[2rem] border border-dashed border-slate-300 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div className="flex items-center gap-4">
-            <div className="bg-orange-50 p-4 rounded-2xl text-mitrafix-orange">
+            <div className="bg-sky-50 p-4 rounded-2xl text-mitrafix-orange">
               <ShoppingCart className="w-8 h-8" />
             </div>
             <div>

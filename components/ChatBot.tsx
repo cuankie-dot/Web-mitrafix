@@ -92,7 +92,7 @@ const ChatBot: React.FC = () => {
             <button 
               onClick={handleSend}
               disabled={isLoading}
-              className="bg-mitrafix-orange text-white p-2.5 rounded-xl hover:bg-orange-600 transition-all disabled:opacity-50"
+              className="bg-mitrafix-orange text-white p-2.5 rounded-xl hover:bg-sky-400 transition-all disabled:opacity-50"
             >
               <Send className="w-5 h-5" />
             </button>
@@ -101,7 +101,7 @@ const ChatBot: React.FC = () => {
       ) : (
         <button 
           onClick={() => setIsOpen(true)}
-          className="bg-mitrafix-orange text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl shadow-orange-500/40 hover:scale-110 transition-all group relative"
+          className="bg-mitrafix-orange text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl shadow-sky-400/40 hover:scale-110 transition-all group relative"
         >
           <div className="absolute -top-12 right-0 bg-white text-slate-900 text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg border border-slate-100 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
             Ada yang bisa dibantu?

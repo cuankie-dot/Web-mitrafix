@@ -34,15 +34,12 @@ const Services: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => {
-            // Logika untuk menentukan icon.
-            // 1. Cek apakah ada di daftar SERVICE_ICONS.
-            // 2. Jika tidak ada, gunakan icon default (Zap).
             const IconComponent = SERVICE_ICONS[service.icon] || <Zap className="w-10 h-10" />;
 
             return (
               <div 
                 key={service.id} 
-                className="group rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 flex flex-col h-full overflow-hidden"
+                className="group rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:shadow-sky-400/10 transition-all duration-300 flex flex-col h-full overflow-hidden"
               >
                 {/* Image Header */}
                 <div className="h-48 overflow-hidden relative">
@@ -50,7 +47,6 @@ const Services: React.FC = () => {
                     src={service.image} 
                     alt={service.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    // Fallback image jika URL error
                     onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop';
                     }}

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { X, Trash2, Download, ExternalLink, Calendar, Briefcase, User, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabase';
@@ -95,7 +96,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
         {/* Header */}
         <div className="bg-slate-900 p-8 flex items-center justify-between">
           <div className="flex items-center gap-5">
-            <div className="bg-mitrafix-orange p-3 rounded-2xl shadow-lg shadow-orange-500/20">
+            <div className="bg-mitrafix-orange p-3 rounded-2xl shadow-lg shadow-sky-400/20">
               <Download className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -134,7 +135,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
             <div className="grid grid-cols-1 gap-6">
               {leads.map((lead) => (
                 <div key={lead.id} className="bg-white border border-slate-100 rounded-[2rem] p-8 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 -mr-16 -mt-16 rounded-full group-hover:bg-orange-50 transition-colors" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 -mr-16 -mt-16 rounded-full group-hover:bg-sky-50 transition-colors" />
                   
                   <div className="flex flex-col lg:flex-row justify-between gap-8 relative z-10">
                     <div className="flex-1">
@@ -150,7 +151,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="flex items-center gap-4">
-                          <div className="bg-orange-50 p-3 rounded-2xl text-mitrafix-orange">
+                          <div className="bg-sky-50 p-3 rounded-2xl text-mitrafix-orange">
                             <User className="w-5 h-5" />
                           </div>
                           <div>

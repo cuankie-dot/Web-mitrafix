@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
           >
             {!logoError ? (
               <img 
-                src="/images/logo.png?v=2" 
+                src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/fav_ico/android-chrome-512x512.png" 
                 alt="Mitrafix Logo" 
                 className="h-10 w-auto object-contain"
                 onError={() => setLogoError(true)}
@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
               href="https://wa.me/6281999970857"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-mitrafix-orange text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-orange-500/30 hover:bg-orange-600 transition-all transform hover:-translate-y-0.5"
+              className="bg-mitrafix-orange text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-sky-400/30 hover:bg-sky-400 transition-all transform hover:-translate-y-0.5"
             >
               Konsultasi Gratis
             </a>

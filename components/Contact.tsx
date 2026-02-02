@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Mail, MapPin, Phone, MessageSquare, Send, CheckCircle, Cloud, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
@@ -116,7 +117,7 @@ const Contact: React.FC = () => {
               </div>
             </div>
             <div className="mt-12 pt-8 border-t border-slate-800">
-              <a href="https://wa.me/6281999970857" target="_blank" className="inline-flex items-center gap-3 bg-mitrafix-orange text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-orange-500/20 hover:scale-105 transition-all">
+              <a href="https://wa.me/6281999970857" target="_blank" className="inline-flex items-center gap-3 bg-mitrafix-orange text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/20 hover:scale-105 transition-all">
                 <MessageSquare className="w-5 h-5" /> Chat via WhatsApp
               </a>
             </div>
@@ -173,7 +174,7 @@ const Contact: React.FC = () => {
               </select>
               <textarea value={formData.details} onChange={(e) => setFormData({...formData, details: e.target.value})} placeholder="Detail kebutuhan Anda..." rows={3} className={inputClasses} />
               
-              <button disabled={isSyncing} type="submit" className="w-full bg-mitrafix-orange text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-orange-600 transition-all disabled:opacity-50">
+              <button disabled={isSyncing} type="submit" className="w-full bg-mitrafix-orange text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-sky-400 transition-all disabled:opacity-50">
                 {isSyncing ? 'Mengirim Data...' : 'Kirim Permintaan'} <Send className="w-4 h-4" />
               </button>
             </form>

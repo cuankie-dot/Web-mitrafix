@@ -29,11 +29,11 @@ const Testimonials: React.FC = () => {
               key={testimonial.id}
               className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 relative group"
             >
-              <Quote className="absolute top-6 right-8 w-12 h-12 text-slate-200 group-hover:text-orange-100 transition-colors" />
+              <Quote className="absolute top-6 right-8 w-12 h-12 text-slate-200 group-hover:text-sky-100 transition-colors" />
               
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-orange-400 text-orange-400" />
+                  <Star key={i} className="w-4 h-4 fill-sky-400 text-sky-400" />
                 ))}
               </div>
 
@@ -58,7 +58,7 @@ const Testimonials: React.FC = () => {
         
         <div className="mt-16 flex justify-center">
             <div className="inline-flex items-center gap-2 bg-baby-blue/50 px-6 py-3 rounded-full text-slate-700 font-semibold text-sm">
-                <Star className="w-4 h-4 text-orange-500 fill-orange-500" />
+                <Star className="w-4 h-4 text-sky-500 fill-sky-500" />
                 <span>Rata-rata rating 4.9/5 dari ratusan proyek IT</span>
             </div>
         </div>

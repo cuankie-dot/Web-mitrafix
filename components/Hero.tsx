@@ -24,7 +24,7 @@ const Hero: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 flex flex-col items-center gap-12 lg:flex-row">
           <div className="flex-1 text-center lg:text-left">
-            <div className="mb-6 inline-flex items-center space-x-2 rounded-full bg-orange-100 px-4 py-1.5 text-sm font-bold text-orange-600">
+            <div className="mb-6 inline-flex items-center space-x-2 rounded-full bg-sky-100 px-4 py-1.5 text-sm font-bold text-sky-600">
               <Zap className="h-4 w-4" />
               <span>Partner IT Terpercaya Jakarta Selatan</span>
             </div>
@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
                 href="https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20ingin%20konsultasi%20kebutuhan%20IT%20bisnis%20saya."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-mitrafix-orange px-8 py-4 text-lg font-bold text-white shadow-xl shadow-orange-500/20 transition-all hover:bg-orange-600 sm:w-auto"
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-mitrafix-orange px-8 py-4 text-lg font-bold text-white shadow-xl shadow-sky-400/30 transition-all hover:bg-sky-400 sm:w-auto"
                 aria-label="Konsultasi IT Gratis via WhatsApp"
               >
                 Konsultasi Gratis Sekarang
@@ -80,7 +80,7 @@ const Hero: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
               <div className="absolute bottom-6 left-6 text-white">
-                <p className="mb-1 text-sm font-bold uppercase tracking-widest text-orange-400">Infrastruktur Modern</p>
+                <p className="mb-1 text-sm font-bold uppercase tracking-widest text-sky-400">Infrastruktur Modern</p>
                 <p className="text-xl font-bold">Solusi IT Terlengkap di Jagakarsa</p>
               </div>
             </div>
@@ -104,7 +104,7 @@ const Hero: React.FC = () => {
               key={service.id}
               href="#services"
               onClick={scrollToServices}
-              className="group rounded-2xl border border-white bg-white/80 p-5 backdrop-blur-md transition-all hover:border-mitrafix-orange hover:shadow-lg hover:shadow-orange-500/10 cursor-pointer"
+              className="group rounded-2xl border border-white bg-white/80 p-5 backdrop-blur-md transition-all hover:border-mitrafix-orange hover:shadow-lg hover:shadow-sky-400/20 cursor-pointer"
             >
               <div className="mb-3 text-mitrafix-orange transition-transform duration-300 group-hover:scale-110">
                  {SERVICE_ICONS[service.icon] ? (

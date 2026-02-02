@@ -16,7 +16,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
   const [clickCount, setClickCount] = useState(0);
   const [logoError, setLogoError] = useState(false);
 
-
+  // Fitur Rahasia: Klik 5 kali pada teks copyright untuk membuka Admin Dashboard
   const handleSecretClick = () => {
     const newCount = clickCount + 1;
     setClickCount(newCount);
@@ -24,7 +24,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
       onShowLeads();
       setClickCount(0);
     }
- 
+    // Reset counter jika tidak diklik lagi dalam 2 detik
     setTimeout(() => setClickCount(0), 2000);
   };
 
@@ -37,7 +37,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
               {/* Logo Footer dengan penanganan Error yang Robust */}
               {!logoError ? (
                 <img 
-                  src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/fav_ico/android-chrome-512x512.png" 
+                  src="/images/logo.png?v=2" 
                   alt="Mitrafix Logo" 
                   className="h-12 w-auto bg-white rounded-lg p-2 object-contain"
                   onError={() => setLogoError(true)}
@@ -47,7 +47,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
               )}
             </div>
             <p className="text-sm leading-relaxed mb-6">
-              "One place for all IT solutions to support your business growth"
+              "One place for all IT solutions to support your business growth". Partner terpercaya untuk efisiensi dan keamanan teknologi Anda.
             </p>
             <div className="flex gap-4">
               {['facebook', 'instagram', 'linkedin', 'twitter'].map(social => (
@@ -107,7 +107,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
 const AppContent: React.FC = () => {
   const [showLeads, setShowLeads] = useState(false);
 
-
+  // Check URL param ?admin=true saat website dimuat
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('admin') === 'true') {

@@ -21,7 +21,7 @@ const Contact: React.FC = () => {
     setIsSyncing(true);
     setErrorMessage(null);
     
-    // Simpan ke Supabase (Database Utama)
+    // 1. Simpan ke Supabase (Database Utama) agar data aman
     try {
       const { error } = await supabase.from('leads').insert([
         {
@@ -39,34 +39,60 @@ const Contact: React.FC = () => {
         throw error;
       }
 
-      // Sukses
       console.log("Data saved to Supabase");
-      setIsSubmitted(true);
-      setFormData({ name: '', company: '', email: '', phone: '', needs: '', details: '' });
+      handleSuccessAndRedirect();
 
     } catch (err: any) {
       console.error("Submission Failed:", err);
       
-      // Error Handling Cerdas:
-      // Jika errornya "Failed to fetch", kemungkinan besar karena koneksi internet putus 
-      // ATAU database URL di .env tidak valid (misal masih placeholder).
-      // Dalam kasus demo/pengembangan, kita bisa anggap ini sukses secara UI agar tidak membingungkan user,
-      // tapi kita log errornya.
+      // Error Handling: Jika error network/fetch, kita tetap lanjut ke WA 
+      // agar user tidak kecewa (tetap bisa order meski database down)
       if (err.message && (err.message.includes('fetch') || err.message.includes('network'))) {
-        console.warn("Network error detected. Switching to offline success mode for UX.");
-        setIsSubmitted(true); // Tampilkan sukses ke user (Simulation Mode)
-        setFormData({ name: '', company: '', email: '', phone: '', needs: '', details: '' });
+        console.warn("Network error detected. Switching to offline success mode.");
+        handleSuccessAndRedirect();
       } else {
-        // Jika error validasi database dll, tampilkan pesan asli
         setErrorMessage(err.message || "Terjadi kesalahan sistem. Silakan hubungi via WhatsApp.");
+        setIsSyncing(false);
       }
-    } finally {
-      setIsSyncing(false);
-      // Reset status sukses setelah 5 detik
-      setTimeout(() => {
-        if (isSubmitted) setIsSubmitted(false);
-      }, 5000);
     }
+  };
+
+  // Fungsi khusus untuk handle sukses UI + Redirect WA
+  const handleSuccessAndRedirect = () => {
+    setIsSubmitted(true);
+    setIsSyncing(false);
+
+    // Format Pesan WhatsApp
+    const businessNumber = "6281999970857"; // Nomor Admin Mitrafix
+    const message = `Halo Mitrafix, saya ingin minta penawaran layanan IT.
+    
+📝 *DETAIL PERMINTAAN*:
+• Nama: ${formData.name}
+• Perusahaan: ${formData.company}
+• Email: ${formData.email}
+• No HP: ${formData.phone}
+• Layanan: ${formData.needs}
+
+💬 *Catatan:*
+${formData.details || '-'}
+
+Mohon infonya segera. Terima kasih.`;
+
+    // Encode URL agar karakter khusus (spasi, enter) terbaca
+    const encodedMessage = encodeURIComponent(message);
+    const waUrl = `https://wa.me/${businessNumber}?text=${encodedMessage}`;
+
+    // Buka WhatsApp di tab baru setelah jeda singkat (agar UI sukses terlihat dulu)
+    setTimeout(() => {
+      window.open(waUrl, '_blank');
+      // Reset form
+      setFormData({ name: '', company: '', email: '', phone: '', needs: '', details: '' });
+    }, 1500);
+
+    // Reset status sukses UI setelah 5 detik
+    setTimeout(() => {
+      if (isSubmitted) setIsSubmitted(false);
+    }, 5000);
   };
 
   const inputClasses = "w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-800 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-mitrafix-orange focus:border-transparent transition-all";
@@ -131,13 +157,23 @@ const Contact: React.FC = () => {
                   <CheckCircle className="w-10 h-10 text-green-500" />
                 </div>
                 <h4 className="text-2xl font-bold text-white mb-2">Permintaan Terkirim!</h4>
-                <p className="text-slate-400 text-sm">Terima kasih {formData.name}, tim kami akan segera menghubungi Anda.</p>
-                <button 
-                  onClick={() => setIsSubmitted(false)}
-                  className="mt-6 px-6 py-2 bg-slate-800 rounded-xl text-sm font-bold text-white hover:bg-slate-700 transition-all"
-                >
-                  Kirim Lagi
-                </button>
+                <p className="text-slate-400 text-sm mb-4">Anda akan dialihkan ke WhatsApp Admin...</p>
+                <div className="flex gap-3 justify-center">
+                    <button 
+                    onClick={() => setIsSubmitted(false)}
+                    className="px-6 py-2 bg-slate-800 rounded-xl text-sm font-bold text-white hover:bg-slate-700 transition-all"
+                    >
+                    Kembali
+                    </button>
+                    <a 
+                      href={`https://wa.me/6281999970857?text=${encodeURIComponent(`Halo Mitrafix, saya sudah isi form atas nama ${formData.name}.`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-6 py-2 bg-green-600 rounded-xl text-sm font-bold text-white hover:bg-green-500 transition-all"
+                    >
+                      Buka WhatsApp
+                    </a>
+                </div>
               </div>
             ) : null}
 
@@ -175,7 +211,7 @@ const Contact: React.FC = () => {
               <textarea value={formData.details} onChange={(e) => setFormData({...formData, details: e.target.value})} placeholder="Detail kebutuhan Anda..." rows={3} className={inputClasses} />
               
               <button disabled={isSyncing} type="submit" className="w-full bg-mitrafix-orange text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-sky-400 transition-all disabled:opacity-50">
-                {isSyncing ? 'Mengirim Data...' : 'Kirim Permintaan'} <Send className="w-4 h-4" />
+                {isSyncing ? 'Mengirim Data...' : 'Kirim & Chat WhatsApp'} <Send className="w-4 h-4" />
               </button>
             </form>
           </div>

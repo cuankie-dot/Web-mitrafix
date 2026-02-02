@@ -53,7 +53,7 @@ const WhyUs: React.FC = () => {
           <div className="flex-1 grid grid-cols-2 gap-4">
             <div className="space-y-4">
               <div className="rounded-2xl overflow-hidden shadow-lg h-64">
-                <img src="https://picsum.photos/id/36/400/600?office-1" className="w-full h-full object-cover" alt="Office 1" />
+                <img src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/one%20stoep%20solution.jpg" className="w-full h-full object-cover" alt="Office 1" />
               </div>
               <div className="bg-mitrafix-orange p-8 rounded-2xl text-white text-center">
                 <p className="text-4xl font-extrabold mb-1">500+</p>

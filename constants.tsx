@@ -1,6 +1,9 @@
 
 import React from 'react';
-import { Printer, Monitor, Video, Network, ShieldCheck, Briefcase } from 'lucide-react';
+import { 
+  Printer, Monitor, Video, Network, ShieldCheck, Briefcase, Wifi, 
+  Server, Cloud, Smartphone, Wrench, Code, Database, Zap 
+} from 'lucide-react';
 import { ServiceItem, NavLink, Testimonial, Product } from './types';
 
 export const NAV_LINKS: NavLink[] = [
@@ -175,11 +178,25 @@ export const TESTIMONIALS: Testimonial[] = [
   }
 ];
 
+// INI ADALAH KAMUS ICON
+// Pastikan "nama" di kolom icon Supabase Anda ada di daftar sebelah kiri (keys) ini.
 export const SERVICE_ICONS: Record<string, React.ReactNode> = {
+  // Existing
   printer: <Printer className="w-8 h-8" />,
   monitor: <Monitor className="w-8 h-8" />,
+  cctv: <Video className="w-8 h-8" />,
   video: <Video className="w-8 h-8" />,
+  wifi: <Wifi className="w-8 h-8" />,
   network: <Network className="w-8 h-8" />,
   'shield-check': <ShieldCheck className="w-8 h-8" />,
   briefcase: <Briefcase className="w-8 h-8" />,
+  
+  // New Additions (Gunakan nama ini di Supabase)
+  server: <Server className="w-8 h-8" />,          // Untuk layanan server
+  cloud: <Cloud className="w-8 h-8" />,            // Untuk layanan cloud/hosting
+  phone: <Smartphone className="w-8 h-8" />,       // Untuk service HP/Mobile
+  maintenance: <Wrench className="w-8 h-8" />,     // Alternatif icon maintenance
+  code: <Code className="w-8 h-8" />,              // Untuk layanan software/web
+  database: <Database className="w-8 h-8" />,      // Untuk data recovery
+  default: <Zap className="w-8 h-8" />             // Icon cadangan
 };

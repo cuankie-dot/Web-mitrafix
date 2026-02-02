@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 import { SERVICE_ICONS } from '../constants';
 import { useData } from '../context/DataContext';
 
@@ -33,64 +33,75 @@ const Services: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <div 
-              key={service.id} 
-              className="group rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 flex flex-col h-full overflow-hidden"
-            >
-              {/* Image Header */}
-              <div className="h-48 overflow-hidden relative">
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-300" />
-              </div>
+          {services.map((service) => {
+            // Logika untuk menentukan icon.
+            // 1. Cek apakah ada di daftar SERVICE_ICONS.
+            // 2. Jika tidak ada, gunakan icon default (Zap).
+            const IconComponent = SERVICE_ICONS[service.icon] || <Zap className="w-10 h-10" />;
 
-              {/* Content Container */}
-              <div className="p-8 flex flex-col flex-grow relative">
-                {/* Floating Icon */}
-                <div className="absolute -top-10 left-8 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-mitrafix-orange shadow-lg group-hover:bg-mitrafix-orange group-hover:text-white transition-colors duration-300">
-                   {/* Ikon tetap diambil dari mapping di constants karena React Node tidak bisa disimpan di DB */}
-                   {SERVICE_ICONS[service.icon] ? (
-                      React.cloneElement(SERVICE_ICONS[service.icon] as React.ReactElement<any>, { className: 'w-10 h-10' })
-                   ) : null}
-                </div>
-                
-                <div className="mt-8 mb-4">
-                  <h4 className="text-xl font-bold text-slate-900 group-hover:text-mitrafix-orange transition-colors">
-                    {service.title}
-                  </h4>
-                </div>
-                
-                <div className="space-y-4 mb-8 flex-grow">
-                  <div>
-                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Masalah</p>
-                    <p className="text-sm text-slate-500 italic">"{service.problem}"</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-mitrafix-orange uppercase tracking-wider mb-1">Solusi Mitrafix</p>
-                    <p className="text-sm text-slate-700 leading-relaxed">{service.solution}</p>
-                  </div>
+            return (
+              <div 
+                key={service.id} 
+                className="group rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 flex flex-col h-full overflow-hidden"
+              >
+                {/* Image Header */}
+                <div className="h-48 overflow-hidden relative">
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    // Fallback image jika URL error
+                    onError={(e) => {
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-300" />
                 </div>
 
-                <div className="pt-6 border-t border-slate-200">
-                  <p className="text-sm font-bold text-slate-900 mb-4">
-                    <span className="text-green-600">Benefit:</span> {service.benefit}
-                  </p>
-                  <a 
-                    href={`https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20layanan%20${encodeURIComponent(service.title)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-mitrafix-orange hover:gap-3 transition-all"
-                  >
-                    Minta Penawaran Sekarang <ArrowRight className="w-4 h-4" />
-                  </a>
+                {/* Content Container */}
+                <div className="p-8 flex flex-col flex-grow relative">
+                  {/* Floating Icon */}
+                  <div className="absolute -top-10 left-8 bg-white w-20 h-20 rounded-2xl flex items-center justify-center text-mitrafix-orange shadow-lg group-hover:bg-mitrafix-orange group-hover:text-white transition-colors duration-300">
+                    {React.isValidElement(IconComponent) 
+                      ? React.cloneElement(IconComponent as React.ReactElement<any>, { className: 'w-10 h-10' })
+                      : <Zap className="w-10 h-10" />
+                    }
+                  </div>
+                  
+                  <div className="mt-8 mb-4">
+                    <h4 className="text-xl font-bold text-slate-900 group-hover:text-mitrafix-orange transition-colors">
+                      {service.title}
+                    </h4>
+                  </div>
+                  
+                  <div className="space-y-4 mb-8 flex-grow">
+                    <div>
+                      <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Masalah</p>
+                      <p className="text-sm text-slate-500 italic">"{service.problem}"</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-mitrafix-orange uppercase tracking-wider mb-1">Solusi Mitrafix</p>
+                      <p className="text-sm text-slate-700 leading-relaxed">{service.solution}</p>
+                    </div>
+                  </div>
+
+                  <div className="pt-6 border-t border-slate-200">
+                    <p className="text-sm font-bold text-slate-900 mb-4">
+                      <span className="text-green-600">Benefit:</span> {service.benefit}
+                    </p>
+                    <a 
+                      href={`https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20layanan%20${encodeURIComponent(service.title)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-bold text-mitrafix-orange hover:gap-3 transition-all"
+                    >
+                      Minta Penawaran Sekarang <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* B2B Callout */}

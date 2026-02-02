@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
               <a 
-                href="https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20ingin%20konsultasi%20kebutuhan%20IT%20bisnis%20saya."
+                href="https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20ingin%20konsultasi%20kebutuhan%20IT%20bisnis%20saya."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex w-full items-center justify-center gap-2 rounded-xl bg-mitrafix-orange px-8 py-4 text-lg font-bold text-white shadow-xl shadow-sky-400/30 transition-all hover:bg-sky-400 sm:w-auto"

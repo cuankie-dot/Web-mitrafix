@@ -86,7 +86,7 @@ const Services: React.FC = () => {
                       <span className="text-green-600">Benefit:</span> {service.benefit}
                     </p>
                     <a 
-                      href={`https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20layanan%20${encodeURIComponent(service.title)}`}
+                      href={`https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20layanan%20${encodeURIComponent(service.title)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-sm font-bold text-mitrafix-orange hover:gap-3 transition-all"

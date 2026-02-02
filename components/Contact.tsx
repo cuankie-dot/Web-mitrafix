@@ -63,7 +63,7 @@ const Contact: React.FC = () => {
     setIsSyncing(false);
 
     // Format Pesan WhatsApp
-    const businessNumber = "6281999970857"; // Nomor Admin Mitrafix
+    const businessNumber = "6281999370857"; // Nomor Admin Mitrafix
     const message = `Halo Mitrafix, saya ingin minta penawaran layanan IT.
     
 📝 *DETAIL PERMINTAAN*:
@@ -128,7 +128,7 @@ Mohon infonya segera. Terima kasih.`;
                   </div>
                   <div>
                     <p className="font-bold text-lg mb-1">Telepon & WhatsApp</p>
-                    <p className="text-slate-400 text-sm leading-relaxed">+62 819-9997-0857</p>
+                    <p className="text-slate-400 text-sm leading-relaxed">+62 819-9993-70857</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -143,7 +143,7 @@ Mohon infonya segera. Terima kasih.`;
               </div>
             </div>
             <div className="mt-12 pt-8 border-t border-slate-800">
-              <a href="https://wa.me/6281999970857" target="_blank" className="inline-flex items-center gap-3 bg-mitrafix-orange text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/20 hover:scale-105 transition-all">
+              <a href="https://wa.me/6281999370857" target="_blank" className="inline-flex items-center gap-3 bg-mitrafix-orange text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/20 hover:scale-105 transition-all">
                 <MessageSquare className="w-5 h-5" /> Chat via WhatsApp
               </a>
             </div>
@@ -166,7 +166,7 @@ Mohon infonya segera. Terima kasih.`;
                     Kembali
                     </button>
                     <a 
-                      href={`https://wa.me/6281999970857?text=${encodeURIComponent(`Halo Mitrafix, saya sudah isi form atas nama ${formData.name}.`)}`}
+                      href={`https://wa.me/6281999370857?text=${encodeURIComponent(`Halo Mitrafix, saya sudah isi form atas nama ${formData.name}.`)}`}
                       target="_blank"
                       rel="noreferrer"
                       className="px-6 py-2 bg-green-600 rounded-xl text-sm font-bold text-white hover:bg-green-500 transition-all"

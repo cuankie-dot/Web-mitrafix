@@ -135,7 +135,7 @@ const Products: React.FC = () => {
                     
                     {/* WhatsApp Button */}
                     <a 
-                      href={`https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
+                      href={`https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex flex-col items-center justify-center gap-1 bg-slate-900 text-white p-2 rounded-xl hover:bg-mitrafix-orange transition-all shadow-sm"
@@ -164,7 +164,7 @@ const Products: React.FC = () => {
             </div>
           </div>
           <a 
-            href="https://wa.me/6281999970857?text=Halo%20Mitrafix,%20saya%20ingin%20tanya%20ketersediaan%20produk%20IT%20spesifik."
+            href="https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20ingin%20tanya%20ketersediaan%20produk%20IT%20spesifik."
             target="_blank"
             rel="noopener noreferrer"
             className="bg-slate-900 text-white px-8 py-3.5 rounded-2xl font-bold hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 cursor-pointer"

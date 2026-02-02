@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
               </a>
             ))}
             <a
-              href="https://wa.me/6281999970857"
+              href="https://wa.me/6281999370857"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-mitrafix-orange text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-sky-400/30 hover:bg-sky-400 transition-all transform hover:-translate-y-0.5"
@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
             </a>
           ))}
           <a
-            href="https://wa.me/6281999970857"
+            href="https://wa.me/6281999370857"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-mitrafix-orange text-white px-8 py-3 rounded-full font-bold w-4/5 text-center"

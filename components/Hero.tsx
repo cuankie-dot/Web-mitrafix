@@ -73,7 +73,7 @@ const Hero: React.FC = () => {
           <div className="relative flex-1">
             <div className="relative z-10 transform overflow-hidden rounded-2xl shadow-2xl shadow-slate-200 transition-transform duration-500 hover:rotate-0 lg:rotate-2">
               <img 
-                src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/IT%20solution.JPG" 
+                src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/it%20solution.jpeg" 
                 alt="Mitrafix IT Solutions Team Working on Infrastructure" 
                 className="h-[400px] w-full object-cover"
                 loading="eager"
@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
               <div className="absolute bottom-6 left-6 text-white">
                 <p className="mb-1 text-sm font-bold uppercase tracking-widest text-sky-400">Infrastruktur Modern</p>
-                <p className="text-xl font-bold">Solusi IT Terlengkap di Jagakarsa</p>
+                <p className="text-xl font-bold">Solusi IT Terlengkap di Jakarta</p>
               </div>
             </div>
             {/* Float Cards */}

@@ -40,6 +40,7 @@ const Contact: React.FC = () => {
       }
 
       console.log("Data saved to Supabase");
+      // Setelah sukses simpan di DB, kirim notifikasi ke WA Admin
       handleSuccessAndRedirect();
 
     } catch (err: any) {
@@ -57,35 +58,40 @@ const Contact: React.FC = () => {
     }
   };
 
-  // Fungsi khusus untuk handle sukses UI + Redirect WA
+  // Fungsi khusus untuk handle sukses UI + Redirect WA dengan detail lengkap
   const handleSuccessAndRedirect = () => {
     setIsSubmitted(true);
     setIsSyncing(false);
 
-    // Format Pesan WhatsApp
-    const businessNumber = "6281999370857"; // Nomor Admin Mitrafix
-    const message = `Halo Mitrafix, saya ingin minta penawaran layanan IT.
-    
-📝 *DETAIL PERMINTAAN*:
+    // Nomor Admin Mitrafix sesuai request
+    const businessNumber = "6281999370857"; 
+
+    // Format Pesan Notifikasi Lengkap untuk Admin
+    const message = `*NOTIFIKASI LEAD BARU - WEBSITE MITRAFIX* 🚀
+
+Halo Admin, saya baru saja mengisi formulir penawaran di website. Berikut detail data saya:
+
+👤 *DATA PELANGGAN*
 • Nama: ${formData.name}
 • Perusahaan: ${formData.company}
 • Email: ${formData.email}
 • No HP: ${formData.phone}
-• Layanan: ${formData.needs}
 
-💬 *Catatan:*
-${formData.details || '-'}
+🛠 *KEBUTUHAN LAYANAN*
+• Kategori: ${formData.needs}
+• Detail Request: 
+"${formData.details || '-'}"
 
-Mohon infonya segera. Terima kasih.`;
+Mohon dicek dan dibantu proses penawarannya. Terima kasih.`;
 
-    // Encode URL agar karakter khusus (spasi, enter) terbaca
+    // Encode URL agar karakter khusus (spasi, enter, emoji) terbaca dengan benar
     const encodedMessage = encodeURIComponent(message);
     const waUrl = `https://wa.me/${businessNumber}?text=${encodedMessage}`;
 
     // Buka WhatsApp di tab baru setelah jeda singkat (agar UI sukses terlihat dulu)
     setTimeout(() => {
       window.open(waUrl, '_blank');
-      // Reset form
+      // Reset form setelah terkirim
       setFormData({ name: '', company: '', email: '', phone: '', needs: '', details: '' });
     }, 1500);
 

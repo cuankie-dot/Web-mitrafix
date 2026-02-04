@@ -9,56 +9,55 @@ import { ServiceItem, NavLink, Testimonial, Product } from './types';
 export const NAV_LINKS: NavLink[] = [
   { label: 'Beranda', href: 'home' },
   { label: 'Tentang Kami', href: 'about' },
-  { label: 'Layanan', href: 'services' },
-  { label: 'Produk', href: 'products' },
-  { label: 'Kenapa Kami', href: 'why-us' },
-  { label: 'Kontak', href: 'contact' },
+  { label: 'Layanan IT', href: 'services' },
+  { label: 'Katalog Produk', href: 'products' },
+  { label: 'Keunggulan', href: 'why-us' },
+  { label: 'Kontak Admin', href: 'contact' },
 ];
-
 
 export const SERVICES: ServiceItem[] = [
   {
     id: 'printer',
-    title: 'Printer Solution & Refill',
-    problem: 'Biaya cetak membengkak dan operasional terhambat karena printer rusak atau tinta habis mendadak.',
-    solution: 'Kami menyediakan penyewaan printer korporat, penjualan unit baru, dan isi ulang tinta berkualitas tinggi.',
-    benefit: 'Efisiensi biaya operasional hingga 40% dan jaminan kelancaran dokumen bisnis Anda.',
+    title: 'Service Printer & Refill Tinta Jakarta',
+    problem: 'Biaya cetak membengkak dan operasional terhambat karena printer rusak atau tinta habis mendadak di kantor.',
+    solution: 'Kami melayani service printer panggilan, sewa printer kantor (B2B), dan refill tinta berkualitas tinggi untuk semua merk.',
+    benefit: 'Hemat biaya operasional hingga 40% dengan jaminan printer tetap prima setiap saat.',
     icon: 'printer',
     image: 'https://images.unsplash.com/photo-1612815154858-60aa4c4603e1?q=80&w=800&auto=format&fit=crop'
   },
   {
     id: 'hardware',
-    title: 'Computer Hardware & Acc',
-    problem: 'Perangkat lemot dan spesifikasi yang tidak sesuai menghambat produktivitas karyawan.',
-    solution: 'Pengadaan PC, Laptop, dan aksesoris IT orisinal dengan spesifikasi tepat guna untuk kebutuhan bisnis.',
-    benefit: 'Peningkatan produktivitas tim dengan perangkat yang andal dan bergaransi resmi.',
+    title: 'Hardware Komputer & IT Procurement',
+    problem: 'Perangkat PC atau Laptop lemot menghambat produktivitas karyawan dan operasional perusahaan.',
+    solution: 'Pengadaan unit PC, Laptop, dan server kantor orisinal dengan spesifikasi yang disesuaikan anggaran bisnis Anda.',
+    benefit: 'Efisiensi kerja maksimal dengan perangkat IT yang andal, baru, dan bergaransi resmi.',
     icon: 'monitor',
     image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=800&auto=format&fit=crop'
   },
   {
     id: 'cctv',
-    title: 'CCTV & Security System',
-    problem: 'Rasa tidak aman terhadap aset fisik kantor atau rumah saat tidak dipantau secara langsung.',
-    solution: 'Instalasi sistem keamanan CCTV berbasis IP atau Analog dengan fitur pemantauan remote via smartphone.',
-    benefit: 'Keamanan 24/7 dan ketenangan pikiran dengan sistem monitoring aset yang cerdas.',
+    title: 'Instalasi CCTV Jakarta',
+    problem: 'Kurangnya pengawasan keamanan pada aset kantor, gudang, atau rumah saat Anda sedang tidak di lokasi.',
+    solution: 'Pemasangan paket CCTV IP Camera & Analog dengan fitur remote monitoring via Smartphone 24/7.',
+    benefit: 'Pantau aset secara real-time dari mana saja, memberikan ketenangan pikiran bagi pemilik bisnis.',
     icon: 'video',
     image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=800&auto=format&fit=crop'
   },
   {
     id: 'network',
-    title: 'Network Infrastructure',
-    problem: 'Koneksi internet tidak stabil, WiFi "dead zone", dan keamanan jaringan yang rentan serangan.',
-    solution: 'Instalasi jaringan LAN, sistem WiFi Mesh, dan konfigurasi sistem keamanan jaringan (firewall/mikrotik).',
-    benefit: 'Konektivitas tanpa hambatan yang mendukung kolaborasi digital dan keamanan data perusahaan.',
+    title: 'Instalasi Jaringan LAN & Wifi',
+    problem: 'Koneksi internet kantor tidak stabil atau sinyal WiFi tidak merata (dead zone) di area kerja.',
+    solution: 'Pemasangan jaringan LAN, setup Mikrotik, dan WiFi Mesh profesional untuk kantor, cafe, dan rumah.',
+    benefit: 'Konektivitas internet stabil tanpa hambatan untuk mendukung kolaborasi tim secara digital.',
     icon: 'network',
     image: 'https://images.unsplash.com/photo-1544197150-b99a580bbcbf?q=80&w=800&auto=format&fit=crop'
   },
   {
     id: 'maintenance',
-    title: 'IT Support & Maintenance',
-    problem: 'Tidak memiliki tim IT internal namun sering mengalami kendala teknis yang mengganggu operasional.',
-    solution: 'Layanan IT support panggilan (on-call) dan kontrak maintenance rutin untuk menjaga stabilitas sistem.',
-    benefit: 'Solusi IT instan tanpa biaya gaji tim internal, memastikan operasional tetap berjalan 24/7.',
+    title: 'Kontrak Maintenance IT Kantor',
+    problem: 'Sering terjadi kendala IT mendadak tapi tidak memiliki tim IT internal yang standby setiap saat.',
+    solution: 'Layanan IT Support panggilan dan kontrak perawatan (maintenance) rutin bulanan untuk seluruh sistem IT kantor.',
+    benefit: 'Operasional bisnis berjalan lancar tanpa gangguan teknis dengan biaya jauh lebih hemat daripada hire tim IT.',
     icon: 'shield-check',
     image: 'https://images.unsplash.com/photo-1581092921461-eab62e97a783?q=80&w=800&auto=format&fit=crop'
   }
@@ -67,85 +66,23 @@ export const SERVICES: ServiceItem[] = [
 export const PRODUCTS: Product[] = [
   {
     id: 'p1',
-    name: 'Epson EcoTank L3210',
+    name: 'Epson EcoTank L3210 Original',
     category: 'printer',
-    description: 'Printer multifungsi (Print, Scan, Copy) dengan sistem tangki tinta hemat biaya.',
-    price: 'Rp 2.xxx.xxx',
-    // Contoh jika pakai GDrive: 'https://drive.google.com/uc?export=view&id=1A2B3C...'
-    image: '/images/products/epson-l3210.jpg', 
+    description: 'Printer multifungsi terbaik untuk kantor UMKM dengan sistem tangki tinta ultra hemat.',
+    price: 'Hubungi Admin',
+    image: 'https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/products/epson-l3210.jpg', 
     isPopular: true,
-    tokopediaUrl: 'https://www.tokopedia.com',
-    shopeeUrl: 'https://shopee.co.id'
-  },
-  {
-    id: 'p2',
-    name: 'HP LaserJet Pro M12w',
-    category: 'printer',
-    description: 'Printer laser monochrome cepat dengan konektivitas WiFi untuk kantor.',
-    price: 'Rp 1.xxx.xxx',
-    image: '/images/products/hp-laserjet.jpg',
-    tokopediaUrl: 'https://www.tokopedia.com',
-    shopeeUrl: 'https://shopee.co.id'
-  },
-  {
-    id: 'h1',
-    name: 'ASUS ExpertBook B1',
-    category: 'hardware',
-    description: 'Laptop bisnis tangguh dengan performa tinggi untuk produktivitas tim.',
-    price: 'Rp 7.xxx.xxx',
-    image: '/images/products/asus-expertbook.jpg',
-    isPopular: true,
-    tokopediaUrl: 'https://www.tokopedia.com',
-    shopeeUrl: 'https://shopee.co.id'
-  },
-  {
-    id: 'h2',
-    name: 'PC Desktop Business Core i5',
-    category: 'hardware',
-    description: 'Set komputer desktop optimal untuk admin dan manajemen kantor.',
-    price: 'Rp 5.xxx.xxx',
-    image: '/images/products/pc-desktop.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
   },
   {
     id: 'c1',
-    name: 'Hikvision IP Cam 2MP',
+    name: 'Paket CCTV Hikvision 2MP',
     category: 'cctv',
-    description: 'Kamera pengawas Full HD dengan infrared untuk pantauan malam hari.',
-    price: 'Rp 4xx.xxx',
-    image: '/images/products/cctv-hikvision.jpg',
+    description: 'Paket keamanan lengkap 4 kamera dengan infrared untuk pantauan jernih siang dan malam.',
+    price: 'Promo Khusus',
+    image: 'https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/products/cctv-hikvision.jpg',
     isPopular: true,
-    tokopediaUrl: 'https://www.tokopedia.com',
-    shopeeUrl: 'https://shopee.co.id'
-  },
-  {
-    id: 'c2',
-    name: 'Dahua 4CH DVR Kit',
-    category: 'cctv',
-    description: 'Paket lengkap 4 kamera analog HD untuk keamanan rumah & toko.',
-    price: 'Rp 2.xxx.xxx',
-    image: '/images/products/dahua-dvr.jpg',
-    tokopediaUrl: 'https://www.tokopedia.com',
-    shopeeUrl: 'https://shopee.co.id'
-  },
-  {
-    id: 'a1',
-    name: 'Logitech MK220 Wireless',
-    category: 'accessories',
-    description: 'Set keyboard dan mouse wireless hemat ruang dengan baterai tahan lama.',
-    price: 'Rp 2xx.xxx',
-    image: '/images/products/keyboard-logitech.jpg',
-    tokopediaUrl: 'https://www.tokopedia.com',
-    shopeeUrl: 'https://shopee.co.id'
-  },
-  {
-    id: 'a2',
-    name: 'TP-Link Archer AX10',
-    category: 'accessories',
-    description: 'Router WiFi 6 terbaru untuk koneksi internet ultra cepat dan stabil.',
-    price: 'Rp 6xx.xxx',
-    image: '/images/products/router-tplink.jpg',
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
   }
@@ -156,32 +93,21 @@ export const TESTIMONIALS: Testimonial[] = [
     id: 1,
     name: "Budi Santoso",
     role: "CEO",
-    company: "PT. Digital Maju Utama",
-    quote: "Mitrafix sangat membantu pengadaan hardware kantor kami. Proses cepat dan teknisinya sangat handal. Rekomendasi utama untuk partner IT B2B.",
+    company: "PT. Maju Digital Jakarta",
+    quote: "Mitrafix adalah vendor IT terbaik di Jakarta Selatan. Respon cepat untuk service printer panggilan sangat membantu operasional kantor kami.",
     image: "https://i.pravatar.cc/150?u=budi"
   },
   {
     id: 2,
     name: "Siti Aminah",
     role: "Operational Manager",
-    company: "Cafe Kopi Senja",
-    quote: "Pemasangan CCTV dan WiFi di cafe kami sangat rapi. Sekarang pantau bisnis jadi lebih tenang dari mana saja lewat HP. Supportnya sangat responsif!",
+    company: "Resto Senja Jagakarsa",
+    quote: "Pemasangan CCTV dan WiFi di resto kami sangat rapi. Tim teknisinya sangat paham seluk beluk jaringan. Recommended!",
     image: "https://i.pravatar.cc/150?u=siti"
-  },
-  {
-    id: 3,
-    name: "Andi Wijaya",
-    role: "IT Admin",
-    company: "Sekolah Harapan Bangsa",
-    quote: "Layanan kontrak maintenance printer Mitrafix sangat efisien. Tidak ada lagi kendala cetak dokumen mendadak di sekolah. Tinta selalu ready.",
-    image: "https://i.pravatar.cc/150?u=andi"
   }
 ];
 
-// INI ADALAH KAMUS ICON
-// Pastikan "nama" di kolom icon Supabase Anda ada di daftar sebelah kiri (keys) ini.
 export const SERVICE_ICONS: Record<string, React.ReactNode> = {
-  // Existing
   printer: <Printer className="w-8 h-8" />,
   monitor: <Monitor className="w-8 h-8" />,
   cctv: <Video className="w-8 h-8" />,
@@ -190,13 +116,11 @@ export const SERVICE_ICONS: Record<string, React.ReactNode> = {
   network: <Network className="w-8 h-8" />,
   'shield-check': <ShieldCheck className="w-8 h-8" />,
   briefcase: <Briefcase className="w-8 h-8" />,
-  
-  // New Additions (Gunakan nama ini di Supabase)
-  server: <Server className="w-8 h-8" />,          // Untuk layanan server
-  cloud: <Cloud className="w-8 h-8" />,            // Untuk layanan cloud/hosting
-  phone: <Smartphone className="w-8 h-8" />,       // Untuk service HP/Mobile
-  maintenance: <Wrench className="w-8 h-8" />,     // Alternatif icon maintenance
-  code: <Code className="w-8 h-8" />,              // Untuk layanan software/web
-  database: <Database className="w-8 h-8" />,      // Untuk data recovery
-  default: <Zap className="w-8 h-8" />             // Icon cadangan
+  server: <Server className="w-8 h-8" />,
+  cloud: <Cloud className="w-8 h-8" />,
+  phone: <Smartphone className="w-8 h-8" />,
+  maintenance: <Wrench className="w-8 h-8" />,
+  code: <Code className="w-8 h-8" />,
+  database: <Database className="w-8 h-8" />,
+  default: <Zap className="w-8 h-8" />
 };

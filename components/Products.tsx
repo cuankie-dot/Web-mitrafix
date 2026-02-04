@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
-import { ShoppingCart, ExternalLink, Zap, MessageCircle } from 'lucide-react';
+import { ShoppingCart, ExternalLink, Zap, MessageCircle, Search, PackageX } from 'lucide-react';
 import { useData } from '../context/DataContext';
+import { optimizeImage } from '../utils/imageOptimizer';
 
 const categories = [
   { id: 'all', label: 'Semua Produk' },
@@ -14,10 +15,17 @@ const categories = [
 const Products: React.FC = () => {
   const { products, isLoading } = useData();
   const [activeCategory, setActiveCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredProducts = activeCategory === 'all' 
-    ? products 
-    : products.filter(p => p.category === activeCategory);
+  // Logika Filter Ganda: Kategori AND Search Query
+  const filteredProducts = products.filter(p => {
+    const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
+    const query = searchQuery.toLowerCase();
+    const matchesSearch = p.name.toLowerCase().includes(query) || 
+                          p.description.toLowerCase().includes(query);
+    
+    return matchesCategory && matchesSearch;
+  });
 
   if (isLoading) {
     return <section className="py-24 bg-slate-50 text-center">Loading products...</section>;
@@ -26,7 +34,7 @@ const Products: React.FC = () => {
   return (
     <section id="products" className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <h2 className="text-mitrafix-orange font-bold tracking-widest uppercase text-sm mb-3">Katalog Produk IT</h2>
           <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
             Perangkat IT <span className="text-mitrafix-orange">Terbaik</span> Original & Bergaransi
@@ -34,6 +42,30 @@ const Products: React.FC = () => {
           <p className="text-slate-600 max-w-2xl mx-auto">
             Kami hanya menyediakan produk IT orisinal mulai dari Printer, PC Business, hingga sistem CCTV dengan garansi resmi.
           </p>
+        </div>
+
+        {/* Search Bar Section */}
+        <div className="max-w-md mx-auto mb-8 relative">
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-slate-400 group-focus-within:text-mitrafix-orange transition-colors" />
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="block w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl leading-5 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-mitrafix-orange focus:border-transparent transition-all shadow-sm"
+              placeholder="Cari nama produk (misal: Epson, CCTV, Kabel)..."
+            />
+            {searchQuery && (
+              <button 
+                onClick={() => setSearchQuery('')}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+              >
+                <span className="text-xs font-bold bg-slate-100 px-2 py-1 rounded-md">Clear</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Filter Tabs */}
@@ -54,103 +86,115 @@ const Products: React.FC = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {filteredProducts.map((product) => (
-            <div 
-              key={product.id} 
-              className="bg-white rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl hover:shadow-slate-200 transition-all duration-300 group flex flex-col"
-            >
-              {/* Image Container - Updated for better product visibility */}
-              <div className="relative h-64 overflow-hidden bg-white border-b border-slate-50 p-6 flex items-center justify-center">
-                <img 
-                  src={product.image} 
-                  alt={`${product.name} - Jual & Service di Mitrafix Jakarta`} 
-                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-                {product.isPopular && (
-                  <div className="absolute top-4 left-4 bg-mitrafix-orange text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 uppercase tracking-wider shadow-md">
-                    <Zap className="w-3 h-3 fill-current" />
-                    Terlaris
-                  </div>
-                )}
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-white/90 backdrop-blur-sm p-2 rounded-xl text-slate-900 shadow-sm border border-slate-100">
-                    <ExternalLink className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                <div className="mb-2">
-                  <span className="text-[10px] font-bold text-mitrafix-orange uppercase tracking-widest">{product.category}</span>
-                  <h4 className="text-lg font-bold text-slate-900 leading-tight group-hover:text-mitrafix-orange transition-colors mt-1">
-                    {product.name}
-                  </h4>
-                </div>
-                
-                <p className="text-sm text-slate-500 line-clamp-2 mb-4 flex-grow">
-                  {product.description}
-                </p>
-
-                <div className="mt-auto pt-4 border-t border-slate-50">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase">Mulai Dari</p>
-                      <p className="text-lg font-extrabold text-slate-900">{product.price}</p>
+        {filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {filteredProducts.map((product) => (
+              <div 
+                key={product.id} 
+                className="bg-white rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl hover:shadow-slate-200 transition-all duration-300 group flex flex-col"
+              >
+                {/* Image Container */}
+                <div className="relative h-64 overflow-hidden bg-white border-b border-slate-50 p-6 flex items-center justify-center">
+                  <img 
+                    src={optimizeImage(product.image, 400)} 
+                    alt={`${product.name} - Jual & Service di Mitrafix Jakarta`} 
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
+                  />
+                  {product.isPopular && (
+                    <div className="absolute top-4 left-4 bg-mitrafix-orange text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 uppercase tracking-wider shadow-md">
+                      <Zap className="w-3 h-3 fill-current" />
+                      Terlaris
+                    </div>
+                  )}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="bg-white/90 backdrop-blur-sm p-2 rounded-xl text-slate-900 shadow-sm border border-slate-100">
+                      <ExternalLink className="w-4 h-4" />
                     </div>
                   </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="mb-2">
+                    <span className="text-[10px] font-bold text-mitrafix-orange uppercase tracking-widest">{product.category}</span>
+                    <h4 className="text-lg font-bold text-slate-900 leading-tight group-hover:text-mitrafix-orange transition-colors mt-1">
+                      {product.name}
+                    </h4>
+                  </div>
                   
-                  <div className="grid grid-cols-3 gap-2">
-                    {/* Tokopedia Button */}
-                    {product.tokopediaUrl && (
+                  <p className="text-sm text-slate-500 line-clamp-2 mb-4 flex-grow">
+                    {product.description}
+                  </p>
+
+                  <div className="mt-auto pt-4 border-t border-slate-50">
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase">Mulai Dari</p>
+                        <p className="text-lg font-extrabold text-slate-900">{product.price}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-2">
+                      {product.tokopediaUrl && (
+                        <a 
+                          href={product.tokopediaUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-col items-center justify-center gap-1 bg-[#42B549] text-white p-2 rounded-xl hover:bg-[#389e3f] transition-all shadow-sm"
+                        >
+                          <ShoppingCart className="w-4 h-4" />
+                          <span className="text-[8px] font-bold">TOKOPEDIA</span>
+                        </a>
+                      )}
+                      
+                      {product.shopeeUrl && (
+                        <a 
+                          href={product.shopeeUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-col items-center justify-center gap-1 bg-[#EE4D2D] text-white p-2 rounded-xl hover:bg-[#d14327] transition-all shadow-sm"
+                        >
+                          <ShoppingCart className="w-4 h-4" />
+                          <span className="text-[8px] font-bold">SHOPEE</span>
+                        </a>
+                      )}
+                      
                       <a 
-                        href={product.tokopediaUrl}
+                        href={`https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex flex-col items-center justify-center gap-1 bg-[#42B549] text-white p-2 rounded-xl hover:bg-[#389e3f] transition-all shadow-sm"
-                        title={`Beli ${product.name} di Tokopedia`}
-                        aria-label={`Beli ${product.name} di Tokopedia`}
+                        className="flex flex-col items-center justify-center gap-1 bg-slate-900 text-white p-2 rounded-xl hover:bg-mitrafix-orange transition-all shadow-sm"
                       >
-                        <ShoppingCart className="w-4 h-4" />
-                        <span className="text-[8px] font-bold">TOKOPEDIA</span>
+                        <MessageCircle className="w-4 h-4" />
+                        <span className="text-[8px] font-bold">WHATSAPP</span>
                       </a>
-                    )}
-                    
-                    {/* Shopee Button */}
-                    {product.shopeeUrl && (
-                      <a 
-                        href={product.shopeeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-col items-center justify-center gap-1 bg-[#EE4D2D] text-white p-2 rounded-xl hover:bg-[#d14327] transition-all shadow-sm"
-                        title={`Beli ${product.name} di Shopee`}
-                        aria-label={`Beli ${product.name} di Shopee`}
-                      >
-                        <ShoppingCart className="w-4 h-4" />
-                        <span className="text-[8px] font-bold">SHOPEE</span>
-                      </a>
-                    )}
-                    
-                    {/* WhatsApp Button */}
-                    <a 
-                      href={`https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex flex-col items-center justify-center gap-1 bg-slate-900 text-white p-2 rounded-xl hover:bg-mitrafix-orange transition-all shadow-sm"
-                      title="Tanya via WhatsApp"
-                      aria-label="Konsultasi Produk via WhatsApp"
-                    >
-                      <MessageCircle className="w-4 h-4" />
-                      <span className="text-[8px] font-bold">WHATSAPP</span>
-                    </a>
+                    </div>
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+        ) : (
+          /* Empty State */
+          <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+            <div className="bg-slate-100 p-6 rounded-full mb-4">
+              <PackageX className="w-12 h-12 text-slate-400" />
             </div>
-          ))}
-        </div>
+            <h4 className="text-xl font-bold text-slate-900 mb-2">Produk Tidak Ditemukan</h4>
+            <p className="text-slate-500 max-w-md">
+              Maaf, kami tidak menemukan produk dengan kata kunci "<span className="font-semibold text-slate-700">{searchQuery}</span>" di kategori ini.
+            </p>
+            <button 
+              onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
+              className="mt-6 text-mitrafix-orange font-bold hover:underline"
+            >
+              Lihat Semua Produk
+            </button>
+          </div>
+        )}
 
         {/* Custom Order Callout */}
         <div className="mt-16 bg-white p-8 rounded-[2rem] border border-dashed border-slate-300 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">

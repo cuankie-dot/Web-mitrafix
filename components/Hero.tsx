@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden">
+    <section id="home" className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden" aria-label="Beranda Mitrafix">
       {/* Background Decor */}
       <div className="absolute top-0 left-0 h-full w-full -z-10 bg-baby-blue/50" />
       <div className="absolute top-[-10%] right-[-5%] h-[400px] w-[400px] -z-10 rounded-full bg-mitrafix-orange/10 blur-3xl" />
@@ -30,21 +30,21 @@ const Hero: React.FC = () => {
             </div>
             
             <h1 className="mb-6 text-4xl font-extrabold leading-tight text-slate-900 md:text-6xl">
-              Solusi IT Terintegrasi untuk <span className="text-mitrafix-orange">Pertumbuhan Bisnis</span> Anda
+              Jasa IT & <span className="text-mitrafix-orange">Service Printer Jakarta</span> Bergaransi
             </h1>
             
             <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-600 lg:mx-0">
-              Mitrafix hadir sebagai partner strategis untuk kebutuhan printer, perangkat keras, jaringan, hingga maintenance sistem IT Anda di wilayah Jakarta dan sekitarnya.
-              <span className="font-semibold text-slate-900"> Profesional, Cepat, dan Berorientasi Hasil.</span>
+              Mitrafix hadir sebagai solusi IT satu pintu (One-Stop Solution) untuk kebutuhan printer, CCTV, jaringan, dan maintenance kantor di wilayah Jagakarsa dan sekitarnya.
+              <span className="font-semibold text-slate-900 block mt-2"> Cepat, Profesional, dan Berorientasi Hasil.</span>
             </p>
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
               <a 
-                href="https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20ingin%20konsultasi%20kebutuhan%20IT%20bisnis%20saya."
+                href="https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20ingin%20konsultasi%20jasa%20IT%20panggilan."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex w-full items-center justify-center gap-2 rounded-xl bg-mitrafix-orange px-8 py-4 text-lg font-bold text-white shadow-xl shadow-sky-400/30 transition-all hover:bg-sky-400 sm:w-auto"
-                aria-label="Konsultasi IT Gratis via WhatsApp"
+                aria-label="Konsultasi IT Jakarta via WhatsApp"
               >
                 Konsultasi Gratis Sekarang
                 <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -54,18 +54,18 @@ const Hero: React.FC = () => {
                 onClick={scrollToServices}
                 className="w-full rounded-xl border border-slate-200 bg-white px-8 py-4 text-lg font-bold text-slate-900 transition-all hover:bg-slate-50 sm:w-auto"
               >
-                Lihat Layanan
+                Cek Layanan IT
               </a>
             </div>
 
             <div className="mt-10 flex items-center justify-center gap-8 opacity-70 lg:justify-start">
               <div className="flex items-center gap-2 text-sm font-medium">
                 <ShieldCheck className="h-5 w-5 text-green-500" />
-                <span>Garansi Resmi & Terjamin</span>
+                <span>Teknisi Berpengalaman</span>
               </div>
               <div className="flex items-center gap-2 text-sm font-medium">
                 <Globe className="h-5 w-5 text-blue-500" />
-                <span>Support Area seluruh Indonesia</span>
+                <span>Area Jakarta & Depok</span>
               </div>
             </div>
           </div>
@@ -74,14 +74,14 @@ const Hero: React.FC = () => {
             <div className="relative z-10 transform overflow-hidden rounded-2xl shadow-2xl shadow-slate-200 transition-transform duration-500 hover:rotate-0 lg:rotate-2">
               <img 
                 src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/it%20solution.jpeg" 
-                alt="Mitrafix IT Solutions Team Working on Infrastructure" 
+                alt="Jasa IT Solution Terlengkap di Jakarta" 
                 className="h-[400px] w-full object-cover"
                 loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
               <div className="absolute bottom-6 left-6 text-white">
-                <p className="mb-1 text-sm font-bold uppercase tracking-widest text-sky-400">Infrastruktur Modern</p>
-                <p className="text-xl font-bold">Solusi IT Terlengkap di Jakarta</p>
+                <p className="mb-1 text-sm font-bold uppercase tracking-widest text-sky-400">Pusat Jasa IT Jakarta</p>
+                <p className="text-xl font-bold">Respon Cepat & Bergaransi</p>
               </div>
             </div>
             {/* Float Cards */}
@@ -90,11 +90,11 @@ const Hero: React.FC = () => {
                 <Zap className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs text-slate-500">Response Time</p>
-                <p className="text-sm font-bold">&lt; 20 Menit</p>
+                <p className="text-xs text-slate-500">Uptime Support</p>
+                <p className="text-sm font-bold">24/7 Monitoring</p>
               </div>
             </div>
-          </div>
+          </div> 
         </div>
 
         {/* Services Highlight Grid */}
@@ -105,6 +105,7 @@ const Hero: React.FC = () => {
               href="#services"
               onClick={scrollToServices}
               className="group rounded-2xl border border-white bg-white/80 p-5 backdrop-blur-md transition-all hover:border-mitrafix-orange hover:shadow-lg hover:shadow-sky-400/20 cursor-pointer"
+              title={`Layanan ${service.title}`}
             >
               <div className="mb-3 text-mitrafix-orange transition-transform duration-300 group-hover:scale-110">
                  {SERVICE_ICONS[service.icon] ? (

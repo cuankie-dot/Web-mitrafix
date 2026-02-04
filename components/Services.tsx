@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowRight, Zap } from 'lucide-react';
 import { SERVICE_ICONS } from '../constants';
 import { useData } from '../context/DataContext';
+import { optimizeImage } from '../utils/imageOptimizer';
 
 const Services: React.FC = () => {
   const { services, isLoading } = useData();
@@ -44,9 +45,11 @@ const Services: React.FC = () => {
                 {/* Image Header */}
                 <div className="h-48 overflow-hidden relative">
                   <img 
-                    src={service.image} 
+                    src={optimizeImage(service.image, 600)} 
                     alt={service.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
                     onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop';
                     }}

@@ -1,6 +1,7 @@
 {
-  "name": "Mitrafix - Professional IT Solutions",
-  "description": "A conversion-oriented company profile for Mitrafix IT Solutions, featuring services for B2B and B2C markets in Indonesia.",
+  "name": "Mitrafix Jakarta - Jasa IT & Service Printer",
+  "short_name": "Mitrafix",
+  "description": "Jasa IT Solution Profesional di Jakarta Selatan: Service Printer, CCTV, Jaringan WiFi, dan Maintenance Kantor Bergaransi.",
   "requestFramePermissions": [
     "geolocation"
   ]

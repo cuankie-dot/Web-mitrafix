@@ -4,7 +4,7 @@ import {
   Printer, Monitor, Video, Network, ShieldCheck, Briefcase, Wifi, 
   Server, Cloud, Smartphone, Wrench, Code, Database, Zap 
 } from 'lucide-react';
-import { ServiceItem, NavLink, Testimonial, Product } from './types';
+import { ServiceItem, NavLink, Testimonial, Product, Partner } from './types';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Beranda', href: 'home' },
@@ -105,6 +105,18 @@ export const TESTIMONIALS: Testimonial[] = [
     quote: "Pemasangan CCTV dan WiFi di resto kami sangat rapi. Tim teknisinya sangat paham seluk beluk jaringan. Recommended!",
     image: "https://i.pravatar.cc/150?u=siti"
   }
+];
+
+// Data Dummy Partner (Logo Brand IT Populer)
+export const PARTNERS: Partner[] = [
+  { id: 1, name: "Epson", logo: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Epson_logo_2017.svg" },
+  { id: 2, name: "Canon", logo: "https://upload.wikimedia.org/wikipedia/commons/3/36/Canon_svg_logo.svg" },
+  { id: 3, name: "HP", logo: "https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg" },
+  { id: 4, name: "Hikvision", logo: "https://upload.wikimedia.org/wikipedia/commons/2/22/Hikvision_logo.svg" },
+  { id: 5, name: "Dahua", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Dahua_Technology_logo.svg" },
+  { id: 6, name: "Mikrotik", logo: "https://upload.wikimedia.org/wikipedia/commons/3/36/MikroTik_Logo.svg" },
+  { id: 7, name: "TP-Link", logo: "https://upload.wikimedia.org/wikipedia/commons/e/ee/TP-Link_Logo.svg" },
+  { id: 8, name: "Lenovo", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Lenovo_logo_2015.svg" }
 ];
 
 export const SERVICE_ICONS: Record<string, React.ReactNode> = {

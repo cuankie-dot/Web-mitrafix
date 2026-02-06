@@ -39,3 +39,9 @@ export interface Product {
   tokopediaUrl?: string;
   shopeeUrl?: string;
 }
+
+export interface Partner {
+  id: number;
+  name: string;
+  logo: string;
+}

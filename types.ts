@@ -31,7 +31,7 @@ export interface Testimonial {
 export interface Product {
   id: string;
   name: string;
-  category: 'printer' | 'hardware' | 'accessories' | 'cctv';
+  category: 'printer' | 'hardware' | 'accessories' | 'cctv'| 'network';
   description: string;
   price: string;
   image: string;

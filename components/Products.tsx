@@ -9,6 +9,7 @@ const categories = [
   { id: 'printer', label: 'Printer' },
   { id: 'hardware', label: 'Hardware' },
   { id: 'cctv', label: 'CCTV' },
+  { id: 'network', label: 'Network' },
   { id: 'accessories', label: 'Aksesoris' }
 ];
 

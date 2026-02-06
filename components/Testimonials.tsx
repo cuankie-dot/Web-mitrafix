@@ -2,6 +2,7 @@
 import React from 'react';
 import { Quote, Star } from 'lucide-react';
 import { useData } from '../context/DataContext';
+import { optimizeImage } from '../utils/imageOptimizer';
 
 const Testimonials: React.FC = () => {
   const { testimonials, isLoading } = useData();
@@ -43,9 +44,10 @@ const Testimonials: React.FC = () => {
 
               <div className="flex items-center gap-4 mt-auto">
                 <img 
-                  src={testimonial.image} 
+                  src={optimizeImage(testimonial.image, 150)} 
                   alt={testimonial.name}
                   className="w-14 h-14 rounded-2xl object-cover shadow-sm grayscale hover:grayscale-0 transition-all"
+                  loading="lazy"
                 />
                 <div>
                   <h4 className="font-bold text-slate-900">{testimonial.name}</h4>

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { CheckCircle2, Award, Clock, Users } from 'lucide-react';
+import { optimizeImage } from '../utils/imageOptimizer';
 
 const WhyUs: React.FC = () => {
   const highlights = [
@@ -53,7 +54,12 @@ const WhyUs: React.FC = () => {
           <div className="flex-1 grid grid-cols-2 gap-4">
             <div className="space-y-4">
               <div className="rounded-2xl overflow-hidden shadow-lg h-64">
-                <img src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/one%20stoep%20solution.jpg" className="w-full h-full object-cover" alt="Office 1" />
+                <img 
+                  src={optimizeImage("https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/one%20stoep%20solution.jpg", 800)} 
+                  className="w-full h-full object-cover" 
+                  alt="Office 1"
+                  loading="lazy" 
+                />
               </div>
               <div className="bg-mitrafix-orange p-8 rounded-2xl text-white text-center">
                 <p className="text-4xl font-extrabold mb-1">500+</p>
@@ -66,7 +72,12 @@ const WhyUs: React.FC = () => {
                 <p className="text-sm font-medium opacity-80 uppercase tracking-widest">Tahun Pengalaman</p>
               </div>
               <div className="rounded-2xl overflow-hidden shadow-lg h-64">
-                <img src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/customer-rate.jpg" className="w-full h-full object-cover" alt="Server Room" />
+                <img 
+                  src={optimizeImage("https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/customer-rate.jpg", 800)} 
+                  className="w-full h-full object-cover" 
+                  alt="Server Room" 
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>

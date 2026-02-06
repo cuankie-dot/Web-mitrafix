@@ -96,7 +96,7 @@ const Products: React.FC = () => {
                 {/* Image Container */}
                 <div className="relative h-64 overflow-hidden bg-white border-b border-slate-50 p-6 flex items-center justify-center">
                   <img 
-                    src={optimizeImage(product.image, 400)} 
+                    src={optimizeImage(product.image, 800)} 
                     alt={`${product.name} - Jual & Service di Mitrafix Jakarta`} 
                     className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
                     loading="lazy"

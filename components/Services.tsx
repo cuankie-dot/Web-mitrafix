@@ -45,7 +45,7 @@ const Services: React.FC = () => {
                 {/* Image Header */}
                 <div className="h-48 overflow-hidden relative">
                   <img 
-                    src={optimizeImage(service.image, 600)} 
+                    src={optimizeImage(service.image, 800)} 
                     alt={service.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"

@@ -3,6 +3,7 @@ import React from 'react';
 import { ChevronRight, ShieldCheck, Zap, Globe } from 'lucide-react';
 import { SERVICE_ICONS } from '../constants';
 import { useData } from '../context/DataContext';
+import { optimizeImage } from '../utils/imageOptimizer';
 
 const Hero: React.FC = () => {
   const { services } = useData();
@@ -73,10 +74,11 @@ const Hero: React.FC = () => {
           <div className="relative flex-1">
             <div className="relative z-10 transform overflow-hidden rounded-2xl shadow-2xl shadow-slate-200 transition-transform duration-500 hover:rotate-0 lg:rotate-2">
               <img 
-                src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/it%20solution.jpeg" 
+                src={optimizeImage("https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/it%20solution.jpeg", 1200)} 
                 alt="Jasa IT Solution Terlengkap di Jakarta" 
                 className="h-[400px] w-full object-cover"
                 loading="eager"
+                fetchPriority="high"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
               <div className="absolute bottom-6 left-6 text-white">

@@ -6,7 +6,10 @@ import { useData } from '../context/DataContext';
 import { optimizeImage } from '../utils/imageOptimizer';
 
 const Hero: React.FC = () => {
-  const { services } = useData();
+  const { services, partners } = useData();
+
+  // Menduplikasi array partners untuk menciptakan efek loop infinite
+  const sliderPartners = [...partners, ...partners];
 
   const scrollToServices = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -17,7 +20,21 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden" aria-label="Beranda Mitrafix">
+    <section id="home" className="relative pt-32 pb-16 lg:pt-48 lg:pb-20 overflow-hidden" aria-label="Beranda Mitrafix">
+      {/* Styles for animation */}
+      <style>{`
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+          animation: scroll 40s linear infinite;
+        }
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
       {/* Background Decor */}
       <div className="absolute top-0 left-0 h-full w-full -z-10 bg-baby-blue/50" />
       <div className="absolute top-[-10%] right-[-5%] h-[400px] w-[400px] -z-10 rounded-full bg-mitrafix-orange/10 blur-3xl" />
@@ -100,7 +117,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Services Highlight Grid */}
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 mb-16">
           {services.map((service) => (
             <a 
               key={service.id}
@@ -120,6 +137,36 @@ const Hero: React.FC = () => {
             </a>
           ))}
         </div>
+
+        {/* Partners Marquee Section (Moved Here) */}
+        <div className="border-t border-slate-200/60 pt-8">
+          <p className="text-center text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest">
+            Sparepart Original & Authorized Partner
+          </p>
+          <div className="relative w-full overflow-hidden">
+             {/* Gradient Masks for seamless effect */}
+             <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-baby-blue to-transparent z-10 opacity-50" />
+             <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-baby-blue to-transparent z-10 opacity-50" />
+            
+             <div className="flex w-max animate-scroll">
+              {sliderPartners.map((partner, index) => (
+                <div 
+                  key={`${partner.id}-${index}`} 
+                  className="mx-6 w-24 h-12 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
+                >
+                  <img 
+                    src={optimizeImage(partner.logo, 150)} 
+                    alt={`${partner.name} Partner`} 
+                    className="max-w-full max-h-full object-contain"
+                    title={`Mitrafix Partner: ${partner.name}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

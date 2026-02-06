@@ -1,32 +1,15 @@
 
 import React from 'react';
 import { Target, Eye, Shield } from 'lucide-react';
-import { useData } from '../context/DataContext';
-import { optimizeImage } from '../utils/imageOptimizer';
 
 const About: React.FC = () => {
-  const { partners } = useData();
-
-  // Menduplikasi array partners untuk menciptakan efek loop infinite yang mulus tanpa jeda
-  const sliderPartners = [...partners, ...partners];
-
+  // Logic partner dipindahkan ke Hero
+  
   return (
     <section id="about" className="py-24 bg-white relative overflow-hidden">
-      <style>{`
-        @keyframes scroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-scroll {
-          animation: scroll 30s linear infinite;
-        }
-        .animate-scroll:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-12">
           <div className="order-2 lg:order-1 relative">
              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl group">
                {/* 
@@ -92,37 +75,6 @@ const About: React.FC = () => {
                   <p className="text-sm text-slate-500">Kombinasi antara teknisi panggilan yang cepat sampai lokasi dan kualitas hardware orisinal dengan harga kompetitif.</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Partners Section */}
-        <div className="border-t border-slate-100 pt-16">
-          <div className="text-center mb-10">
-            <h4 className="text-slate-900 font-bold text-lg mb-2">Didukung oleh Brand & Partner Ternama</h4>
-            <p className="text-slate-500 text-sm">Kami menggunakan produk dan sparepart orisinal dari partner resmi.</p>
-          </div>
-          
-          <div className="relative w-full overflow-hidden bg-white">
-            {/* Gradient Masks for fade effect */}
-            <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-white to-transparent z-10" />
-            <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-white to-transparent z-10" />
-            
-            <div className="flex w-max animate-scroll">
-              {sliderPartners.map((partner, index) => (
-                <div 
-                  key={`${partner.id}-${index}`} 
-                  className="mx-8 w-32 h-20 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer"
-                >
-                  <img 
-                    src={optimizeImage(partner.logo, 200)} 
-                    alt={`${partner.name} Partner Mitrafix`} 
-                    className="max-w-full max-h-full object-contain"
-                    title={`Mitrafix Partner: ${partner.name}`}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
             </div>
           </div>
         </div>

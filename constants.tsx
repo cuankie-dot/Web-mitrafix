@@ -15,7 +15,7 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Kontak Admin', href: 'contact' },
 ];
 
-export const SERVICES: ServiceItem[] = [
+export const Services: ServiceItem[] = [
   {
     id: 'printer',
     title: 'Service Printer & Refill Tinta Jakarta',

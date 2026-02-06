@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -151,6 +152,7 @@ const App: React.FC = () => {
   return (
     <DataProvider>
       <AppContent />
+      <Analytics />
     </DataProvider>
   );
 };

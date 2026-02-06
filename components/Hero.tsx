@@ -83,7 +83,7 @@ const Hero: React.FC = () => {
               </div>
               <div className="flex items-center gap-2 text-sm font-medium">
                 <Globe className="h-5 w-5 text-blue-500" />
-                <span>Area Jakarta & Depok</span>
+                <span>Area JABODETABEK Dan Sekitarnya</span>
               </div>
             </div>
           </div>

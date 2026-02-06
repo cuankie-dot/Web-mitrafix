@@ -38,7 +38,7 @@ const About: React.FC = () => {
           <div className="order-1 lg:order-2">
             <h2 className="text-mitrafix-orange font-bold tracking-widest uppercase text-sm mb-3">Tentang Mitrafix</h2>
             <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">
-              Partner IT Terpercaya Sejak 2014 di Jagakarsa, Jakarta Selatan
+              Partner IT Terpercaya Sejak 2014 di Jakarta 
             </h3>
             <p className="text-slate-600 mb-8 leading-relaxed">
               Mitrafix lahir dari visi untuk menyederhanakan kompleksitas teknologi bagi pelaku bisnis dan individu. Kami percaya bahwa setiap masalah IT memiliki solusi yang efisien jika ditangani oleh ahlinya. 

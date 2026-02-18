@@ -12,7 +12,7 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Layanan IT', href: 'services' },
   { label: 'Katalog Produk', href: 'products' },
   { label: 'Keunggulan', href: 'why-us' },
-  { label: 'FAQ', href: 'FAQ' },
+  { label: 'FAQ', href: 'faq' },
   { label: 'Kontak Admin', href: 'contact' },
 ];
 

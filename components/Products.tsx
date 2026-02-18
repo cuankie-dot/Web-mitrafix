@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
-import { ShoppingCart, ExternalLink, Zap, MessageCircle, Search, PackageX } from 'lucide-react';
+import { ShoppingCart, ExternalLink, Zap, MessageCircle, Search, PackageX, CheckCircle, AlertTriangle, Clock, XCircle } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { optimizeImage } from '../utils/imageOptimizer';
+import { Product } from '../types';
 
 const categories = [
   { id: 'all', label: 'Semua Produk' },
@@ -12,6 +13,44 @@ const categories = [
   { id: 'network', label: 'Network' },
   { id: 'accessories', label: 'Aksesoris' }
 ];
+
+const AvailabilityBadge: React.FC<{ status?: Product['availability'] }> = ({ status }) => {
+  switch (status) {
+    case 'ready':
+      return (
+        <div className="flex items-center gap-1.5 bg-green-50 text-green-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-green-100 shadow-sm">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </span>
+          Stok Tersedia
+        </div>
+      );
+    case 'limited':
+      return (
+        <div className="flex items-center gap-1.5 bg-amber-50 text-amber-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-amber-100 shadow-sm">
+          <AlertTriangle className="w-3 h-3" />
+          Stok Terbatas
+        </div>
+      );
+    case 'oos':
+      return (
+        <div className="flex items-center gap-1.5 bg-red-50 text-red-400 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-red-100 shadow-sm grayscale opacity-70">
+          <XCircle className="w-3 h-3" />
+          Stok Habis
+        </div>
+      );
+    case 'preorder':
+      return (
+        <div className="flex items-center gap-1.5 bg-sky-50 text-sky-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-sky-100 shadow-sm">
+          <Clock className="w-3 h-3" />
+          Pre-order
+        </div>
+      );
+    default:
+      return null;
+  }
+};
 
 const Products: React.FC = () => {
   const { products, isLoading } = useData();
@@ -92,24 +131,29 @@ const Products: React.FC = () => {
             {filteredProducts.map((product) => (
               <div 
                 key={product.id} 
-                className="bg-white rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl hover:shadow-slate-200 transition-all duration-300 group flex flex-col"
+                className={`bg-white rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl hover:shadow-slate-200 transition-all duration-300 group flex flex-col ${product.availability === 'oos' ? 'opacity-80' : ''}`}
               >
                 {/* Image Container */}
                 <div className="relative h-64 overflow-hidden bg-white border-b border-slate-50 p-6 flex items-center justify-center">
                   <img 
                     src={optimizeImage(product.image, 800)} 
                     alt={`${product.name} - Jual & Service di Mitrafix Jakarta`} 
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                    className={`w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 ${product.availability === 'oos' ? 'grayscale' : ''}`}
                     loading="lazy"
                     decoding="async"
                     fetchPriority="low"
                   />
-                  {product.isPopular && (
-                    <div className="absolute top-4 left-4 bg-mitrafix-orange text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 uppercase tracking-wider shadow-md">
-                      <Zap className="w-3 h-3 fill-current" />
-                      Terlaris
-                    </div>
-                  )}
+                  
+                  {/* Floating Badges */}
+                  <div className="absolute top-4 left-4 flex flex-col gap-2">
+                    {product.isPopular && (
+                      <div className="bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 uppercase tracking-wider shadow-md w-fit">
+                        <Zap className="w-3 h-3 fill-mitrafix-orange text-mitrafix-orange" />
+                        Terlaris
+                      </div>
+                    )}
+                  </div>
+                  
                   <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                     <div className="bg-white/90 backdrop-blur-sm p-2 rounded-xl text-slate-900 shadow-sm border border-slate-100">
                       <ExternalLink className="w-4 h-4" />
@@ -119,22 +163,24 @@ const Products: React.FC = () => {
 
                 {/* Content */}
                 <div className="p-6 flex flex-col flex-grow">
-                  <div className="mb-2">
+                  <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                     <span className="text-[10px] font-bold text-mitrafix-orange uppercase tracking-widest">{product.category}</span>
-                    <h4 className="text-lg font-bold text-slate-900 leading-tight group-hover:text-mitrafix-orange transition-colors mt-1">
-                      {product.name}
-                    </h4>
+                    <AvailabilityBadge status={product.availability} />
                   </div>
                   
-                  <p className="text-sm text-slate-500 line-clamp-2 mb-4 flex-grow">
+                  <h4 className="text-lg font-bold text-slate-900 leading-tight group-hover:text-mitrafix-orange transition-colors mb-2">
+                    {product.name}
+                  </h4>
+                  
+                  <p className="text-sm text-slate-500 line-clamp-2 mb-6 flex-grow">
                     {product.description}
                   </p>
 
                   <div className="mt-auto pt-4 border-t border-slate-50">
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase">Mulai Dari</p>
-                        <p className="text-lg font-extrabold text-slate-900">{product.price}</p>
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Estimasi Harga</p>
+                        <p className={`text-xl font-extrabold ${product.availability === 'oos' ? 'text-slate-400' : 'text-slate-900'}`}>{product.price}</p>
                       </div>
                     </div>
                     
@@ -164,7 +210,7 @@ const Products: React.FC = () => {
                       )}
                       
                       <a 
-                        href={`https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
+                        href={`https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}%20(${product.availability === 'oos' ? 'Tanya Stok Baru' : 'Cek Ketersediaan'}).`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex flex-col items-center justify-center gap-1 bg-slate-900 text-white p-2 rounded-xl hover:bg-mitrafix-orange transition-all shadow-sm"

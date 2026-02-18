@@ -12,6 +12,7 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Layanan IT', href: 'services' },
   { label: 'Katalog Produk', href: 'products' },
   { label: 'Keunggulan', href: 'why-us' },
+  { label: 'FAQ', href: 'FAQ' },
   { label: 'Kontak Admin', href: 'contact' },
 ];
 
@@ -70,6 +71,7 @@ export const PRODUCTS: Product[] = [
     category: 'printer',
     description: 'Printer multifungsi terbaik untuk kantor UMKM dengan sistem tangki tinta ultra hemat.',
     price: 'Hubungi Admin',
+    availability: 'ready',
     image: 'https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/products/epson-l3210.jpg', 
     isPopular: true,
     tokopediaUrl: 'https://www.tokopedia.com',
@@ -81,10 +83,31 @@ export const PRODUCTS: Product[] = [
     category: 'cctv',
     description: 'Paket keamanan lengkap 4 kamera dengan infrared untuk pantauan jernih siang dan malam.',
     price: 'Promo Khusus',
+    availability: 'limited',
     image: 'https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/products/cctv-hikvision.jpg',
     isPopular: true,
     tokopediaUrl: 'https://www.tokopedia.com',
     shopeeUrl: 'https://shopee.co.id'
+  },
+  {
+    id: 'n1',
+    name: 'Mikrotik RB450Gx4',
+    category: 'network',
+    description: 'Routerboard powerful untuk manajemen bandwidth kantor skala menengah.',
+    price: 'Rp 1.xxx.000',
+    availability: 'ready',
+    image: 'https://images.unsplash.com/photo-1544197150-b99a580bbcbf?q=80&w=800&auto=format&fit=crop',
+    tokopediaUrl: 'https://www.tokopedia.com'
+  },
+  {
+    id: 'h1',
+    name: 'SSD Samsung 980 Pro 1TB',
+    category: 'hardware',
+    description: 'Upgrade performa laptop/PC Anda dengan kecepatan NVMe Gen4 terbaik.',
+    price: 'Rp 1.xxx.000',
+    availability: 'oos',
+    image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=800&auto=format&fit=crop',
+    tokopediaUrl: 'https://www.tokopedia.com'
   }
 ];
 

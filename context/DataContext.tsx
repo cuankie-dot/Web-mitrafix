@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ServiceItem, Product, Testimonial, Partner } from '../types';
 import { 
   SERVICES as INITIAL_SERVICES, 
+  SERVICES, 
   PRODUCTS as INITIAL_PRODUCTS, 
   TESTIMONIALS as INITIAL_TESTIMONIALS,
   PARTNERS as INITIAL_PARTNERS 
@@ -16,6 +17,11 @@ interface DataContextType {
   partners: Partner[];
   isLoading: boolean;
   isUsingFallback: boolean;
+  // Chat Integration States
+  isChatOpen: boolean;
+  setIsChatOpen: (open: boolean) => void;
+  pendingChatMessage: string | null;
+  setPendingChatMessage: (msg: string | null) => void;
 }
 
 const DataContext = createContext<DataContextType>({
@@ -25,6 +31,10 @@ const DataContext = createContext<DataContextType>({
   partners: [],
   isLoading: true,
   isUsingFallback: false,
+  isChatOpen: false,
+  setIsChatOpen: () => {},
+  pendingChatMessage: null,
+  setPendingChatMessage: () => {},
 });
 
 export const useData = () => useContext(DataContext);
@@ -36,12 +46,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [partners, setPartners] = useState<Partner[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isUsingFallback, setIsUsingFallback] = useState(false);
+  
+  // Chat States
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [pendingChatMessage, setPendingChatMessage] = useState<string | null>(null);
 
   const loadData = async () => {
-    // FIX: Jika user belum setup ENV Supabase (masih pakai Fallback/Demo),
-    // PRIORITASKAN data dari constants.tsx agar perubahan kode/konten di Github langsung muncul di website.
     if (!isConfigured) {
-      console.log("[DataContext] Custom DB not configured. Using local constants data.");
       setServices(INITIAL_SERVICES);
       setProducts(INITIAL_PRODUCTS);
       setTestimonials(INITIAL_TESTIMONIALS);
@@ -52,7 +63,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     try {
-      // Ambil data dari 4 tabel sekaligus
       const [servicesRes, productsRes, testimonialsRes, partnersRes] = await Promise.all([
         supabase.from('services').select('*').order('id'),
         supabase.from('products').select('*').order('id'),
@@ -60,13 +70,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         supabase.from('partners').select('*').order('id')
       ]);
 
-      // Cek error dari response Supabase
       if (servicesRes.error) throw servicesRes.error;
       if (productsRes.error) throw productsRes.error;
       if (testimonialsRes.error) throw testimonialsRes.error;
-      // partnersRes.error boleh diabaikan jika tabel belum dibuat, fallback ke constant
 
-      // Jika database Anda sendiri kosong, gunakan fallback ke constants.tsx
       const dbServices = servicesRes.data as ServiceItem[];
       const dbProducts = productsRes.data as Product[];
       const dbTestimonials = testimonialsRes.data as Testimonial[];
@@ -80,13 +87,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const isEmptyDB = (!dbServices || dbServices.length === 0) && (!dbProducts || dbProducts.length === 0);
       setIsUsingFallback(isEmptyDB);
 
-      if (isEmptyDB) {
-        console.log("[DataContext] Connected to Custom DB but it is empty. Using Template Data.");
-      }
-
     } catch (error) {
-      console.warn("[DataContext] Gagal mengambil data. Mengaktifkan Mode Offline/Statis.", error);
-      // Fallback total jika terjadi error jaringan atau konfigurasi salah
       setServices(INITIAL_SERVICES);
       setProducts(INITIAL_PRODUCTS);
       setTestimonials(INITIAL_TESTIMONIALS);
@@ -100,14 +101,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     loadData();
 
-    // Hanya subscribe realtime jika menggunakan Database sendiri
     if (isConfigured) {
       const channel = supabase.channel('public:db_changes')
         .on(
           'postgres_changes',
           { event: '*', schema: 'public' },
           (payload: any) => {
-            console.log('Update Realtime diterima:', payload);
             loadData();
           }
         )
@@ -120,7 +119,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   return (
-    <DataContext.Provider value={{ services, products, testimonials, partners, isLoading, isUsingFallback }}>
+    <DataContext.Provider value={{ 
+      services, products, testimonials, partners, isLoading, isUsingFallback,
+      isChatOpen, setIsChatOpen, pendingChatMessage, setPendingChatMessage
+    }}>
       {children}
     </DataContext.Provider>
   );

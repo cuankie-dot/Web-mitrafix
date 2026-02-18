@@ -1,12 +1,14 @@
 
-import React from 'react';
-import { ChevronRight, ShieldCheck, Zap, Globe } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronRight, ShieldCheck, Zap, Globe, Search } from 'lucide-react';
 import { SERVICE_ICONS } from '../constants';
 import { useData } from '../context/DataContext';
 import { optimizeImage } from '../utils/imageOptimizer';
+import ServiceFinder from './ServiceFinder';
 
 const Hero: React.FC = () => {
   const { services, partners } = useData();
+  const [isFinderOpen, setIsFinderOpen] = useState(false);
 
   // Menduplikasi array partners untuk menciptakan efek loop infinite
   const sliderPartners = [...partners, ...partners];
@@ -61,19 +63,19 @@ const Hero: React.FC = () => {
                 href="https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20ingin%20konsultasi%20jasa%20IT%20panggilan."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-mitrafix-orange px-8 py-4 text-lg font-bold text-white shadow-xl shadow-sky-400/30 transition-all hover:bg-sky-400 sm:w-auto"
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-8 py-4 text-lg font-bold text-white shadow-xl shadow-slate-900/20 transition-all hover:bg-slate-800 sm:w-auto"
                 aria-label="Konsultasi IT Jakarta via WhatsApp"
               >
-                Konsultasi Gratis Sekarang
+                Hubungi Kami
                 <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
-              <a 
-                href="#services" 
-                onClick={scrollToServices}
-                className="w-full rounded-xl border border-slate-200 bg-white px-8 py-4 text-lg font-bold text-slate-900 transition-all hover:bg-slate-50 sm:w-auto"
+              <button 
+                onClick={() => setIsFinderOpen(true)}
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-mitrafix-orange px-8 py-4 text-lg font-bold text-white shadow-xl shadow-sky-400/30 transition-all hover:bg-sky-400 sm:w-auto"
               >
-                Cek Layanan IT
-              </a>
+                <Search className="h-5 w-5" />
+                Cari Solusi IT Tepat
+              </button>
             </div>
 
             <div className="mt-10 flex items-center justify-center gap-8 opacity-70 lg:justify-start">
@@ -83,7 +85,7 @@ const Hero: React.FC = () => {
               </div>
               <div className="flex items-center gap-2 text-sm font-medium">
                 <Globe className="h-5 w-5 text-blue-500" />
-                <span>Area JABODETABEK Dan Sekitarnya</span>
+                <span>Area JABODETABEK</span>
               </div>
             </div>
           </div>
@@ -138,7 +140,7 @@ const Hero: React.FC = () => {
           ))}
         </div>
 
-        {/* Partners Marquee Section (Moved Here) */}
+        {/* Partners Marquee Section */}
         <div className="border-t border-slate-200/60 pt-8">
           <p className="text-center text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest">
             Sparepart Original & Authorized Partner
@@ -166,8 +168,10 @@ const Hero: React.FC = () => {
             </div>
           </div>
         </div>
-
       </div>
+
+      {/* Interactive Service Finder Modal */}
+      <ServiceFinder isOpen={isFinderOpen} onClose={() => setIsFinderOpen(false)} />
     </section>
   );
 };

@@ -8,8 +8,10 @@ import Products from './components/Products';
 import About from './components/About';
 import WhyUs from './components/WhyUs';
 import Testimonials from './components/Testimonials';
+import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import ChatBot from './components/ChatBot';
+import ScrollToTop from './components/ScrollToTop';
 import LeadDashboard from './components/LeadDashboard';
 import { DataProvider } from './context/DataContext';
 
@@ -138,9 +140,11 @@ const AppContent: React.FC = () => {
       <Products />
       <WhyUs />
       <Testimonials />
+      <FAQ />
       <Contact />
       <Footer onShowLeads={() => setShowLeads(true)} />
       <ChatBot />
+      <ScrollToTop />
       
       {showLeads && <LeadDashboard onClose={() => setShowLeads(false)} />}
     </div>

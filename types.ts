@@ -36,6 +36,7 @@ export interface Product {
   price: string;
   image: string;
   isPopular?: boolean;
+  availability?: 'ready' | 'limited' | 'oos' | 'preorder';
   tokopediaUrl?: string;
   shopeeUrl?: string;
 }

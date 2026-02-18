@@ -48,16 +48,18 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
               {!logoError ? (
                 <img 
                   src="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/fav_ico/android-chrome-512x512.png" 
-                  alt="Mitrafix Logo" 
+                  alt="Mitrafix Logo - Jasa IT Jakarta" 
                   className="h-12 w-auto bg-white rounded-lg p-2 object-contain"
                   onError={() => setLogoError(true)}
+                  width="48"
+                  height="48"
                 />
               ) : (
                 <span className="text-2xl font-extrabold text-white">Mitrafix</span>
               )}
             </div>
             <p className="text-sm leading-relaxed mb-6">
-              "One place for all IT solutions to support your business growth".
+              "One place for all IT solutions to support your business growth". Partner resmi pengadaan dan maintenance IT terbaik di Jakarta Selatan.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
@@ -67,7 +69,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-mitrafix-orange hover:text-white transition-all text-slate-400"
-                  aria-label={social.name}
+                  aria-label={`Ikuti Mitrafix di ${social.name}`}
                 >
                   {social.icon}
                 </a>
@@ -78,20 +80,23 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
           <div>
             <h5 className="text-white font-bold mb-6">Layanan & Produk</h5>
             <ul className="space-y-4 text-sm">
-              <li><a href="#services" className="hover:text-mitrafix-orange transition-colors">IT Maintenance Support</a></li>
-              <li><a href="#products" className="hover:text-mitrafix-orange transition-colors">Katalog Printer & Tinta</a></li>
-              <li><a href="#products" className="hover:text-mitrafix-orange transition-colors">Hardware PC & Laptop</a></li>
-              <li><a href="#products" className="hover:text-mitrafix-orange transition-colors">Paket CCTV Murah</a></li>
-              <li><a href="#products" className="hover:text-mitrafix-orange transition-colors">Aksesoris Jaringan</a></li>
+              <li><a href="#services" className="hover:text-mitrafix-orange transition-colors">Service Printer Panggilan</a></li>
+              <li><a href="#services" className="hover:text-mitrafix-orange transition-colors">Jasa Pasang CCTV</a></li>
+              <li><a href="#services" className="hover:text-mitrafix-orange transition-colors">Instalasi WiFi & LAN</a></li>
+              <li><a href="#products" className="hover:text-mitrafix-orange transition-colors">Jual Beli Printer Bekas</a></li>
+              <li><a href="#services" className="hover:text-mitrafix-orange transition-colors">IT Support Kantor</a></li>
             </ul>
           </div>
 
           <div>
-            <h5 className="text-white font-bold mb-6">Perusahaan</h5>
+            <h5 className="text-white font-bold mb-6">Area Layanan</h5>
             <ul className="space-y-4 text-sm">
-              <li><a href="#about" className="hover:text-mitrafix-orange transition-colors">Tentang Kami</a></li>
-              <li><a href="#why-us" className="hover:text-mitrafix-orange transition-colors">Keunggulan Kami</a></li>
-              {/* Tombol Admin Report telah disembunyikan */}
+              {/* Local SEO Keyword Injection */}
+              <li><a href="#contact" className="hover:text-mitrafix-orange transition-colors">Service Printer Jagakarsa</a></li>
+              <li><a href="#contact" className="hover:text-mitrafix-orange transition-colors">Jasa IT Cilandak & Kemang</a></li>
+              <li><a href="#contact" className="hover:text-mitrafix-orange transition-colors">Service Komputer Lenteng Agung</a></li>
+              <li><a href="#contact" className="hover:text-mitrafix-orange transition-colors">Pasang CCTV Cinere & Depok</a></li>
+              <li><a href="#contact" className="hover:text-mitrafix-orange transition-colors">Maintenance IT Depok & Kebagusan</a></li>
             </ul>
           </div>
 
@@ -101,6 +106,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
               <li className="flex justify-between"><span>Senin - Jumat:</span> <span className="text-white">08:00 - 17:00</span></li>
               <li className="flex justify-between"><span>Sabtu:</span> <span className="text-white">08:00 - 15:00</span></li>
               <li className="flex justify-between"><span>Minggu:</span> <span className="text-white">Tutup</span></li>
+              <li className="mt-4 text-xs text-slate-500 italic">*Layanan Emergency tersedia untuk klien kontrak.</li>
             </ul>
           </div>
         </div>
@@ -109,11 +115,14 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
           <p 
             onClick={handleSecretClick} 
             className="cursor-default select-none hover:text-slate-200 transition-colors"
-            title="Mitrafix IT Solutions"
+            title="Mitrafix IT Solutions Admin Access"
           >
             &copy; {new Date().getFullYear()} Mitrafix IT Solutions. All rights reserved.
           </p>
-          
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>

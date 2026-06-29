@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { X, Trash2, Download, ExternalLink, Calendar, Briefcase, User, Phone } from 'lucide-react';
+import { X, Trash2, Download, ExternalLink, Calendar, Briefcase, User, Phone, Lock, LogOut, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import type { Session } from '@supabase/supabase-js';
 
 interface Lead {
   id: number;
@@ -23,6 +24,52 @@ interface LeadDashboardProps {
 const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Auth state
+  const [session, setSession] = useState<Session | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+
+  // Periksa session yang ada & dengarkan perubahan auth
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setAuthChecked(true);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      setSession(newSession);
+    });
+
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsAuthenticating(true);
+    setAuthError(null);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      setPassword('');
+    } catch (err: any) {
+      setAuthError(err?.message === 'Invalid login credentials'
+        ? 'Email atau password salah.'
+        : (err?.message || 'Gagal masuk. Coba lagi.'));
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setLeads([]);
+  };
 
   const fetchLeads = async () => {
     setIsLoading(true);
@@ -46,17 +93,18 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
       }
     } catch (error) {
       console.error("Error fetching leads:", error);
-      // Fallback ke localStorage jika DB gagal/kosong sementara
-      const localData = JSON.parse(localStorage.getItem('mitrafix_leads') || '[]');
-      setLeads(localData);
+      setLeads([]);
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
+    // Hanya ambil data & dengarkan realtime jika sudah login
+    if (!session) return;
+
     fetchLeads();
-    
+
     // Setup Realtime Listener untuk Lead Baru
     const channel = supabase.channel('realtime leads')
       .on(
@@ -72,7 +120,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [session]);
 
   const deleteLead = async (id: number) => {
     if (confirm('Hapus laporan ini permanen dari Database?')) {
@@ -89,6 +137,84 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
       }
     }
   };
+
+  // Gerbang autentikasi: tampilkan layar login jika belum masuk
+  if (!session) {
+    return (
+      <div className="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-md flex items-center justify-center p-4">
+        <div className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200">
+          <div className="bg-slate-900 p-8 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="bg-mitrafix-orange p-3 rounded-2xl shadow-lg shadow-sky-400/20">
+                <Lock className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-white font-extrabold text-xl tracking-tight">Akses Admin</h2>
+                <p className="text-slate-400 text-[10px] uppercase tracking-[0.2em] font-bold mt-1">Login Diperlukan</p>
+              </div>
+            </div>
+            <button onClick={onClose} className="bg-white/10 p-3 rounded-2xl text-white hover:bg-white/20 transition-all" aria-label="Tutup">
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          <form onSubmit={handleLogin} className="p-8 space-y-5">
+            {!authChecked ? (
+              <p className="text-center text-slate-400 text-sm py-4">Memeriksa sesi...</p>
+            ) : (
+              <>
+                <p className="text-sm text-slate-500 leading-relaxed">
+                  Halaman ini berisi data pelanggan yang bersifat rahasia. Silakan masuk dengan akun admin Anda.
+                </p>
+
+                {authError && (
+                  <div className="p-4 bg-red-50 border border-red-100 rounded-xl flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                    <p className="text-sm text-red-600">{authError}</p>
+                  </div>
+                )}
+
+                <div>
+                  <label htmlFor="admin-email" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Email</label>
+                  <input
+                    id="admin-email"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="admin@mitrafix.com"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-mitrafix-orange focus:border-transparent transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="admin-password" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Password</label>
+                  <input
+                    id="admin-password"
+                    type="password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-mitrafix-orange focus:border-transparent transition-all"
+                  />
+                </div>
+
+                <button
+                  disabled={isAuthenticating}
+                  type="submit"
+                  className="w-full bg-mitrafix-orange text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-sky-400 transition-all disabled:opacity-50"
+                >
+                  {isAuthenticating ? 'Memverifikasi...' : 'Masuk'}
+                  <Lock className="w-4 h-4" />
+                </button>
+              </>
+            )}
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-md flex items-center justify-center p-4">
@@ -110,7 +236,14 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={onClose} className="bg-white/10 p-3 rounded-2xl text-white hover:bg-white/20 transition-all">
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 bg-white/10 px-4 py-3 rounded-2xl text-white text-xs font-bold uppercase tracking-widest hover:bg-white/20 transition-all"
+              title="Keluar dari sesi admin"
+            >
+              <LogOut className="w-4 h-4" /> Keluar
+            </button>
+            <button onClick={onClose} className="bg-white/10 p-3 rounded-2xl text-white hover:bg-white/20 transition-all" aria-label="Tutup">
               <X className="w-6 h-6" />
             </button>
           </div>

@@ -106,7 +106,7 @@ const ChatBot: React.FC = () => {
                 type="text" 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Tanya apapun ke AI..."
                 className="flex-1 bg-transparent border-none px-4 py-2 text-sm focus:outline-none"
               />

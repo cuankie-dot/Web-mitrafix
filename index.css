@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+}
+
+/* Utilitas hover legacy yang dipakai sebelum migrasi ke Tailwind config */
+.hover-mitrafix-orange:hover {
+  background-color: #38bdf8;
+}

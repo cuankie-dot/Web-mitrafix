@@ -134,7 +134,7 @@ Mohon dicek dan dibantu proses penawarannya. Terima kasih.`;
                   </div>
                   <div>
                     <p className="font-bold text-lg mb-1">Telepon & WhatsApp</p>
-                    <p className="text-slate-400 text-sm leading-relaxed">+62 819-9993-70857</p>
+                    <p className="text-slate-400 text-sm leading-relaxed">+62 819-9937-0857</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

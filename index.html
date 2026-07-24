@@ -14,6 +14,10 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="https://www.mitrafix.com/">
 
+    <!-- Hreflang for Indonesian locale -->
+    <link rel="alternate" hreflang="id" href="https://www.mitrafix.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.mitrafix.com/" />
+
     <!-- Performance Optimization (Core Web Vitals) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,6 +145,68 @@
       }
     }
     </script>
+
+    <!-- FAQ Page Schema for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Apakah layanan service di Mitrafix memiliki garansi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tentu saja. Semua layanan kami (Service Printer, Hardware, & Instalasi Jaringan) memiliki garansi pengerjaan mulai dari 14 hingga 30 hari tergantung jenis perbaikannya. Kami menjamin kepuasan Anda."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Berapa lama waktu respon (SLA) teknisi untuk sampai ke lokasi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Untuk layanan on-call di area Jakarta Selatan (Jagakarsa, Cilandak, dsb) dan Depok, rata-rata teknisi kami tiba dalam 2-4 jam. Untuk klien kontrak maintenance B2B, kami menyediakan prioritas SLA yang lebih cepat sesuai kesepakatan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Area mana saja yang di-cover oleh layanan Mitrafix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fokus utama kami adalah Jakarta Selatan, Jakarta Timur, dan Depok. Namun, untuk proyek pengadaan infrastruktur IT atau kontrak maintenance perusahaan, kami melayani seluruh wilayah JABODETABEK."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Apakah Mitrafix melayani kontrak maintenance rutin untuk kantor (B2B)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ya, ini adalah salah satu spesialisasi kami. Kami menawarkan paket maintenance bulanan yang mencakup perawatan printer, pembersihan hardware, optimasi jaringan, hingga update keamanan sistem secara berkala dengan biaya yang jauh lebih hemat daripada hire IT internal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bagaimana sistem pembayaran layanan di Mitrafix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kami menerima pembayaran tunai (cash), transfer bank, serta sistem invoice khusus untuk klien korporasi (B2B) yang telah menjalin kerjasama kontrak maintenance."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- WebSite Schema for Sitelinks Search Box -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Mitrafix IT Solutions",
+      "url": "https://www.mitrafix.com/",
+      "inLanguage": "id-ID"
+    }
+    </script>
+
 <script type="importmap">
 {
   "imports": {
@@ -157,6 +223,25 @@
 </head>
 <body class="bg-gray-50 text-slate-900 overflow-x-hidden">
     <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; max-width: 800px; margin: 0 auto; font-family: sans-serif;">
+        <h1>Mitrafix IT Solutions — Jasa IT & Service Printer Jakarta</h1>
+        <p>Mitrafix adalah penyedia layanan IT One-Stop Solution di Jakarta Selatan sejak 2014. Kami melayani service printer panggilan, pasang CCTV, instalasi jaringan WiFi, dan maintenance IT kantor bergaransi.</p>
+        <h2>Layanan Kami</h2>
+        <ul>
+          <li>Service Printer & Refill Tinta Jakarta</li>
+          <li>Hardware Komputer & IT Procurement</li>
+          <li>Instalasi CCTV Jakarta</li>
+          <li>Instalasi Jaringan LAN & Wifi</li>
+          <li>Kontrak Maintenance IT Kantor</li>
+        </ul>
+        <h2>Kontak</h2>
+        <p>Alamat: Jl. Timbul No.4, RW.4, Cipedak, Jagakarsa, Jakarta Selatan 12630</p>
+        <p>Telepon/WhatsApp: +62 819-9993-70857</p>
+        <p>Email: info@mitrafix.com</p>
+        <p>Jam Operasional: Senin-Jumat 08:00-17:00, Sabtu 08:00-15:00</p>
+      </div>
+    </noscript>
     <script type="module" src="/index.tsx"></script>
 </body>
 </html>

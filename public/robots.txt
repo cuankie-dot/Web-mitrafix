@@ -1,7 +1,15 @@
-
 User-agent: *
 Allow: /
+Allow: /assets/
+Allow: /privacy-policy.html
+Allow: /terms-of-service.html
 Disallow: /admin
 Disallow: /private
+Disallow: /*.env
+Disallow: /.env
 
+# Crawl-delay untuk bot agresif
+Crawl-delay: 1
+
+# Sitemap
 Sitemap: https://www.mitrafix.com/sitemap.xml

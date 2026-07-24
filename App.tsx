@@ -32,7 +32,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
   };
 
   const socialLinks = [
-    { name: 'facebook', url: '#', icon: <Facebook className="w-5 h-5" /> },
+    { name: 'facebook', url: 'https://www.facebook.com/mitrafix', icon: <Facebook className="w-5 h-5" /> },
     { name: 'instagram', url: 'https://www.instagram.com/mitra.fix', icon: <Instagram className="w-5 h-5" /> },
     { name: 'linkedin', url: '#', icon: <Linkedin className="w-5 h-5" /> },
     { name: 'twitter', url: '#', icon: <Twitter className="w-5 h-5" /> }
@@ -120,8 +120,8 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
             &copy; {new Date().getFullYear()} Mitrafix IT Solutions. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="/privacy-policy.html" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms-of-service.html" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

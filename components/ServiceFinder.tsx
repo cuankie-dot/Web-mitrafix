@@ -113,12 +113,12 @@ const ServiceFinder: React.FC<ServiceFinderProps> = ({ isOpen, onClose }) => {
       />
       
       {/* Modal Container */}
-      <div className="relative w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300 flex flex-col max-h-[90vh]">
+      <div className="relative w-full max-w-2xl bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300 flex flex-col max-h-[90vh]">
         {/* Header */}
         <div className="bg-slate-900 p-6 flex items-center justify-between text-white shrink-0">
           <div className="flex items-center gap-3">
             <div className="bg-mitrafix-orange p-2 rounded-xl">
-              <Rocket className="w-5 h-5 text-white" />
+              <Rocket className="w-5 h-5 text-slate-900" />
             </div>
             <div>
               <p className="font-bold text-lg leading-tight">Smart Service Finder</p>
@@ -132,7 +132,7 @@ const ServiceFinder: React.FC<ServiceFinderProps> = ({ isOpen, onClose }) => {
 
         {/* Progress Bar */}
         {step <= totalSteps && (
-          <div className="h-1.5 w-full bg-slate-100 shrink-0">
+          <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 shrink-0">
             <div 
               className="h-full bg-mitrafix-orange transition-all duration-500" 
               style={{ width: `${(step / totalSteps) * 100}%` }}
@@ -144,10 +144,10 @@ const ServiceFinder: React.FC<ServiceFinderProps> = ({ isOpen, onClose }) => {
           {step <= totalSteps ? (
             <div className="animate-in slide-in-from-right-4 duration-300">
               <div className="flex items-center gap-4 mb-8">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-100 text-sky-600 font-bold text-sm">
+                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-sky-100 dark:bg-sky-500/20 text-sky-600 dark:text-sky-300 font-bold text-sm">
                   {step}
                 </span>
-                <h3 className="text-xl md:text-2xl font-extrabold text-slate-900">
+                <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white">
                   {questions[step - 1].text}
                 </h3>
               </div>
@@ -159,20 +159,20 @@ const ServiceFinder: React.FC<ServiceFinderProps> = ({ isOpen, onClose }) => {
                     onClick={() => handleSelect(questions[step - 1].id, option.value)}
                     className={`flex items-center gap-5 p-5 rounded-2xl border-2 text-left transition-all group ${
                       answers[questions[step - 1].id] === option.value 
-                        ? 'border-mitrafix-orange bg-sky-50 shadow-md shadow-sky-400/10' 
-                        : 'border-slate-100 bg-white hover:border-slate-200 hover:bg-slate-50'
+                        ? 'border-mitrafix-orange bg-sky-50 dark:bg-sky-500/10 shadow-md shadow-sky-400/10' 
+                        : 'border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-200 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/60'
                     }`}
                   >
                     <div className={`p-4 rounded-xl transition-colors ${
                       answers[questions[step - 1].id] === option.value 
-                        ? 'bg-mitrafix-orange text-white' 
-                        : 'bg-slate-100 text-slate-500 group-hover:bg-slate-200'
+                        ? 'bg-mitrafix-orange text-slate-900' 
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 group-hover:bg-slate-200'
                     }`}>
                       {option.icon}
                     </div>
                     <div>
-                      <p className="font-bold text-slate-900 mb-0.5">{option.label}</p>
-                      <p className="text-xs text-slate-500">{option.desc}</p>
+                      <p className="font-bold text-slate-900 dark:text-white mb-0.5">{option.label}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{option.desc}</p>
                     </div>
                     <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
                       <ChevronRight className="w-5 h-5 text-slate-300" />
@@ -199,16 +199,16 @@ const ServiceFinder: React.FC<ServiceFinderProps> = ({ isOpen, onClose }) => {
             <div className="animate-in zoom-in duration-500">
               <div className="text-center mb-8">
                 <div className="mb-4 flex justify-center">
-                  <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center animate-bounce">
+                  <div className="w-16 h-16 bg-green-100 dark:bg-green-500/20 text-green-600 rounded-full flex items-center justify-center animate-bounce">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                 </div>
-                <h3 className="text-2xl font-extrabold text-slate-900 mb-1">Solusi Ditemukan!</h3>
-                <p className="text-slate-500 text-sm">Hasil diagnosis sistem Mitrafix untuk kebutuhan Anda:</p>
+                <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white mb-1">Solusi Ditemukan!</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm">Hasil diagnosis sistem Mitrafix untuk kebutuhan Anda:</p>
               </div>
 
               {/* Enhanced Result Card */}
-              <div className="bg-white border-2 border-slate-100 rounded-[2rem] overflow-hidden shadow-xl shadow-slate-200/50 mb-8">
+              <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-black/40 mb-8">
                 <div className="h-40 relative">
                   <img 
                     src={optimizeImage(recommendation.image, 800)} 
@@ -223,34 +223,34 @@ const ServiceFinder: React.FC<ServiceFinderProps> = ({ isOpen, onClose }) => {
                 <div className="p-6 space-y-6">
                   {/* Problem Description */}
                   <div className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center text-red-500">
+                    <div className="shrink-0 w-10 h-10 bg-red-50 dark:bg-red-500/10 rounded-xl flex items-center justify-center text-red-500">
                       <AlertCircle className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Analisis Masalah</p>
-                      <p className="text-sm text-slate-600 italic leading-relaxed">"{recommendation.problem}"</p>
+                      <p className="text-sm text-slate-600 dark:text-slate-400 italic leading-relaxed">"{recommendation.problem}"</p>
                     </div>
                   </div>
 
                   {/* Solution Description */}
                   <div className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-sky-50 rounded-xl flex items-center justify-center text-mitrafix-orange">
+                    <div className="shrink-0 w-10 h-10 bg-sky-50 dark:bg-sky-500/10 rounded-xl flex items-center justify-center text-mitrafix-orange">
                       <Lightbulb className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Solusi Rekomendasi</p>
-                      <p className="text-sm text-slate-700 font-medium leading-relaxed">{recommendation.solution}</p>
+                      <p className="text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">{recommendation.solution}</p>
                     </div>
                   </div>
 
                   {/* Benefit Section */}
                   <div className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center text-green-600">
+                    <div className="shrink-0 w-10 h-10 bg-green-50 dark:bg-green-500/10 rounded-xl flex items-center justify-center text-green-600">
                       <TrendingUp className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Manfaat Utama</p>
-                      <p className="text-sm font-bold text-slate-900">{recommendation.benefit}</p>
+                      <p className="text-sm font-bold text-slate-900 dark:text-white">{recommendation.benefit}</p>
                     </div>
                   </div>
                 </div>
@@ -261,19 +261,19 @@ const ServiceFinder: React.FC<ServiceFinderProps> = ({ isOpen, onClose }) => {
                   href={`https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20sudah%20mencoba%20Finder%20Tool%20dan%20ingin%20konsultasi%20layanan%20*${encodeURIComponent(recommendation.title)}*.%0A%0AAnalisis%20Masalah:%20${encodeURIComponent(recommendation.problem)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-mitrafix-orange text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/30 hover:bg-sky-400 transition-all"
+                  className="flex items-center justify-center gap-2 bg-mitrafix-orange text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/30 hover:bg-sky-400 transition-all"
                 >
                   <MessageCircle className="w-5 h-5" /> Konsultasi Sekarang
                 </a>
                 <button 
                   onClick={resetQuiz}
-                  className="flex items-center justify-center gap-2 bg-slate-100 text-slate-600 px-8 py-4 rounded-2xl font-bold hover:bg-slate-200 transition-all"
+                  className="flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-8 py-4 rounded-2xl font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
                 >
                   Cek Kebutuhan Lain
                 </button>
               </div>
               
-              <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-center gap-4 opacity-50">
+              <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-center gap-4 opacity-50">
                 <div className="flex items-center gap-1.5 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   <Shield className="w-3 h-3" /> Bergaransi
                 </div>

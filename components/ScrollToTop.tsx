@@ -37,7 +37,7 @@ const ScrollToTop: React.FC = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-28 right-8 z-[55] w-12 h-12 flex items-center justify-center rounded-full bg-slate-900 text-white shadow-2xl transition-all duration-500 transform hover:bg-mitrafix-orange hover:scale-110 active:scale-95 ${
+      className={`fixed bottom-28 right-8 z-[55] w-12 h-12 flex items-center justify-center rounded-full bg-slate-900 text-white shadow-2xl transition-all duration-500 transform hover:bg-mitrafix-orange hover:text-slate-900 hover:scale-110 active:scale-95 ${
         isVisible 
           ? 'opacity-100 translate-y-0' 
           : 'opacity-0 translate-y-10 pointer-events-none'

@@ -52,12 +52,12 @@ const ChatBot: React.FC = () => {
   return (
     <div className="fixed bottom-6 right-6 z-[60]">
       {isChatOpen ? (
-        <div className="bg-white w-[350px] sm:w-[400px] h-[550px] rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden border border-slate-100 animate-in slide-in-from-bottom-10 duration-500">
+        <div className="bg-white dark:bg-slate-900 w-[350px] sm:w-[400px] h-[550px] rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden border border-slate-100 dark:border-slate-800 animate-in slide-in-from-bottom-10 duration-500">
           {/* Header */}
           <div className="bg-slate-900 p-5 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
               <div className="bg-mitrafix-orange p-2 rounded-xl shadow-lg shadow-sky-400/20">
-                <Rocket className="w-5 h-5 text-white" />
+                <Rocket className="w-5 h-5 text-slate-900" />
               </div>
               <div>
                 <p className="text-white font-bold text-sm">MitraAI Assistant</p>
@@ -76,13 +76,13 @@ const ChatBot: React.FC = () => {
           </div>
 
           {/* Messages Area */}
-          <div ref={scrollRef} className="flex-1 p-6 overflow-y-auto bg-slate-50 space-y-5 custom-scrollbar">
+          <div ref={scrollRef} className="flex-1 p-6 overflow-y-auto bg-slate-50 dark:bg-slate-950 space-y-5 custom-scrollbar">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
                 <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${
                   msg.role === 'user' 
-                    ? 'bg-mitrafix-orange text-white rounded-tr-none shadow-md shadow-sky-400/10 font-medium' 
-                    : 'bg-white text-slate-700 shadow-sm border border-slate-100 rounded-tl-none'
+                    ? 'bg-mitrafix-orange text-slate-900 rounded-tr-none shadow-md shadow-sky-400/10 font-medium' 
+                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 shadow-sm border border-slate-100 dark:border-slate-800 rounded-tl-none'
                 }`}>
                   {msg.text}
                 </div>
@@ -90,18 +90,18 @@ const ChatBot: React.FC = () => {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 rounded-tl-none flex gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce" />
-                  <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:0.2s]" />
-                  <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:0.4s]" />
+                <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 rounded-tl-none flex gap-1.5">
+                  <div className="w-1.5 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full animate-bounce" />
+                  <div className="w-1.5 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full animate-bounce [animation-delay:0.2s]" />
+                  <div className="w-1.5 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full animate-bounce [animation-delay:0.4s]" />
                 </div>
               </div>
             )}
           </div>
 
           {/* Input Area */}
-          <div className="p-5 bg-white border-t border-slate-100 shrink-0">
-            <div className="flex gap-2 bg-slate-50 p-1.5 rounded-2xl border border-slate-100 focus-within:border-mitrafix-orange focus-within:ring-2 focus-within:ring-sky-100 transition-all">
+          <div className="p-5 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 shrink-0">
+            <div className="flex gap-2 bg-slate-50 dark:bg-slate-950 p-1.5 rounded-2xl border border-slate-100 dark:border-slate-800 focus-within:border-mitrafix-orange focus-within:ring-2 focus-within:ring-sky-100 transition-all">
               <input 
                 type="text" 
                 value={input}
@@ -113,7 +113,7 @@ const ChatBot: React.FC = () => {
               <button 
                 onClick={() => handleSend()}
                 disabled={isLoading || !input.trim()}
-                className="bg-mitrafix-orange text-white p-3 rounded-xl hover:bg-sky-400 transition-all disabled:opacity-50 disabled:grayscale shadow-lg shadow-sky-400/20"
+                className="bg-mitrafix-orange text-slate-900 p-3 rounded-xl hover:bg-sky-400 transition-all disabled:opacity-50 disabled:grayscale shadow-lg shadow-sky-400/20"
               >
                 <Send className="w-5 h-5" />
               </button>
@@ -126,9 +126,9 @@ const ChatBot: React.FC = () => {
       ) : (
         <button 
           onClick={() => setIsChatOpen(true)}
-          className="bg-mitrafix-orange text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl shadow-sky-400/40 hover:scale-110 active:scale-95 transition-all group relative"
+          className="bg-mitrafix-orange text-slate-900 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl shadow-sky-400/40 hover:scale-110 active:scale-95 transition-all group relative"
         >
-          <div className="absolute -top-14 right-0 bg-white text-slate-900 text-[10px] font-black px-4 py-2 rounded-2xl shadow-xl border border-slate-100 whitespace-nowrap opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
+          <div className="absolute -top-14 right-0 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-[10px] font-black px-4 py-2 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 whitespace-nowrap opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
             Butuh Bantuan Cepat?
           </div>
           <MessageSquare className="w-8 h-8" />

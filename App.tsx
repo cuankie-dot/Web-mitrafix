@@ -14,6 +14,7 @@ import ChatBot from './components/ChatBot';
 import ScrollToTop from './components/ScrollToTop';
 import LeadDashboard from './components/LeadDashboard';
 import { DataProvider } from './context/DataContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
   const [clickCount, setClickCount] = useState(0);
@@ -68,7 +69,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
                   href={social.url} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-mitrafix-orange hover:text-white transition-all text-slate-400"
+                  className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-mitrafix-orange hover:text-slate-900 transition-all text-slate-400"
                   aria-label={`Ikuti Mitrafix di ${social.name}`}
                 >
                   {social.icon}
@@ -106,7 +107,7 @@ const Footer: React.FC<{ onShowLeads: () => void }> = ({ onShowLeads }) => {
               <li className="flex justify-between"><span>Senin - Jumat:</span> <span className="text-white">08:00 - 17:00</span></li>
               <li className="flex justify-between"><span>Sabtu:</span> <span className="text-white">08:00 - 15:00</span></li>
               <li className="flex justify-between"><span>Minggu:</span> <span className="text-white">Tutup</span></li>
-              <li className="mt-4 text-xs text-slate-500 italic">*Layanan Emergency tersedia untuk klien kontrak.</li>
+              <li className="mt-4 text-xs text-slate-500 dark:text-slate-400 italic">*Layanan Emergency tersedia untuk klien kontrak.</li>
             </ul>
           </div>
         </div>
@@ -162,9 +163,11 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <DataProvider>
-      <AppContent />
-    </DataProvider>
+    <ThemeProvider>
+      <DataProvider>
+        <AppContent />
+      </DataProvider>
+    </ThemeProvider>
   );
 };
 

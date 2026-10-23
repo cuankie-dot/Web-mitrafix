@@ -51,9 +51,29 @@
     <link rel="apple-touch-icon" href="https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/fav_ico/apple-touch-icon.png">
     <link rel="manifest" href="/metadata.json">
     <meta name="theme-color" content="#ffffff">
+    <meta name="color-scheme" content="light dark">
 
     <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Aktifkan dark mode berbasis class (html.dark)
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
+    <script>
+        // Terapkan tema tersimpan sebelum render pertama agar tidak "flash" putih
+        (function () {
+            try {
+                var stored = localStorage.getItem('mitrafix-theme');
+                var theme = (stored === 'light' || stored === 'dark')
+                    ? stored
+                    : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                if (theme === 'dark') document.documentElement.classList.add('dark');
+                document.documentElement.style.colorScheme = theme;
+            } catch (e) { /* ignore */ }
+        })();
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
@@ -61,8 +81,18 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .bg-baby-blue { background-color: #E0F2FE; }
         .text-mitrafix-orange { color: #8FD9FB; }
+        /* Di light mode, aksen biru muda tidak terbaca di atas background terang */
+        html:not(.dark) .text-mitrafix-orange { color: #0284c7; }
         .bg-mitrafix-orange { background-color: #8FD9FB; }
-        .hover-mitrafix-orange:hover { background-color: #38bdf8; } 
+        .hover-mitrafix-orange:hover { background-color: #38bdf8; }
+
+        /* Penyesuaian elemen dekoratif saat dark mode */
+        html.dark .bg-baby-blue { background-color: rgba(56, 189, 248, 0.12); }
+        html.dark ::selection { background-color: #38bdf8; color: #0f172a; }
+        html.dark ::-webkit-scrollbar { width: 10px; height: 10px; }
+        html.dark ::-webkit-scrollbar-track { background: #0f172a; }
+        html.dark ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
+        html.dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
     </style>
 
     <!-- Rich Snippet Schema.org (Agar muncul Bintang & Peta di Google) -->
@@ -221,7 +251,7 @@
 }
 </script>
 </head>
-<body class="bg-gray-50 text-slate-900 overflow-x-hidden">
+<body class="bg-gray-50 text-slate-900 overflow-x-hidden dark:bg-slate-950 dark:text-slate-100">
     <div id="root"></div>
     <noscript>
       <div style="padding: 2rem; max-width: 800px; margin: 0 auto; font-family: sans-serif;">

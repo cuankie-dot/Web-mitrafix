@@ -33,19 +33,19 @@ const WhyUs: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="flex-1">
             <h2 className="text-mitrafix-orange font-bold tracking-widest uppercase text-sm mb-3">Mengapa Mitrafix?</h2>
-            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">
+            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
               Lebih Dari Sekadar Vendor IT, Kami Adalah <span className="text-mitrafix-orange">Growth Partner</span> Anda.
             </h3>
-            <p className="text-slate-600 mb-8">
+            <p className="text-slate-600 dark:text-slate-400 mb-8">
               Kami memahami bahwa IT bukan hanya soal perangkat keras, tapi soal bagaimana teknologi membantu bisnis Anda berjalan lebih lancar dan menguntungkan.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {highlights.map((item, idx) => (
-                <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                <div key={idx} className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
                   <div className="text-mitrafix-orange mb-4">{item.icon}</div>
-                  <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
-                  <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
+                  <h4 className="font-bold text-slate-900 dark:text-white mb-2">{item.title}</h4>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -61,7 +61,7 @@ const WhyUs: React.FC = () => {
                   loading="lazy" 
                 />
               </div>
-              <div className="bg-mitrafix-orange p-8 rounded-2xl text-white text-center">
+              <div className="bg-mitrafix-orange p-8 rounded-2xl text-slate-900 text-center">
                 <p className="text-4xl font-extrabold mb-1">500+</p>
                 <p className="text-sm font-medium opacity-80 uppercase tracking-widest">Klien Puas</p>
               </div>

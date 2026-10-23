@@ -6,7 +6,7 @@ const About: React.FC = () => {
   // Logic partner dipindahkan ke Hero
   
   return (
-    <section id="about" className="py-24 bg-white relative overflow-hidden">
+    <section id="about" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-12">
@@ -37,42 +37,42 @@ const About: React.FC = () => {
 
           <div className="order-1 lg:order-2">
             <h2 className="text-mitrafix-orange font-bold tracking-widest uppercase text-sm mb-3">Tentang Mitrafix</h2>
-            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">
+            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-6">
               Partner IT Terpercaya Sejak 2014 di Jakarta 
             </h3>
-            <p className="text-slate-600 mb-8 leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
               Mitrafix lahir dari visi untuk menyederhanakan kompleksitas teknologi bagi pelaku bisnis dan individu. Kami percaya bahwa setiap masalah IT memiliki solusi yang efisien jika ditangani oleh ahlinya. 
-              Sebagai penyedia layanan IT <span className="font-bold text-slate-900">One-Stop Solution</span>, kami mengintegrasikan pengadaan barang, instalasi CCTV, perbaikan printer, hingga perawatan jaringan WiFi secara profesional.
+              Sebagai penyedia layanan IT <span className="font-bold text-slate-900 dark:text-white">One-Stop Solution</span>, kami mengintegrasikan pengadaan barang, instalasi CCTV, perbaikan printer, hingga perawatan jaringan WiFi secara profesional.
             </p>
 
             <div className="space-y-6">
               <div className="flex gap-4">
-                <div className="bg-sky-100 p-3 rounded-2xl text-mitrafix-orange h-fit">
+                <div className="bg-sky-100 dark:bg-sky-500/20 p-3 rounded-2xl text-mitrafix-orange h-fit">
                   <Target className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 mb-1">Visi Kami</h4>
-                  <p className="text-sm text-slate-500">Menjadi pusat solusi IT nomor satu di Jakarta yang mengutamakan kepuasan pelanggan melalui teknologi tepat guna.</p>
+                  <h4 className="font-bold text-slate-900 dark:text-white mb-1">Visi Kami</h4>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Menjadi pusat solusi IT nomor satu di Jakarta yang mengutamakan kepuasan pelanggan melalui teknologi tepat guna.</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="bg-blue-100 p-3 rounded-2xl text-blue-600 h-fit">
+                <div className="bg-blue-100 dark:bg-blue-500/20 p-3 rounded-2xl text-blue-600 h-fit">
                   <Eye className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 mb-1">Misi Kami</h4>
-                  <p className="text-sm text-slate-500">Memberikan layanan IT profesional, responsif, dan bergaransi demi kenyamanan operasional bisnis klien kami.</p>
+                  <h4 className="font-bold text-slate-900 dark:text-white mb-1">Misi Kami</h4>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Memberikan layanan IT profesional, responsif, dan bergaransi demi kenyamanan operasional bisnis klien kami.</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="bg-green-100 p-3 rounded-2xl text-green-600 h-fit">
+                <div className="bg-green-100 dark:bg-green-500/20 p-3 rounded-2xl text-green-600 h-fit">
                   <Shield className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900 mb-1">Keunggulan Lokal</h4>
-                  <p className="text-sm text-slate-500">Kombinasi antara teknisi panggilan yang cepat sampai lokasi dan kualitas hardware orisinal dengan harga kompetitif.</p>
+                  <h4 className="font-bold text-slate-900 dark:text-white mb-1">Keunggulan Lokal</h4>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Kombinasi antara teknisi panggilan yang cepat sampai lokasi dan kualitas hardware orisinal dengan harga kompetitif.</p>
                 </div>
               </div>
             </div>

@@ -8,18 +8,18 @@ const Testimonials: React.FC = () => {
   const { testimonials, isLoading } = useData();
 
   if (isLoading) {
-     return <section className="py-24 bg-white text-center">Loading testimonials...</section>;
+     return <section className="py-24 bg-white dark:bg-slate-950 text-center">Loading testimonials...</section>;
   }
 
   return (
-    <section id="testimonials" className="py-24 bg-white">
+    <section id="testimonials" className="py-24 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-mitrafix-orange font-bold tracking-widest uppercase text-sm mb-3">Testimonial Klien</h2>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
             Apa Kata Mereka Tentang <span className="text-mitrafix-orange">Layanan Mitrafix</span>
           </h3>
-          <p className="text-slate-600 max-w-2xl mx-auto">
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Kepercayaan klien adalah prioritas utama kami. Berikut adalah pengalaman nyata dari mereka yang telah bermitra dengan Mitrafix.
           </p>
         </div>
@@ -28,7 +28,7 @@ const Testimonials: React.FC = () => {
           {testimonials.map((testimonial) => (
             <div 
               key={testimonial.id}
-              className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 relative group"
+              className="bg-slate-50 dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-black/40 transition-all duration-300 relative group"
             >
               <Quote className="absolute top-6 right-8 w-12 h-12 text-slate-200 group-hover:text-sky-100 transition-colors" />
               
@@ -38,7 +38,7 @@ const Testimonials: React.FC = () => {
                 ))}
               </div>
 
-              <p className="text-slate-700 leading-relaxed mb-8 relative z-10 italic">
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-8 relative z-10 italic">
                 "{testimonial.quote}"
               </p>
 
@@ -50,8 +50,8 @@ const Testimonials: React.FC = () => {
                   loading="lazy"
                 />
                 <div>
-                  <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
-                  <p className="text-xs text-slate-500 font-medium">{testimonial.role}, {testimonial.company}</p>
+                  <h4 className="font-bold text-slate-900 dark:text-white">{testimonial.name}</h4>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{testimonial.role}, {testimonial.company}</p>
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@ const Testimonials: React.FC = () => {
         </div>
         
         <div className="mt-16 flex justify-center">
-            <div className="inline-flex items-center gap-2 bg-baby-blue/50 px-6 py-3 rounded-full text-slate-700 font-semibold text-sm">
+            <div className="inline-flex items-center gap-2 bg-baby-blue/50 px-6 py-3 rounded-full text-slate-700 dark:text-slate-300 font-semibold text-sm">
                 <Star className="w-4 h-4 text-sky-500 fill-sky-500" />
                 <span>Rata-rata rating 4.9/5 dari ratusan proyek IT</span>
             </div>

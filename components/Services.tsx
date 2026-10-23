@@ -29,18 +29,18 @@ const Services: React.FC = () => {
   };
 
   if (isLoading) {
-    return <section className="py-24 bg-white text-center">Loading services...</section>;
+    return <section className="py-24 bg-white dark:bg-slate-950 text-center">Loading services...</section>;
   }
 
   return (
-    <section id="services" className="py-24 bg-white">
+    <section id="services" className="py-24 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-mitrafix-orange font-bold tracking-widest uppercase text-sm mb-3">Layanan Kami</h2>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
             Solusi Tepat Guna untuk Setiap <br className="hidden md:block" /> Tantangan IT Anda
           </h3>
-          <p className="text-slate-600 max-w-2xl mx-auto">
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Kami tidak hanya menjual produk, kami memberikan solusi yang mendukung efisiensi operasional dan keamanan bisnis Anda. Klik layanan untuk detail lengkap.
           </p>
         </div>
@@ -53,7 +53,7 @@ const Services: React.FC = () => {
               <div 
                 key={service.id} 
                 onClick={() => setSelectedService(service)}
-                className="group cursor-pointer rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:border-mitrafix-orange/30 hover:bg-white hover:shadow-[0_30px_60px_-15px_rgba(143,217,251,0.25)] hover:-translate-y-3 hover:scale-[1.03] transition-all duration-500 ease-out flex flex-col h-full overflow-hidden"
+                className="group cursor-pointer rounded-[2.5rem] bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-mitrafix-orange/30 hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_30px_60px_-15px_rgba(143,217,251,0.25)] hover:-translate-y-3 hover:scale-[1.03] transition-all duration-500 ease-out flex flex-col h-full overflow-hidden"
               >
                 {/* Image Header */}
                 <div className="h-48 overflow-hidden relative">
@@ -69,7 +69,7 @@ const Services: React.FC = () => {
                   {/* Quick AI Trigger Icon on Image */}
                   <button 
                     onClick={(e) => handleAskAI(e, service.title)}
-                    className="absolute top-4 right-4 bg-white/90 backdrop-blur-md p-2.5 rounded-xl text-mitrafix-orange shadow-lg hover:bg-mitrafix-orange hover:text-white transition-all transform hover:scale-110 active:scale-90 z-20"
+                    className="absolute top-4 right-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-2.5 rounded-xl text-mitrafix-orange shadow-lg hover:bg-mitrafix-orange hover:text-slate-900 transition-all transform hover:scale-110 active:scale-90 z-20"
                     title="Tanya AI tentang layanan ini"
                   >
                     <Sparkles className="w-5 h-5" />
@@ -79,7 +79,7 @@ const Services: React.FC = () => {
                 {/* Content Container */}
                 <div className="p-8 flex flex-col flex-grow relative">
                   {/* Floating Icon */}
-                  <div className="absolute -top-10 left-8 bg-white w-20 h-20 rounded-[1.5rem] flex items-center justify-center text-mitrafix-orange shadow-xl border border-slate-50 group-hover:bg-mitrafix-orange group-hover:text-white group-hover:rotate-6 transition-all duration-500">
+                  <div className="absolute -top-10 left-8 bg-white dark:bg-slate-900 w-20 h-20 rounded-[1.5rem] flex items-center justify-center text-mitrafix-orange shadow-xl border border-slate-50 dark:border-slate-800 group-hover:bg-mitrafix-orange group-hover:text-slate-900 group-hover:rotate-6 transition-all duration-500">
                     {React.isValidElement(IconComponent) 
                       ? React.cloneElement(IconComponent as React.ReactElement<any>, { className: 'w-10 h-10' })
                       : <Zap className="w-10 h-10" />
@@ -87,18 +87,18 @@ const Services: React.FC = () => {
                   </div>
                   
                   <div className="mt-8 mb-4">
-                    <h4 className="text-xl font-bold text-slate-900 group-hover:text-mitrafix-orange transition-colors duration-300">
+                    <h4 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-mitrafix-orange transition-colors duration-300">
                       {service.title}
                     </h4>
                   </div>
                   
                   <div className="space-y-4 mb-8 flex-grow">
-                    <p className="text-sm text-slate-500 line-clamp-3 leading-relaxed">
+                    <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed">
                       {service.solution}
                     </p>
                   </div>
 
-                  <div className="pt-6 border-t border-slate-200">
+                  <div className="pt-6 border-t border-slate-200 dark:border-slate-800">
                     <div className="flex items-center justify-between">
                        <button 
                         onClick={(e) => handleAskAI(e, service.title)}
@@ -128,7 +128,7 @@ const Services: React.FC = () => {
             <a 
               href="#contact"
               onClick={scrollToContact}
-              className="bg-white text-slate-900 px-10 py-4 rounded-full font-bold shadow-lg hover:bg-mitrafix-orange hover:text-white hover:scale-105 transition-all duration-300 whitespace-nowrap cursor-pointer"
+              className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-mitrafix-orange hover:text-slate-900 hover:scale-105 transition-all duration-300 whitespace-nowrap cursor-pointer"
             >
               Hubungi Tim Enterprise
             </a>
@@ -143,13 +143,13 @@ const Services: React.FC = () => {
             className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" 
             onClick={() => setSelectedService(null)}
           />
-          <div className="relative w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300 flex flex-col max-h-[90vh]">
+          <div className="relative w-full max-w-2xl bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300 flex flex-col max-h-[90vh]">
             <div className="bg-slate-900 p-6 flex items-center justify-between text-white shrink-0">
               <div className="flex items-center gap-3">
                 <div className="bg-mitrafix-orange p-2 rounded-xl">
                   {React.isValidElement(SERVICE_ICONS[selectedService.icon]) 
-                    ? React.cloneElement(SERVICE_ICONS[selectedService.icon] as React.ReactElement<any>, { className: 'w-5 h-5 text-white' })
-                    : <Zap className="w-5 h-5 text-white" />
+                    ? React.cloneElement(SERVICE_ICONS[selectedService.icon] as React.ReactElement<any>, { className: 'w-5 h-5 text-slate-900' })
+                    : <Zap className="w-5 h-5 text-slate-900" />
                   }
                 </div>
                 <div>
@@ -166,7 +166,7 @@ const Services: React.FC = () => {
             </div>
 
             <div className="p-8 overflow-y-auto">
-              <div className="bg-white border-2 border-slate-100 rounded-[2rem] overflow-hidden shadow-xl shadow-slate-200/50 mb-8">
+              <div className="bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-[2rem] overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-black/40 mb-8">
                 <div className="h-48 relative">
                   <img 
                     src={optimizeImage(selectedService.image, 800)} 
@@ -178,7 +178,7 @@ const Services: React.FC = () => {
                   </div>
                   <button 
                     onClick={(e) => handleAskAI(e, selectedService.title)}
-                    className="absolute top-6 right-6 bg-white p-3 rounded-2xl text-mitrafix-orange shadow-2xl hover:scale-110 transition-transform"
+                    className="absolute top-6 right-6 bg-white dark:bg-slate-900 p-3 rounded-2xl text-mitrafix-orange shadow-2xl hover:scale-110 transition-transform"
                     title="Tanya AI tentang layanan ini"
                   >
                     <Sparkles className="w-6 h-6" />
@@ -187,32 +187,32 @@ const Services: React.FC = () => {
                 
                 <div className="p-6 space-y-6">
                   <div className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center text-red-500">
+                    <div className="shrink-0 w-10 h-10 bg-red-50 dark:bg-red-500/10 rounded-xl flex items-center justify-center text-red-500">
                       <AlertCircle className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Masalah Umum</p>
-                      <p className="text-sm text-slate-600 italic leading-relaxed">"{selectedService.problem}"</p>
+                      <p className="text-sm text-slate-600 dark:text-slate-400 italic leading-relaxed">"{selectedService.problem}"</p>
                     </div>
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-sky-50 rounded-xl flex items-center justify-center text-mitrafix-orange">
+                    <div className="shrink-0 w-10 h-10 bg-sky-50 dark:bg-sky-500/10 rounded-xl flex items-center justify-center text-mitrafix-orange">
                       <Lightbulb className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Solusi Mitrafix</p>
-                      <p className="text-sm text-slate-700 font-medium leading-relaxed">{selectedService.solution}</p>
+                      <p className="text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">{selectedService.solution}</p>
                     </div>
                   </div>
 
                   <div className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center text-green-600">
+                    <div className="shrink-0 w-10 h-10 bg-green-50 dark:bg-green-500/10 rounded-xl flex items-center justify-center text-green-600">
                       <TrendingUp className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Manfaat Bagi Anda</p>
-                      <p className="text-sm font-bold text-slate-900">{selectedService.benefit}</p>
+                      <p className="text-sm font-bold text-slate-900 dark:text-white">{selectedService.benefit}</p>
                     </div>
                   </div>
                 </div>
@@ -223,19 +223,19 @@ const Services: React.FC = () => {
                   href={`https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20tertarik%20ingin%20tanya%20lebih%20lanjut%20layanan%20*${encodeURIComponent(selectedService.title)}*.%0A%0AMasalah%20saya:%20${encodeURIComponent(selectedService.problem)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-mitrafix-orange text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/30 hover:bg-sky-400 transition-all"
+                  className="flex items-center justify-center gap-2 bg-mitrafix-orange text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/30 hover:bg-sky-400 transition-all"
                 >
                   <MessageCircle className="w-5 h-5" /> Minta Penawaran Sekarang
                 </a>
                 <button 
                   onClick={() => setSelectedService(null)}
-                  className="flex items-center justify-center gap-2 bg-slate-100 text-slate-600 px-8 py-4 rounded-2xl font-bold hover:bg-slate-200 transition-all"
+                  className="flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-8 py-4 rounded-2xl font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
                 >
                   Tutup
                 </button>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-center gap-6 opacity-40">
+              <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-center gap-6 opacity-40">
                 <div className="flex items-center gap-1.5 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   <Shield className="w-3.5 h-3.5" /> Bergaransi
                 </div>

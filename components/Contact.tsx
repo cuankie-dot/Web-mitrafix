@@ -104,12 +104,12 @@ Mohon dicek dan dibantu proses penawarannya. Terima kasih.`;
   const inputClasses = "w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-800 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-mitrafix-orange focus:border-transparent transition-all";
 
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section id="contact" className="py-24 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-mitrafix-orange font-bold tracking-widest uppercase text-sm mb-3">Kontak Kami</h2>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Konsultasikan Kebutuhan IT Anda Sekarang</h3>
-          <p className="text-slate-600">Tim kami siap memberikan solusi IT terbaik yang sesuai dengan anggaran dan kebutuhan bisnis Anda.</p>
+          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Konsultasikan Kebutuhan IT Anda Sekarang</h3>
+          <p className="text-slate-600 dark:text-slate-400">Tim kami siap memberikan solusi IT terbaik yang sesuai dengan anggaran dan kebutuhan bisnis Anda.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
@@ -149,7 +149,7 @@ Mohon dicek dan dibantu proses penawarannya. Terima kasih.`;
               </div>
             </div>
             <div className="mt-12 pt-8 border-t border-slate-800">
-              <a href="https://wa.me/6281999370857" target="_blank" className="inline-flex items-center gap-3 bg-mitrafix-orange text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/20 hover:scale-105 transition-all">
+              <a href="https://wa.me/6281999370857" target="_blank" className="inline-flex items-center gap-3 bg-mitrafix-orange text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/20 hover:scale-105 transition-all">
                 <MessageSquare className="w-5 h-5" /> Chat via WhatsApp
               </a>
             </div>
@@ -216,7 +216,7 @@ Mohon dicek dan dibantu proses penawarannya. Terima kasih.`;
               </select>
               <textarea value={formData.details} onChange={(e) => setFormData({...formData, details: e.target.value})} placeholder="Detail kebutuhan Anda..." rows={3} className={inputClasses} />
               
-              <button disabled={isSyncing} type="submit" className="w-full bg-mitrafix-orange text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-sky-400 transition-all disabled:opacity-50">
+              <button disabled={isSyncing} type="submit" className="w-full bg-mitrafix-orange text-slate-900 py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-sky-400 transition-all disabled:opacity-50">
                 {isSyncing ? 'Mengirim Data...' : 'Kirim & Chat WhatsApp'} <Send className="w-4 h-4" />
               </button>
             </form>
@@ -225,7 +225,7 @@ Mohon dicek dan dibantu proses penawarannya. Terima kasih.`;
 
         {/* Google Maps */}
         <div className="mt-10">
-          <div className="w-full h-[350px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100">
+          <div className="w-full h-[350px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 dark:border-slate-800">
             <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3965.719601198428!2d106.80201804476303!3d-6.350045192932447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMjEnMDAuMiJTIDEwNsKwNDgnMDcuMyJF!5e0!3m2!1sid!2sid!4v1715600000000!5m2!1sid!2sid" width="100%" height="100%" style={{ border: 0 }} allowFullScreen={true} loading="lazy" title="Lokasi Kantor"></iframe>
           </div>
         </div>

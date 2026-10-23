@@ -44,18 +44,18 @@ const Hero: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 flex flex-col items-center gap-12 lg:flex-row">
           <div className="flex-1 text-center lg:text-left">
-            <div className="mb-6 inline-flex items-center space-x-2 rounded-full bg-sky-100 px-4 py-1.5 text-sm font-bold text-sky-600">
+            <div className="mb-6 inline-flex items-center space-x-2 rounded-full bg-sky-100 dark:bg-sky-500/20 px-4 py-1.5 text-sm font-bold text-sky-600 dark:text-sky-300">
               <Zap className="h-4 w-4" />
               <span>Partner IT Terpercaya</span>
             </div>
             
-            <h1 className="mb-6 text-4xl font-extrabold leading-tight text-slate-900 md:text-6xl">
+            <h1 className="mb-6 text-4xl font-extrabold leading-tight text-slate-900 dark:text-white md:text-6xl">
               Jasa IT & <span className="text-mitrafix-orange">Service Printer Jakarta</span> Bergaransi
             </h1>
             
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-600 lg:mx-0">
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-600 dark:text-slate-400 lg:mx-0">
               Mitrafix hadir sebagai solusi IT satu pintu (One-Stop Solution) untuk kebutuhan printer, CCTV, jaringan, dan maintenance kantor di wilayah Jagakarsa dan sekitarnya.
-              <span className="font-semibold text-slate-900 block mt-2"> Cepat, Profesional, dan Berorientasi Hasil.</span>
+              <span className="font-semibold text-slate-900 dark:text-white block mt-2"> Cepat, Profesional, dan Berorientasi Hasil.</span>
             </p>
             
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
@@ -71,7 +71,7 @@ const Hero: React.FC = () => {
               </a>
               <button 
                 onClick={() => setIsFinderOpen(true)}
-                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-mitrafix-orange px-8 py-4 text-lg font-bold text-white shadow-xl shadow-sky-400/30 transition-all hover:bg-sky-400 sm:w-auto"
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-mitrafix-orange px-8 py-4 text-lg font-bold text-slate-900 shadow-xl shadow-sky-400/30 transition-all hover:bg-sky-400 sm:w-auto"
               >
                 <Search className="h-5 w-5" />
                 Cari Solusi IT Tepat
@@ -91,7 +91,7 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="relative flex-1">
-            <div className="relative z-10 transform overflow-hidden rounded-2xl shadow-2xl shadow-slate-200 transition-transform duration-500 hover:rotate-0 lg:rotate-2">
+            <div className="relative z-10 transform overflow-hidden rounded-2xl shadow-2xl shadow-slate-200 dark:shadow-black/40 transition-transform duration-500 hover:rotate-0 lg:rotate-2">
               <img 
                 src={optimizeImage("https://715udgq2n1apqtj8.public.blob.vercel-storage.com/image/it%20solution.jpeg", 1200)} 
                 alt="Jasa IT Solution Terlengkap di Jakarta" 
@@ -106,12 +106,12 @@ const Hero: React.FC = () => {
               </div>
             </div>
             {/* Float Cards */}
-            <div className="absolute -bottom-6 -left-6 z-20 flex animate-bounce items-center gap-3 rounded-xl bg-white p-4 shadow-xl">
-              <div className="rounded-full bg-green-100 p-2 text-green-600">
+            <div className="absolute -bottom-6 -left-6 z-20 flex animate-bounce items-center gap-3 rounded-xl bg-white dark:bg-slate-900 p-4 shadow-xl">
+              <div className="rounded-full bg-green-100 dark:bg-green-500/20 p-2 text-green-600">
                 <Zap className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs text-slate-500">Uptime Support</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Uptime Support</p>
                 <p className="text-sm font-bold">24/7 Monitoring</p>
               </div>
             </div>
@@ -125,7 +125,7 @@ const Hero: React.FC = () => {
               key={service.id}
               href="#services"
               onClick={scrollToServices}
-              className="group rounded-2xl border border-white bg-white/80 p-5 backdrop-blur-md transition-all hover:border-mitrafix-orange hover:shadow-lg hover:shadow-sky-400/20 cursor-pointer"
+              className="group rounded-2xl border border-white dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-5 backdrop-blur-md transition-all hover:border-mitrafix-orange hover:shadow-lg hover:shadow-sky-400/20 cursor-pointer"
               title={`Layanan ${service.title}`}
             >
               <div className="mb-3 text-mitrafix-orange transition-transform duration-300 group-hover:scale-110">
@@ -133,7 +133,7 @@ const Hero: React.FC = () => {
                       React.cloneElement(SERVICE_ICONS[service.icon] as React.ReactElement<any>, { className: 'w-6 h-6' })
                    ) : null}
               </div>
-              <h4 className="text-sm font-bold leading-tight text-slate-800">
+              <h4 className="text-sm font-bold leading-tight text-slate-800 dark:text-slate-100">
                 {service.title}
               </h4>
             </a>
@@ -141,7 +141,7 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Partners Marquee Section */}
-        <div className="border-t border-slate-200/60 pt-8">
+        <div className="border-t border-slate-200/60 dark:border-slate-800/60 pt-8">
           <p className="text-center text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest">
             Sparepart Original & Authorized Partner
           </p>

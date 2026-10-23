@@ -1,12 +1,39 @@
-
 import { GoogleGenAI } from "@google/genai";
 
-// Initialize the GoogleGenAI client with the API key from environment variables.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Read the API key lazily so a missing key never crashes the app at import time.
+const getApiKey = (): string | undefined => {
+  const fromEnv = (import.meta as any)?.env?.VITE_GEMINI_API_KEY;
+  if (typeof fromEnv === 'string' && fromEnv.trim()) return fromEnv.trim();
+
+  // Fallback for environments where the key is injected at build time.
+  if (typeof process !== 'undefined' && (process as any)?.env?.API_KEY) {
+    return String((process as any).env.API_KEY).trim();
+  }
+
+  return undefined;
+};
+
+let ai: GoogleGenAI | null = null;
+
+const getClient = (): GoogleGenAI | null => {
+  const apiKey = getApiKey();
+  if (!apiKey) return null;
+  if (!ai) ai = new GoogleGenAI({ apiKey });
+  return ai;
+};
+
+const OFFLINE_MESSAGE =
+  "Layanan AI sedang tidak tersedia saat ini. Silakan hubungi tim kami via WhatsApp untuk konsultasi langsung.";
 
 export const getAIResponse = async (userPrompt: string) => {
+  const client = getClient();
+  if (!client) {
+    console.warn('[MitraAI] VITE_GEMINI_API_KEY belum diset — chatbot berjalan dalam mode offline.');
+    return OFFLINE_MESSAGE;
+  }
+
   try {
-    const response = await ai.models.generateContent({
+    const response = await client.models.generateContent({
       model: 'gemini-3-flash-preview',
       contents: userPrompt,
       config: {

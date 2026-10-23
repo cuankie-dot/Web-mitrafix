@@ -34,14 +34,14 @@ const FAQ: React.FC = () => {
   ];
 
   return (
-    <section id="faq" className="py-24 bg-slate-50">
+    <section id="faq" className="py-24 bg-slate-50 dark:bg-slate-950">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-mitrafix-orange font-bold tracking-widest uppercase text-sm mb-3">Tanya Jawab (FAQ)</h2>
-          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
             Punya Pertanyaan? Kami Punya <span className="text-mitrafix-orange">Jawabannya</span>
           </h3>
-          <p className="text-slate-600">
+          <p className="text-slate-600 dark:text-slate-400">
             Berikut adalah hal-hal yang paling sering ditanyakan oleh klien kami. Jika ada hal lain, tim kami siap membantu.
           </p>
         </div>
@@ -52,8 +52,8 @@ const FAQ: React.FC = () => {
               key={index}
               className={`group rounded-3xl border transition-all duration-300 overflow-hidden ${
                 openIndex === index 
-                  ? 'bg-white border-mitrafix-orange shadow-xl shadow-sky-400/10' 
-                  : 'bg-white border-slate-100 hover:border-slate-200'
+                  ? 'bg-white dark:bg-slate-900 border-mitrafix-orange shadow-xl shadow-sky-400/10' 
+                  : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 hover:border-slate-200 dark:hover:border-slate-700'
               }`}
             >
               <button
@@ -62,12 +62,12 @@ const FAQ: React.FC = () => {
               >
                 <div className="flex items-center gap-4">
                   <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                    openIndex === index ? 'bg-mitrafix-orange text-white' : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200'
+                    openIndex === index ? 'bg-mitrafix-orange text-slate-900' : 'bg-slate-100 dark:bg-slate-800 text-slate-400 group-hover:bg-slate-200'
                   }`}>
                     <HelpCircle className="w-5 h-5" />
                   </div>
                   <span className={`font-bold text-lg md:text-xl transition-colors ${
-                    openIndex === index ? 'text-slate-900' : 'text-slate-700'
+                    openIndex === index ? 'text-slate-900 dark:text-white' : 'text-slate-700 dark:text-slate-300'
                   }`}>
                     {faq.question}
                   </span>
@@ -80,8 +80,8 @@ const FAQ: React.FC = () => {
               <div className={`transition-all duration-500 ease-in-out ${
                 openIndex === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
               }`}>
-                <div className="px-6 pb-8 md:px-20 md:pb-10 text-slate-500 leading-relaxed text-base">
-                  <div className="pt-2 border-t border-slate-50">
+                <div className="px-6 pb-8 md:px-20 md:pb-10 text-slate-500 dark:text-slate-400 leading-relaxed text-base">
+                  <div className="pt-2 border-t border-slate-50 dark:border-slate-800">
                     {faq.answer}
                   </div>
                 </div>
@@ -98,7 +98,7 @@ const FAQ: React.FC = () => {
               href="https://wa.me/6281999370857?text=Halo%20Mitrafix,%20saya%20punya%20pertanyaan%20mengenai%20layanan%20IT."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-mitrafix-orange text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/20 hover:bg-sky-400 transition-all hover:scale-105"
+              className="flex items-center gap-2 bg-mitrafix-orange text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-xl shadow-sky-400/20 hover:bg-sky-400 transition-all hover:scale-105"
             >
               <MessageCircle className="w-5 h-5" /> Chat Admin Sekarang
             </a>

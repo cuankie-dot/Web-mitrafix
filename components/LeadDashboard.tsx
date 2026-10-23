@@ -92,12 +92,12 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="bg-white w-full max-w-5xl max-h-[90vh] rounded-[3rem] shadow-2xl flex flex-col overflow-hidden border border-slate-200">
+      <div className="bg-white dark:bg-slate-900 w-full max-w-5xl max-h-[90vh] rounded-[3rem] shadow-2xl flex flex-col overflow-hidden border border-slate-200 dark:border-slate-800">
         {/* Header */}
         <div className="bg-slate-900 p-8 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <div className="bg-mitrafix-orange p-3 rounded-2xl shadow-lg shadow-sky-400/20">
-              <Download className="w-6 h-6 text-white" />
+              <Download className="w-6 h-6 text-slate-900" />
             </div>
             <div>
               <h2 className="text-white font-extrabold text-2xl tracking-tight">Lead Center Mitrafix</h2>
@@ -117,7 +117,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-8 bg-slate-50/50">
+        <div className="flex-1 overflow-y-auto p-8 bg-slate-50/50 dark:bg-slate-950/50">
           
           {isLoading ? (
             <div className="flex items-center justify-center h-64 text-slate-400">
@@ -125,17 +125,17 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
             </div>
           ) : leads.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-80 text-slate-400">
-              <div className="bg-white p-8 rounded-full mb-6 shadow-sm">
+              <div className="bg-white dark:bg-slate-900 p-8 rounded-full mb-6 shadow-sm">
                 <Briefcase className="w-16 h-16 opacity-10" />
               </div>
-              <p className="font-bold text-slate-600 text-xl">Belum Ada Permintaan Masuk</p>
+              <p className="font-bold text-slate-600 dark:text-slate-400 text-xl">Belum Ada Permintaan Masuk</p>
               <p className="text-sm text-slate-400 mt-2">Data dari calon klien akan muncul otomatis di sini.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-6">
               {leads.map((lead) => (
-                <div key={lead.id} className="bg-white border border-slate-100 rounded-[2rem] p-8 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 -mr-16 -mt-16 rounded-full group-hover:bg-sky-50 transition-colors" />
+                <div key={lead.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2rem] p-8 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-black/40 transition-all group relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 dark:bg-slate-950 -mr-16 -mt-16 rounded-full group-hover:bg-sky-50 dark:group-hover:bg-sky-500/10 transition-colors" />
                   
                   <div className="flex flex-col lg:flex-row justify-between gap-8 relative z-10">
                     <div className="flex-1">
@@ -143,7 +143,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
                         <span className="bg-slate-900 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-[0.15em]">
                           {lead.needs}
                         </span>
-                        <span className="flex items-center gap-1.5 text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-100 px-3 py-1.5 rounded-full">
+                        <span className="flex items-center gap-1.5 text-[10px] text-slate-400 font-bold uppercase tracking-widest bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full">
                           <Calendar className="w-3.5 h-3.5" />
                           {lead.date || '-'}
                         </span>
@@ -151,30 +151,30 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="flex items-center gap-4">
-                          <div className="bg-sky-50 p-3 rounded-2xl text-mitrafix-orange">
+                          <div className="bg-sky-50 dark:bg-sky-500/10 p-3 rounded-2xl text-mitrafix-orange">
                             <User className="w-5 h-5" />
                           </div>
                           <div>
                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Klien / Bisnis</p>
-                            <p className="text-slate-900 font-extrabold text-lg">{lead.name}</p>
-                            <p className="text-slate-500 text-xs font-medium">{lead.company}</p>
+                            <p className="text-slate-900 dark:text-white font-extrabold text-lg">{lead.name}</p>
+                            <p className="text-slate-500 dark:text-slate-400 text-xs font-medium">{lead.company}</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-4">
-                          <div className="bg-blue-50 p-3 rounded-2xl text-blue-600">
+                          <div className="bg-blue-50 dark:bg-blue-500/10 p-3 rounded-2xl text-blue-600">
                             <Phone className="w-5 h-5" />
                           </div>
                           <div>
                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Hubungi Langsung</p>
-                            <p className="text-slate-900 font-extrabold text-lg">{lead.phone}</p>
-                            <p className="text-slate-500 text-xs font-medium truncate max-w-[150px]">{lead.email}</p>
+                            <p className="text-slate-900 dark:text-white font-extrabold text-lg">{lead.phone}</p>
+                            <p className="text-slate-500 dark:text-slate-400 text-xs font-medium truncate max-w-[150px]">{lead.email}</p>
                           </div>
                         </div>
                       </div>
 
-                      <div className="mt-8 p-6 bg-slate-50 rounded-[1.5rem] border border-slate-100/50">
+                      <div className="mt-8 p-6 bg-slate-50 dark:bg-slate-950 rounded-[1.5rem] border border-slate-100/50 dark:border-slate-800/50">
                         <p className="text-[10px] font-black text-slate-400 uppercase mb-3 tracking-[0.2em]">Pesan Klien:</p>
-                        <p className="text-sm text-slate-700 leading-relaxed italic font-medium">"{lead.details || 'Tidak ada catatan tambahan.'}"</p>
+                        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic font-medium">"{lead.details || 'Tidak ada catatan tambahan.'}"</p>
                       </div>
                     </div>
 
@@ -189,7 +189,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
                       </a>
                       <button 
                         onClick={() => deleteLead(lead.id)}
-                        className="flex-1 lg:flex-none bg-white text-red-500 p-5 rounded-2xl border border-red-100 hover:bg-red-50 transition-all hover:scale-110"
+                        className="flex-1 lg:flex-none bg-white dark:bg-slate-900 text-red-500 p-5 rounded-2xl border border-red-100 dark:border-red-500/20 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all hover:scale-110"
                         title="Hapus Lead dari DB"
                       >
                         <Trash2 className="w-6 h-6" />
@@ -202,7 +202,7 @@ const LeadDashboard: React.FC<LeadDashboardProps> = ({ onClose }) => {
           )}
         </div>
 
-        <div className="p-6 bg-white border-t border-slate-100 text-center flex justify-center items-center gap-2">
+        <div className="p-6 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 text-center flex justify-center items-center gap-2">
            <div className="w-2 h-2 bg-mitrafix-orange rounded-full" />
            <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.3em]">Mitrafix Database System • Secure Connection</p>
         </div>

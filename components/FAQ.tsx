@@ -21,7 +21,7 @@ const FAQ: React.FC = () => {
     },
     {
       question: "Area mana saja yang di-cover oleh layanan Mitrafix?",
-      answer: "Fokus utama kami adalah Jakarta Selatan, Jakarta Timur, dan Depok. Namun, untuk proyek pengadaan infrastruktur IT atau kontrak maintenance perusahaan, kami melayani seluruh wilayah JABODETABEK."
+      answer: "Fokus utama kami adalah DKI Jakarta dan Sekitarnya. Namun, untuk proyek pengadaan infrastruktur IT atau kontrak maintenance perusahaan, kami melayani seluruh wilayah Indonesia."
     },
     {
       question: "Apakah Mitrafix melayani kontrak maintenance rutin untuk kantor (B2B)?",
